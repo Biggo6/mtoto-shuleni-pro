@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', '')
+@section('title', 'Manage Permissions')
 
 @section('main')
 
@@ -18,7 +18,18 @@
                   </div>
         </div>
 	</div>
-	<div class="col-md-8"></div>
+	<div class="col-md-8">
+		<div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-list"></i> Manage all Permissions</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br>
+                    
+                  </div>
+        </div>
+	</div>
 
 </div>
 

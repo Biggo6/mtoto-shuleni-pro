@@ -21,4 +21,6 @@ Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin'
 Route::group(['before'=>'auth'], function(){
 	Route::get('app/dashboard', ['as'=>'app.dashboard', 'uses'=>'AppController@dashboard']);
 	Route::get('app/logout', ['as'=>'app.logout', 'uses'=>'AppController@logout']);
+	//Users Management
+	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);
 });
