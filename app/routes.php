@@ -23,4 +23,10 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('app/logout', ['as'=>'app.logout', 'uses'=>'AppController@logout']);
 	//Users Management
 	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);
+	//Classes Management
+	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
+	//Settings Codes
+	Route::get('settings/school', ['as'=>'settings.school', 'uses'=>'SettingsController@school']);
+	Route::post('school/update', ['as'=>'school.update', 'uses'=>'SettingsController@schoolUpdate']);
+	Route::get('school/refreshWith', ['as'=>'school.refreshWith', 'uses'=>'SettingsController@schoolRefreshWith']);
 });

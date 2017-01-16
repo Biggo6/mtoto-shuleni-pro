@@ -1,5 +1,66 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{url('bf/src/bootstrap-filestyle.min.js')}}"> </script>
+
+
+  <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+  <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="{{url('iztools/biggo.js')}}"></script>
+
+
+  <script type="text/javascript">
+  $(function(){
+      $('body').on('click', '#removeLogo', function(){
+          
+          $('#logo-placeholder').html('');
+          var $el = $('#schoolLogo');
+          $el.wrap('<form>').closest('form').get(0).reset();
+          $el.unwrap();
+
+      });
+  });
+  </script>
+
+    <script type="text/javascript">
+    $(function(){
+        
+        @if(Route::currentRouteName() == "settings.school")
+        Biggo.changePhotoDiv('schoolLogo', 'logo-placeholder', 72, 72, '');
+        @endif
+
+        $('body').on('click', '#updateSchool', function(){
+            var validated = $('#registerForm_School').validationEngine('validate');
+            if(validated){
+                  var isFileUpload = false;
+                  var data;
+                  if(Biggo.isFileValueSetted(schoolLogo) != undefined){
+                      var arr  = Biggo.serializeData(registerForm_School);
+                      var arr2 = ["schoolLogo"];
+                      isFileUpload = true;
+                      data = Biggo.prepareFormData(arr, arr2);
+                  }else{
+                      data = Biggo.serializeData(registerForm_School);
+                  }
+                  Biggo.applyOpacity(registerForm_School);
+                  Biggo.enableEl(updateSchool);
+                  Biggo.talkToServer('{{route("school.update")}}', data, isFileUpload).then(function(res){
+
+                    
+
+                    Biggo.removeOpacity(registerForm_School);
+                    Biggo.disableEl(updateSchool);
+                    if(res.error){
+                        Biggo.showFeedBack(registerForm_School, res.msg, res.error);
+                    }else{
+                        window.location = '{{route('school.refreshWith')}}';
+                    }
+                });
+            }
+        });
+    });
+    </script>
+
     <!-- Bootstrap -->
     <script src="{{url('vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
@@ -26,6 +87,9 @@
     <script src="{{url('vendors/moment/min/moment.min.js')}}"></script>
     <script src="{{url('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
     
+    <!-- Switchery -->
+    <script src="{{url('vendors/switchery/dist/switchery.min.js')}}"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="{{url('build/js/custom.min.js')}}"></script>
 

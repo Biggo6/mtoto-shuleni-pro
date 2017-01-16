@@ -1,6 +1,6 @@
 @if(Session::has('success'))
 	<div class="alert alert-success flush">
-		{{Session::get('success')}}
+		<i class="fa fa-check"> </i> {{Session::get('success')}}
 	</div>
 @endif	
 

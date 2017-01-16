@@ -9,6 +9,40 @@
 
     <title> @yield('title') </title>
 
+    <style>
+        
+
+        div.show-image {
+            position: relative;
+            float:left;
+            margin:5px;
+        }
+        div.show-image:hover img{
+            opacity:0.5;
+        }
+        div.show-image:hover span {
+            margin-top: 8px;
+            display: block;
+            cursor : pointer;
+        }
+        div.show-image span {
+            position:absolute;
+            display:none;
+        }
+        div.show-image input.update {
+            top:0;
+            left:0;
+        }
+        div.show-image span.delete {
+            top:0;
+            left:59%;
+        }
+        </style>
+
+
+     <link rel="stylesheet" href="http://sokokuu.mchechu.com/ve/css/validationEngine.jquery.css" type="text/css"/>
+
+
     <!-- Bootstrap -->
     <link href="{{url('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -17,6 +51,9 @@
     <link href="{{url('vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="{{url('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+
+    <!-- Switchery -->
+    <link href="{{url('vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="{{url('build/css/custom.min.css')}}" rel="stylesheet">
