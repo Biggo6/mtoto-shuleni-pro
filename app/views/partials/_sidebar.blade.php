@@ -55,7 +55,11 @@
                       <li><a href="#">System Backup/Restore</a></li>
                       <li><a href="#">Trash Bin</a></li>
                       <li><a href="{{route('settings.school')}}">School Information</a></li>
-                      <li><a href="#">Sections/Streams</a></li>
+                      @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+                      <li><a href="{{route('sections.manage')}}">Sections/Streams</a></li>
+                      @endif
+                      @endif
                       <li><a href="#">SMS settings</a></li>
                       <li><a href="#">Licence</a></li>
                       

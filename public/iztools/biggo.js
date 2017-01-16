@@ -105,6 +105,11 @@ function getAllFormData(el){
 	return $(el).serializeArray();
 }
 
+function errorBox(el, str){
+	var newDiv = $('<div style="overflow-x:scroll" />').addClass('alert alert-info').html('<h4><i class="fa fa-warning"></i> Error Occurs<br/> <hr/> ' + str + '</h4>');	
+	$(el).before(newDiv);
+}
+
 function showFeedBack(el, str, error=true, url=null){
 
 	if(url != null){
@@ -235,5 +240,6 @@ var Biggo = {
 	disableEl : disableEl,
 	enableEl : enableEl,
 	resetForm : resetForm,
-	changePhotoDiv : changePhotoDiv
+	changePhotoDiv : changePhotoDiv,
+	errorBox : errorBox
 }

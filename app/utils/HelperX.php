@@ -12,6 +12,19 @@ class HelperX {
 		return $models;
 	}
 
+    public static function getStatus($s)
+    {
+        if ($s == 1) {
+            return "<label class='label label-success'>Active</label>";
+        } else {
+            return "<label class='label label-danger'>Blocked</label>";
+        }
+    }
+
+    public static function ve($data){
+        return View::make('partials._ve')->withData($data);
+    }
+
 	public static function getSchoolInfo(){
 		return School::find(1);
 	}

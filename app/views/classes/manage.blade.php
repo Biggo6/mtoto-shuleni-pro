@@ -19,10 +19,17 @@
                         <label>Name</label>
                         <input type="text" class="form-control" placeholder="Enter Class Name">
                       </div><br/>
+
+                      @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
                       <div class="form-group">
                         <label>Section/Stream</label>
                         
+
+                       
                       </div>
+                       @endif
+                      @endif
 
                     </form>
                     

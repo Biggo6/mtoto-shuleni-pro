@@ -29,4 +29,14 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('settings/school', ['as'=>'settings.school', 'uses'=>'SettingsController@school']);
 	Route::post('school/update', ['as'=>'school.update', 'uses'=>'SettingsController@schoolUpdate']);
 	Route::get('school/refreshWith', ['as'=>'school.refreshWith', 'uses'=>'SettingsController@schoolRefreshWith']);
+	if(School::count()){
+	 	if(HelperX::getSchoolInfo()->isStreamEnable == 1){
+	 		Route::get('sections/manage', ['as'=>'sections.manage', 'uses'=>'SettingsController@sectionsManage']);	
+	 	}
+	}
+	Route::post('sections/store', ['as'=>'sections.store', 'uses'=>'SettingsController@storeSections']);
+	Route::get('sections/refreshWith', ['as'=>'sections.refreshWith', 'uses'=>'SettingsController@refreshSections']);
+	Route::post('sections/edit/{id}', ['as'=>'sections.edit', 'uses'=>'SettingsController@editSection']);
+	Route::post('sections/update/{id}', ['as'=>'sections.update', 'uses'=>'SettingsController@updateSection']);
+	Route::post('sections/delete/{id}', ['as'=>'sections.delete', 'uses'=>'SettingsController@deleteSection']);
 });

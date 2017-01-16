@@ -1,13 +1,36 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
 
+    <script type="text/javascript" src="{{url('sweetalert/dist/sweetalert.min.js')}}"></script>
+
     <script type="text/javascript" src="{{url('bf/src/bootstrap-filestyle.min.js')}}"> </script>
+
+    <!-- Datatables -->
+    <script src="{{url('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+    <script src="{{url('vendors/datatables.net-scroller/js/datatables.scroller.min.js')}}"></script>
+
+    <script type="text/javascript">
+    $(function(){
+        $('#datatable').dataTable();
+    });
+    </script>
 
 
   <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
   <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="{{url('iztools/biggo.js')}}"></script>
 
+    @yield('footerScripts')
 
   <script type="text/javascript">
   $(function(){

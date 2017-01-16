@@ -6,6 +6,83 @@ class SettingsController extends \BaseController {
 		return View::make('settings.school');
 	}
 
+	public function editSection(){
+		$row_id = Input::get('row_id');
+		return View::make('settings.editSection')->withS(Section::find($row_id));
+	}
+
+	public function deleteSection(){
+		$row_id = Input::get('row_id');
+		Section::find($row_id)->delete();
+	}
+
+	public function updateSection($id){
+		
+		sleep(1);
+
+		$row_id = $id;//Input::get('row_id');
+		$section_name = Input::get('section_name');
+		$description  = Input::get('description');
+		$status		  = Input::get('status');
+
+		$check = Section::where('id', $row_id)->where('name', $section_name)->count();
+
+		if(!$check){
+				$check_ = Section::where('id', '!=', $row_id)->where('name', $section_name)->count();
+				if($check_){
+					return Response::json(['error'=>true, 'msg'=>'Section already registered!']);
+				}else{
+					//update here
+					$s = Section::find($row_id);
+					$s->name = $section_name;
+					$s->description = $description;
+					$s->status  = $status;
+					$s->save();
+					return Response::json(['msg'=>'Successfully processed!', 'error'=>false]);
+				}
+		}else{
+			// update here
+			$s = Section::find($row_id);
+			$s->name = $section_name;
+			$s->description = $description;
+			$s->status  = $status;
+			$s->save();
+			return Response::json(['msg'=>'Successfully processed!', 'error'=>false]);
+		}
+
+		return Response::json(['error'=>true, 'msg'=>'Error']);
+	}
+
+	public function storeSections(){
+		sleep(1);
+
+		$section_name = Input::get('section_name');
+		$description  = Input::get('description');
+		$status		  = Input::get('status');
+
+		$check        = Section::where('name', $section_name)->count();
+
+		if($check){
+			return Response::json(['msg'=>'Section or Stream already registered', 'error'=>true]);
+		}else{
+			$s = new Section;
+			$s->name = $section_name;
+			$s->description = $description;
+			$s->status  = $status;
+			$s->save();
+			return Response::json(['msg'=>'Successfully added!', 'error'=>false]);
+		}
+
+	}
+
+	public function sectionsManage(){
+		return View::make('settings.sections');
+	}
+
+	public function refreshSections(){
+		return Redirect::back()->withSuccess('Successfully run!');
+	}
+
 	public function schoolUpdate(){
 
 		sleep(1);

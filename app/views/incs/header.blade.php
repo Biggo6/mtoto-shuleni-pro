@@ -9,6 +9,15 @@
 
     <title> @yield('title') </title>
 
+    <link rel="stylesheet" type="text/css" href="{{url('sweetalert/dist/sweetalert.css')}}">
+
+    <!-- Datatables -->
+    <link href="{{URL('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{URL('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+
     <style>
         
 
@@ -40,7 +49,7 @@
         </style>
 
 
-     <link rel="stylesheet" href="http://sokokuu.mchechu.com/ve/css/validationEngine.jquery.css" type="text/css"/>
+     <link rel="stylesheet" href="{{url('ve/css/validationEngine.jquery.css')}}" type="text/css"/>
 
 
     <!-- Bootstrap -->
