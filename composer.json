@@ -7,7 +7,9 @@
 	"require": {
 		"laravel/framework": "4.2.22",
 		"machuga/authority-l4": "^2.2",
-		"way/generators": "~2.0"
+		"way/generators": "~2.0",
+		"biggo6/laravel-updater": "^1.0"
+		
 	},
 	"autoload": {
 		"classmap": [
