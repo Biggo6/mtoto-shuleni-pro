@@ -14,22 +14,44 @@
                   </div>
                   <div class="x_content">
                    
-                    <form class="form-horizontal form-label-left">
+                    <form class="form-horizontal form-label-left" id="registerClass">
                       <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" placeholder="Enter Class Name">
+                        <input type="text"  name="class_name" {{HelperX::ve(["veName"=>"Class Name", "veVs"=>"required"])}} placeholder="Enter Class Name">
                       </div><br/>
 
                       @if(School::count())
                       @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
                       <div class="form-group">
                         <label>Section/Stream</label>
-                        
-
-                       
+                        <select name="class_section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required"])}}>
+                          <option value="">--Select Section / Stream --</option>
+                          <?php $sections = Section::where('status', 1)->get(); ?>
+                          @foreach($sections as $section)
+                              <option value="{{$section->id}}">{{$section->name}}</option>
+                          @endforeach
+                        </select>  
                       </div>
                        @endif
                       @endif
+
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                      </div><br/>
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" {{HelperX::ve(["veName"=>"Status", "veVs"=>"required"])}}>
+                          <option value="1">Active</option>
+                          <option value="0">Blocked</option>
+                        </select>
+                      </div><br/>
+
+                      @include('partials._buttonSave', ['btnId'=>'saveClass', 'title'=>'Save New Class']);
+
+                      @section('footerScripts')
+                        @include('partials._saveFunc', ["btnID" => "saveClass", "formID"=>"registerClass", "route"=>"msclasses.store", "routeWith"=>"msclasses.refreshWith"])
+                      @stop
 
                     </form>
                     

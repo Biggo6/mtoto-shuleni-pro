@@ -39,4 +39,11 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('sections/edit/{id}', ['as'=>'sections.edit', 'uses'=>'SettingsController@editSection']);
 	Route::post('sections/update/{id}', ['as'=>'sections.update', 'uses'=>'SettingsController@updateSection']);
 	Route::post('sections/delete/{id}', ['as'=>'sections.delete', 'uses'=>'SettingsController@deleteSection']);
+	//Classes
+	Route::post('msclasses/store', ['as'=>'msclasses.store', 'uses'=>'ClassController@store']);
+	Route::get('msclasses/refreshWith', ['as'=>'msclasses.refreshWith', 'uses'=>'ClassController@refreshWith']);
+	Route::get('test', function(){
+		return Biggo6\LaravelUpdater\LaravelUpdater::hello();
+	});
+
 });
