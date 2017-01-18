@@ -3,7 +3,29 @@
 
     <script type="text/javascript" src="{{url('sweetalert/dist/sweetalert.min.js')}}"></script>
 
+    
     <script type="text/javascript" src="{{url('bf/src/bootstrap-filestyle.min.js')}}"> </script>
+    
+
+
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{url('vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{url('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+        $('#birthday').daterangepicker({
+          autoUpdateInput: false,
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('#birthday').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY'));
+        });
+      });
+    </script>
 
     <!-- Datatables -->
     <script src="{{url('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -22,6 +44,21 @@
     <script type="text/javascript">
     $(function(){
         $('#datatable').dataTable();
+
+        var i = 0;
+        $('body').on('click', '#more', function(){
+            if(i==0){
+              $('#more_teacher_fields').delay(200).fadeIn();
+              $(this).removeClass('label-primary').addClass('label-info').html('<i class="fa fa-arrow-up"></i> Less ...')
+              i++;
+            }else{
+              i = 0;
+              $('#more_teacher_fields').delay(200).fadeOut();
+              $(this).addClass('label-primary').removeClass('label-info').html('<i class="fa fa-arrow-down"></i> More ...')
+            }
+            
+        });
+
     });
     </script>
 
@@ -29,6 +66,15 @@
   <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
   <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="{{url('iztools/biggo.js')}}"></script>
+
+    <script type="text/javascript">
+        function checkPassMatch(field, rules, i, options){
+            var a=rules[i+2];
+            if((field.val()) != ( $("#"+a).val() ) ){
+               return "Password Mismatches"
+            }
+        }
+    </script>
 
     @yield('footerScripts')
 
@@ -50,6 +96,10 @@
         
         @if(Route::currentRouteName() == "settings.school")
         Biggo.changePhotoDiv('schoolLogo', 'logo-placeholder', 72, 72, '');
+        @endif
+
+        @if(Route::currentRouteName() == "teachers.manage")
+        Biggo.changePhotoDiv('profile_photo', 'logo-placeholder', 72, 72, '');
         @endif
 
         $('body').on('click', '#updateSchool', function(){

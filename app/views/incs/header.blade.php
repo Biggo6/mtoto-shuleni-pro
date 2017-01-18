@@ -9,6 +9,9 @@
 
     <title> @yield('title') </title>
 
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{url('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="{{url('sweetalert/dist/sweetalert.css')}}">
 
     <!-- Datatables -->

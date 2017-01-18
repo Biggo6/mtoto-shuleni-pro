@@ -47,6 +47,15 @@
                         </select>
                       </div><br/>
 
+                      <div class="form-group">
+                        <label>Teacher</label>
+                        <select name="class_teacher" {{HelperX::ve(["veName"=>"Teacher", "veVs"=>"required"])}}>
+                          <option value="">--Select Teacher --</option>
+                          
+                        </select>  
+                      </div>
+                      <hr/>
+
                       @include('partials._buttonSave', ['btnId'=>'saveClass', 'title'=>'Save New Class']);
 
                       @section('footerScripts')

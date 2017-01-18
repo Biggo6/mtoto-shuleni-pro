@@ -12,6 +12,16 @@ class HelperX {
 		return $models;
 	}
 
+    public static function getVersionLabel(){
+        return '<label class="label label-warning">' . HelperX::getSystemVersion() .'</label>';
+    }
+
+    public static function getSystemVersion(){
+        $localVersionFile = file_get_contents(base_path('version.json'));
+        $localVersionJson = json_decode($localVersionFile, true);
+        return 'v'.$localVersionJson['version'];
+    }
+
     public static function getStatus($s)
     {
         if ($s == 1) {

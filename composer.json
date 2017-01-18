@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.22",
 		"machuga/authority-l4": "^2.2",
 		"way/generators": "~2.0",
-		"biggo6/laravel-updater": "^1.0"
+		"biggo6/laravel-updater": "^1.0",
+		"chumper/zipper": "0.5.x"
 		
 	},
 	"autoload": {

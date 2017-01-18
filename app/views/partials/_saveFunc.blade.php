@@ -17,7 +17,7 @@ $(function(){
           @if(isset($photo))
           
           if(Biggo.isFileValueSetted({{$photo}}) != undefined){
-              var arr  = Biggo.serializeData(registerForm_School);
+              var arr  = Biggo.serializeData({{$formID}});
               var arr2 = ["{{$photo}}"];
               isFileUpload = true;
               data = Biggo.prepareFormData(arr, arr2);
@@ -29,7 +29,9 @@ $(function(){
             data = Biggo.serializeData({{$formID}});
           @endif
 
-          console.log(data);
+          @if(Config::get('app.debug'))
+            console.log(data);
+          @endif  
 
           Biggo.applyOpacity({{$formID}});
           Biggo.enableEl({{$btnID}});
@@ -44,10 +46,15 @@ $(function(){
 
           var biggo = Biggo.talkToServer(url, data, isFileUpload).then(function(res){
 
-            
+            @if(isset($debug))
+                Biggo.removeOpacity({{$formID}});
+                Biggo.enableEl({{$btnID}});
+                Biggo.errorBox({{$formID}}, res);
+                return;
+            @endif
 
             Biggo.removeOpacity({{$formID}});
-            Biggo.disableEl({{$btnID}});
+            Biggo.enableEl({{$btnID}});
             if(res.error){
                 Biggo.showFeedBack({{$formID}}, res.msg, res.error);
             }else{
@@ -58,7 +65,7 @@ $(function(){
           @if(Config::get('app.debug'))
             biggo.fail(function(err){
                 Biggo.removeOpacity({{$formID}});
-                Biggo.disableEl({{$btnID}});
+                Biggo.enableEl({{$btnID}});
                 var error = JSON.stringify(err);
                 Biggo.errorBox({{$formID}}, error);
             });

@@ -6,7 +6,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{route('app.dashboard')}}" class="site_title"><span>MtotoShuleni Pro</span></a>
+              <a href="{{route('app.dashboard')}}" class="site_title"><span>MtotoShuleni Pro </span></a>
             </div>
 
             <div class="clearfix"></div>

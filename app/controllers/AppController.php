@@ -8,7 +8,7 @@ class AppController extends BaseController{
 			"active"   => 1
  		];
 		if(Auth::attempt($credx)){
-			return Redirect::route('app.dashboard');
+			return Redirect::intended('app/dashboard');
 		}else{
 			return Redirect::back()->withError('Invalid login information');
 		}

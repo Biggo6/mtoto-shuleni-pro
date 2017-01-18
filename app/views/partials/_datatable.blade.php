@@ -24,25 +24,49 @@
     <tbody> 
 
       <?php $i=1; ?>
+      @if(isset($data))
       @foreach($data as $d)
+
+
+
         <tr>
             <td>{{$i}}</td>
             @foreach($mapEls as $mapEl)
+
+
+
               @if($mapEl == "status")
               <td>{{HelperX::getStatus($d->$mapEl)}}</td>
               @else
-              <td>{{($d->$mapEl)}}</td>
+
+               @if(isset($photos))
+                  @foreach($photos as $photo)
+                      @if($photo == $mapEl)
+                          @if($d->$mapEl == "")
+                            <td><img src="{{url('images/img.jpg')}}" style="width:50px" /></td>
+                          @else
+                            <td><img src="{{($d->$mapEl)}}" style="width:50px" /></td>
+                          @endif
+                      @else
+                          <td>{{($d->$mapEl)}}</td>
+                      @endif
+                  @endforeach
+              @else
+                  <td>{{($d->$mapEl)}}</td>
+              @endif
+
               @endif
             @endforeach
             <td>{{View::make("actions.tools")->withRowid($d->id)->withModal($md)}}</td>
         </tr>
         <?php $i++; ?>
       @endforeach
+      @endif
     </tbody> 
 </table>
 
 <div class="modal fade" id="modal-id">
-  <div class="modal-dialog {{($modal)}}">
+  <div class="modal-dialog modal-{{($modal)}}">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -52,7 +76,7 @@
         <center>
           <img class="loader" style="display:none" src="{{url('images/loader.gif')}}" />
         </center>
-        <div class="edit_area"></div>
+        <div id="edit_area"></div>
       </div>
     </div>
   </div>
@@ -64,17 +88,18 @@ $(function(){
     var row_id = $(this).attr('rowid');
     
     $('.loader').show();
-    $('.edit_area').html('');
+    $('#edit_area').html('');
     var url = '{{url($url_edit)}}' + "/" + row_id;
    
     var biggo = Biggo.talkToServer(url, {row_id:row_id}).then(function(res){
         $('.loader').hide();
-        $('.edit_area').hide().html(res).fadeIn();
+        $('#edit_area').hide().html(res).fadeIn();
     });
 
     @if(Config::get('app.debug'))
             biggo.fail(function(err){
             var error = JSON.stringify(err);
+            $('.loader').hide();
             Biggo.errorBox(edit_area, error);
         });
     @endif

@@ -12,4 +12,5 @@
 */
 
 Artisan::add(new AddAdmin);
+Artisan::add(new Init);
 

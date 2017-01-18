@@ -106,7 +106,7 @@ function getAllFormData(el){
 }
 
 function errorBox(el, str){
-	var newDiv = $('<div style="overflow-x:scroll" />').addClass('alert alert-info').html('<h4><i class="fa fa-warning"></i> Error Occurs<br/> <hr/> ' + str + '</h4>');	
+	var newDiv = $('<div style="overflow-x:scroll" />').addClass('alert alert-info').html('<h4><i class="fa fa-warning"></i> Debugging!<br/> <hr/> ' + str + '</h4>');	
 	$(el).before(newDiv);
 }
 

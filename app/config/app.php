@@ -124,6 +124,7 @@ return array(
 		'Authority\AuthorityL4\AuthorityL4ServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Biggo6\LaravelUpdater\LaravelUpdaterServiceProvider',
+		'Chumper\Zipper\ZipperServiceProvider'
 
 	),
 
@@ -192,6 +193,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Authority'         => 'Authority\AuthorityL4\Facades\Authority',
+		'Zipper'            => 'Chumper\Zipper\Zipper',
 
 	),
 
