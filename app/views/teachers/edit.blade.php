@@ -308,7 +308,38 @@
                     <h4><i class="fa fa-bank"></i> Classes Taught By This Teacher</h4>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content"></div>
+                  <div class="x_content">
+
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Class Name</th>
+                            @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+                            <th>Section/Stream</th>
+                            @endif
+                            @endif
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $k = 1; ?>
+                          @foreach(MsClass::where('teacher_id', $teacher->id)->where('status', 1)->get() as $ms)
+                          <tr>
+                            <td>{{$k}}</td>
+                            <td>{{$ms->class_name}}</td>
+                             @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+                            <td>{{Section::find($ms->class_section)->name}}</td>
+                            @endif
+                            @endif
+                          </tr>
+                          <?php $k++; ?>
+                          @endforeach
+                        </tbody>
+                      </table>
+
+                  </div>
           </div>
       </div>
     </div>
