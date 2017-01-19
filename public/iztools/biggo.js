@@ -11,8 +11,8 @@ function changePhotoDiv(target='appLogo', placeholder='logo-placeholder', width=
 			// Create a new image.
 			var img = new Image();
 			// Set the img src property using the data URL.
-			img.width = 250;
-			img.height = 250;
+			img.width = width;
+			img.height = height;
 			img.src = imgsrc;
 
 			// Add the image to the page.
@@ -106,7 +106,7 @@ function getAllFormData(el){
 }
 
 function errorBox(el, str){
-	var newDiv = $('<div style="overflow-x:scroll" />').addClass('alert alert-info').html('<h4><i class="fa fa-warning"></i> Debugging!<br/> <hr/> ' + str + '</h4>');	
+	var newDiv = $('<div style="overflow-x:scroll" />').addClass('alert alert-info').html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><h4><i class="fa fa-warning"></i> Debugging!<br/> <hr/> ' + str + '</h4>');	
 	$(el).before(newDiv);
 }
 

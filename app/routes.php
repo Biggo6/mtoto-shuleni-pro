@@ -25,6 +25,7 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('teachers/refreshWith', ['as'=>'teachers.refreshWith', 'uses'=>'TeacherController@refreshWith']);
 	Route::post('teachers/delete/{id}', ['as'=>'teachers.delete', 'uses'=>'TeacherController@delete']);
 	Route::post('teachers/edit/{id}', ['as'=>'teachers.edit', 'uses'=>'TeacherController@edit']);
+	Route::post('teachers/update/{id}', ['as'=>'teachers.update', 'uses'=>'TeacherController@update']);
 
 	//App
 	Route::get('app/dashboard', ['as'=>'app.dashboard', 'uses'=>'AppController@dashboard']);

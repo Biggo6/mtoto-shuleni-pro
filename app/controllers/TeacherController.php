@@ -5,6 +5,72 @@ class TeacherController extends BaseController{
 		return View::make('teachers.manage');
 	}
 
+	public function update($id){
+		$row_id = Input::get('row_id');
+
+		$firstname      = Input::get('firstname');
+		$lastname       = Input::get('lastname');
+		$birthday       = Input::get('birthday');
+		$gender         = Input::get('gender');
+		$address        = Input::get('address');
+		$phone          = Input::get('phone');
+		$email          = Input::get('email');
+		$status			= Input::get('status');
+
+		$check = Teacher::where('id', $row_id)->where('firstname', $firstname)->where('lastname', $lastname)->count();
+
+		if(!$check){
+				$check_ = Teacher::where('id', '!=', $row_id)->where('firstname', $firstname)->where('lastname', $lastname)->count();
+				if($check_){
+					return Response::json(['error'=>true, 'msg'=>'Teacher already registered!']);
+				}else{
+					//update here
+					$user  = User::find(Teacher::find($row_id)->user_id);
+					$user->firstname = $firstname;
+					$user->lastname  = $lastname;
+					$user->save();
+
+					$t = Teacher::find($row_id);
+					$t->firstname = $firstname;
+					$t->lastname  = $lastname;
+					$t->birthday  = $birthday;
+					$t->gender    = $gender;
+					$t->address   = $address;
+					$t->phone     = $phone;
+					$t->email     = $email;
+					$t->status    = $status;
+					if(Input::hasFile('profile_photo_edit')){
+						$t->profile_photo = HelperX::uplodFileThenReturnPath('profile_photo_edit');
+					}
+					$t->save();
+
+					return Response::json(['msg'=>'Successfully processed!', 'error'=>false]);
+				}
+		}else{
+			// update here
+			$user  = User::find(Teacher::find($row_id)->user_id);
+			$user->firstname = $firstname;
+			$user->lastname  = $lastname;
+			$user->save();
+
+			$t = Teacher::find($row_id);
+			$t->firstname = $firstname;
+			$t->lastname  = $lastname;
+			$t->birthday  = $birthday;
+			$t->gender    = $gender;
+			$t->address   = $address;
+			$t->phone     = $phone;
+			$t->email     = $email;
+			$t->status    = $status;
+			if(Input::hasFile('profile_photo_edit')){
+				$t->profile_photo = HelperX::uplodFileThenReturnPath('profile_photo_edit');
+			}
+			$t->save();
+
+			return Response::json(['msg'=>'Successfully processed!', 'error'=>false]);
+		}
+	}
+
 	public function delete($id){
 		$row_id = Input::get('row_id');
 		$user_id  = Teacher::find($row_id)->user_id;
@@ -14,7 +80,7 @@ class TeacherController extends BaseController{
 
 	public function edit($id){
 		$row_id  = Input::get('row_id');
-		$teacher = Teacher::find($row_id);
+		$teacher = Teacher::find($id);
 		return View::make('teachers.edit')->withTeacher($teacher); 
 	}
 

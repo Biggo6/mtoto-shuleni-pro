@@ -38,6 +38,7 @@ $(function(){
 
           @if(isset($rowId))
             var url = '{{route($route, $rowId)}}';
+            
           @else
             var url = '{{route($route)}}';
           @endif
