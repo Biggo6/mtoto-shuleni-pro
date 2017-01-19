@@ -3,18 +3,27 @@
 
 <div class="row">
 
-  <div class="col-xs-2">
+  <div class="col-xs-3">
     <!-- required for floating -->
     <!-- Nav tabs -->
+    <div class="">
     <ul class="nav nav-tabs tabs-left">
       <li class="active"><a href="#home" data-toggle="tab" aria-expanded="false"><i class="fa fa-edit"></i> Edit</a>
       </li>
       <li class=""><a href="#profile" data-toggle="tab" aria-expanded="true"><i class="fa fa-eye"></i> View </a>
       </li>
+      <li class=""><a href="#profile2" data-toggle="tab" aria-expanded="true"><i class="fa fa-lock"></i>  Password </a>
+      </li>
+      
+      <li class=""><a href="#profile4" data-toggle="tab" aria-expanded="true"><i class="fa fa-bank"></i> Classes </a>
+      </li>
+      <li class=""><a href="#profile3" data-toggle="tab" aria-expanded="true"><i class="fa fa-cogs"></i> Settings </a>
+      </li>
     </ul>
   </div>
+  </div>
 
-  <div class="col-xs-10">
+  <div class="col-xs-9">
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane active" id="home">
@@ -39,6 +48,11 @@
 <div class="form-group">
 <label>Last Name</label>
 <input type="text" value="{{$teacher->lastname}}"  name="lastname" {{HelperX::ve(["veName"=>"Last  Name", "veVs"=>"required"])}} placeholder="Enter Last Name">
+</div>
+
+<div class="form-group">
+  <label>Username</label>
+  <input type="text" value="{{User::find($teacher->user_id)->username}}"   name="username" {{HelperX::ve(["veName"=>"  Username", "veVs"=>"required"])}} placeholder="Enter UserName">
 </div>
 
 
@@ -154,7 +168,149 @@
 
             
       </div>
-      <div class="tab-pane " id="profile">Profile Tab.</div>
+      <div class="tab-pane " id="profile">
+          <div class="x_panel">
+                  <div class="x_title">
+                    <h4><i class="fa fa-user"></i> Teacher Information</h4>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Profile Photo</label><br/>
+                            @if($teacher->profile_photo == "")
+                              <img src="{{url('images/img.jpg')}}" style="width: 150px" />
+                            @else
+                              <img src="{{$teacher->profile_photo}}" style="width: 50px" />
+                            @endif
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Firstname</label><br/>
+                            <i>{{$teacher->firstname}}</i>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Lastname</label><br/>
+                            <i>{{$teacher->lastname}}</i>
+                            
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Username</label><br/>
+                            <i>{{$teacher->lastname}}</i>
+                            
+                            </div>
+                        </div>
+                      </div>
+                      <hr/>
+                      <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Status</label><br/>
+                            <i>{{HelperX::getStatus($teacher->status)}}</i>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Birthday</label><br/>
+                            <i>{{$teacher->birthday}}</i>
+                            
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Gender</label><br/>
+                            <i>{{$teacher->gender}}</i>
+                            
+                            </div>
+                        </div>
+                      </div>
+                      <br/>
+                      <hr/>
+                      <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Address</label><br/>
+                            <i>{{($teacher->address)}}</i>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Phone</label><br/>
+                            <i>{{$teacher->phone}}</i>
+                            
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Email</label><br/>
+                            <i>{{$teacher->email}}</i>
+                            
+                            </div>
+                        </div>
+                      </div>
+                  </div>  
+          </div>
+                 
+
+      </div>
+      <div class="tab-pane " id="profile2">
+          <div class="x_panel">
+                  <div class="x_title">
+                    <h4><i class="fa fa-unlock"></i> Change Password</h4>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <form class="form-horizontal form-label-left" id="teacherChangePassword">
+                          <input type="hidden" value="{{$rowId}}" name="row_id" />
+                          <div class="form-group">
+                          <label>New Password</label>
+                          <input type="password" value="" id="password_teacher"  name="password_teacher" {{HelperX::ve(["veName"=>"Password", "veVs"=>"required"])}} placeholder="Enter Password">
+                          </div>
+                          <div class="form-group">
+                          <label>Confirm New Password</label>
+                          <input type="password" id="cpassword_teacher"  name="cpassword_teacher" {{HelperX::ve(["veName"=>"Confirm Password", "veVs"=>"required"])}} placeholder="Enter Confirm Password">
+                          </div>
+
+                          <hr/>
+
+                          @include('partials._buttonSave', ['btnId'=>'changePassword', 'title'=>'Change Password']);
+
+                          @include('partials._saveFunc', ["btnID" => "changePassword", "formID"=>"teacherChangePassword", "route"=>"teachers.changepassword", "routeWith"=>"teachers.refreshWith", "rowId"=>$rowId, "update"=>true, ])
+
+
+
+                      </form>    
+                  </div>
+          </div>
+      </div>
+      <div class="tab-pane " id="profile3">
+          <div class="x_panel">
+                  <div class="x_title">
+                    <h4><i class="fa fa-cog"></i> General Settings</h4>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content"></div>
+          </div>
+      </div>
+      <div class="tab-pane " id="profile4">
+          <div class="x_panel">
+                  <div class="x_title">
+                    <h4><i class="fa fa-bank"></i> Classes Taught By This Teacher</h4>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content"></div>
+          </div>
+      </div>
     </div>
   </div>
 

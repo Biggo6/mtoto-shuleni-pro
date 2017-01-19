@@ -26,6 +26,7 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('teachers/delete/{id}', ['as'=>'teachers.delete', 'uses'=>'TeacherController@delete']);
 	Route::post('teachers/edit/{id}', ['as'=>'teachers.edit', 'uses'=>'TeacherController@edit']);
 	Route::post('teachers/update/{id}', ['as'=>'teachers.update', 'uses'=>'TeacherController@update']);
+	Route::post('teachers/changepassword', ['as'=>'teachers.changepassword', 'uses'=>'TeacherController@changepassword']);
 
 	//App
 	Route::get('app/dashboard', ['as'=>'app.dashboard', 'uses'=>'AppController@dashboard']);
@@ -50,8 +51,13 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('sections/update/{id}', ['as'=>'sections.update', 'uses'=>'SettingsController@updateSection']);
 	Route::post('sections/delete/{id}', ['as'=>'sections.delete', 'uses'=>'SettingsController@deleteSection']);
 	//Classes
+	
 	Route::post('msclasses/store', ['as'=>'msclasses.store', 'uses'=>'ClassController@store']);
+	Route::post('msclasses/update/{id}', ['as'=>'msclasses.update', 'uses'=>'ClassController@update']);
 	Route::get('msclasses/refreshWith', ['as'=>'msclasses.refreshWith', 'uses'=>'ClassController@refreshWith']);
+	Route::post('msclasses/destroy/{id}', ['as'=>'msclasses.destroy', 'uses'=>'ClassController@destroy']);
+	Route::post('msclasses/edit/{id}', ['as'=>'msclasses.edit', 'uses'=>'ClassController@edit']);
+	
 	Route::get('test', function(){
 		// $files = glob('files/*');
 		// try{

@@ -15,7 +15,7 @@
       <tr>
         <th>#</th>
         @foreach($columns as $column)
-        <th>{{$column}}</th>
+          <th>{{$column}}</th>
         @endforeach
       </tr>
 
@@ -32,7 +32,6 @@
         <tr>
             <td>{{$i}}</td>
             @foreach($mapEls as $mapEl)
-
 
 
               @if($mapEl == "status")
@@ -52,7 +51,9 @@
                       @endif
                   @endforeach
               @else
-                  <td>{{($d->$mapEl)}}</td>
+
+                 <td>{{($d->$mapEl)}}</td>
+                  
               @endif
 
               @endif
@@ -72,7 +73,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Information</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="background-color: #fbfbfb">
         <center>
           <img class="loader" style="display:none" src="{{url('images/loader.gif')}}" />
         </center>
@@ -124,6 +125,7 @@ $(function(){
     },
     function(isConfirm){
       if (isConfirm) {
+
         var biggo = Biggo.talkToServer(url, {row_id:row_id}).then(function(res){
             swal({
                 title: 'Deleted',
@@ -137,7 +139,7 @@ $(function(){
         @if(Config::get('app.debug'))
             biggo.fail(function(err){
             var error = JSON.stringify(err);
-            alert(error)
+            console.log(error)
         });
         @endif
       }

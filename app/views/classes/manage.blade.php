@@ -4,6 +4,8 @@
 
 @section('main')
 
+
+
 <div class="row">
 
 	<div class="col-md-4">
@@ -41,7 +43,7 @@
                       </div><br/>
                       <div class="form-group">
                         <label>Status</label>
-                        <select name="status" {{HelperX::ve(["veName"=>"Status", "veVs"=>"required"])}}>
+                        <select  name="status" {{HelperX::ve(["veName"=>"Status", "veVs"=>"required"])}}>
                           <option value="1">Active</option>
                           <option value="0">Blocked</option>
                         </select>
@@ -49,9 +51,12 @@
 
                       <div class="form-group">
                         <label>Teacher</label>
-                        <select name="class_teacher" {{HelperX::ve(["veName"=>"Teacher", "veVs"=>"required"])}}>
-                          <option value="">--Select Teacher --</option>
-                          
+                        <select id="select_2" name="class_teacher" {{HelperX::ve(["veName"=>"Teacher", "veVs"=>"required"])}}>
+                          <option url="" value="">--Select Teacher --</option>
+                          <?php $teachers = Teacher::where('status', 1)->get(); ?>
+                          @foreach($teachers as $teacher)
+                              <option url="{{$teacher->profile_photo}}" value="{{$teacher->id}}">{{$teacher->firstname}} {{$teacher->lastname}}</option>
+                          @endforeach
                         </select>  
                       </div>
                       <hr/>
@@ -75,7 +80,54 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    
+                    @include('partials._success')
+
+
+                    @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+                  @include('partials._datatable', [
+
+                  "columns"=>["Class Name", "Section/Stream", "Description", "Status", "Teacher", "Actions"], 
+
+                  "mapEls"=>["className", "classSection", "description", "status", "fullname"], "data"=>
+
+
+                  DB::table('msclasses')
+                  ->join('teachers', 'teachers.id', '=', 'msclasses.teacher_id')
+                  ->join('sections', 'sections.id', '=', 'msclasses.class_section')
+                  ->select('msclasses.id', 'msclasses.class_name as className', 'sections.name as classSection', 'msclasses.description', 'msclasses.status', DB::raw('CONCAT(teachers.firstname, " ", teachers.lastname) AS fullname'))
+                  ->where('msclasses.deleted_at', NULL)->orderBy('msclasses.created_at', 'DESC')->get()
+
+
+                  , "modal"=>"lg", "url_edit"=>"msclasses/edit", "url_delete" =>"msclasses/destroy", "refreshWix"=>"msclasses.refreshWith"  ])
+
+                      @else
+
+
+                  @include('partials._datatable', [
+
+                  "columns"=>["Class Name", "Description", "Status", "Teacher", "Actions"], 
+
+                  "mapEls"=>["className", "description", "status", "fullname"], "data"=>
+
+
+                  DB::table('msclasses')
+                  ->join('teachers', 'teachers.id', '=', 'msclasses.teacher_id')
+                  ->join('sections', 'sections.id', '=', 'msclasses.class_section')
+                  ->select('msclasses.id', 'msclasses.class_name as className', 'msclasses.description', 'msclasses.status', DB::raw('CONCAT(teachers.firstname, " ", teachers.lastname) AS fullname'))
+                  ->where('msclasses.deleted_at', NULL)->orderBy('msclasses.created_at', 'DESC')->get()
+
+
+                  , "modal"=>"", "url_edit"=>"msclasses/edit", "url_delete" =>"msclasses/destroy", "refreshWix"=>"msclasses.refreshWith"  ])
+
+
+
+
+                      @endif
+                    @endif
+
+
+
                   </div>
         </div>
   </div>

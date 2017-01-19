@@ -34,11 +34,7 @@
           <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Subjects</a></li>
         </ul>
       </li>
-      <li><a><i class="fa fa-edit"></i> Teachers <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Subjects</a></li>
-        </ul>
-      </li>
+     
       <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
@@ -56,10 +52,10 @@
   <div class="menu_section">
                 <h3>Settings</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-cogs"></i> General Settings <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('self-updater/check')}}">Software Updates  </a></li>
-                      <li><a href="#">System Backup/Restore</a></li>
+                      <li><a href="#">System Settings</a></li>
                       <li><a href="#">Trash Bin</a></li>
                       <li><a href="{{route('settings.school')}}">School Information</a></li>
                       @if(School::count())

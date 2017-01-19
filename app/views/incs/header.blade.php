@@ -9,6 +9,8 @@
 
     <title> @yield('title') </title>
 
+    <link href="{{url('select2/dist/css/select2.min.css')}}" rel="stylesheet">
+
     <!-- bootstrap-daterangepicker -->
     <link href="{{url('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
 

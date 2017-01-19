@@ -1,10 +1,41 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('select2/dist/js/select2.min.js')}}"></script>
 
     <script type="text/javascript" src="{{url('sweetalert/dist/sweetalert.min.js')}}"></script>
 
     
     <script type="text/javascript" src="{{url('bf/src/bootstrap-filestyle.min.js')}}"> </script>
+
+    <script type="text/javascript">
+    function formatState (state) {
+      if (!state.id) { return state.text; }
+      var img = "";
+      Array.prototype.slice.call(state.element.attributes).forEach(function(item) {
+          if(item.name == "url"){
+            img = item.value;
+          }
+      });
+      if(img == ""){
+        var $state = $(
+          '<span><img style="width:40px" src="{{url("images/img.jpg")}}" class="img-flag" /> ' + state.text + '</span>'
+        );
+      }else{
+         var $state = $(
+          '<span><img style="width:40px" src="'+img+'" class="img-flag" /> ' + state.text + '</span>'
+        );
+       
+      }
+
+       return $state;
+     
+    };
+    $(document).ready(function() {
+      $("#select_2").select2({
+        templateResult: formatState
+      });
+    });
+    </script>
     
 
 

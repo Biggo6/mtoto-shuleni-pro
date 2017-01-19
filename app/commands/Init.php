@@ -44,10 +44,14 @@ class Init extends Command {
 		$this->info('');
 		$this->info('');
 		try{
-			$this->call('migrate');
+			$this->call('migrate:refresh');
 		}catch(Exception $x){
-			$this->call('migrate:reset');
+			$this->call('migrate');
 		}finally{
+			$s = new School;
+			$s->name = "MtotoShuleni Pro";
+			$s->save();
+			$this->info('dump data was added successfully........');
 			$this->call('mtotoshuleni:add-admin');	
 		}
 		

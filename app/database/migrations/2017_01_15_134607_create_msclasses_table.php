@@ -20,6 +20,7 @@ class CreateMsclassesTable extends Migration {
 			$table->text('description');
 			$table->integer('status')->default(1);
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

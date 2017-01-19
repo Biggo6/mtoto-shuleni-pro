@@ -5,17 +5,50 @@ class TeacherController extends BaseController{
 		return View::make('teachers.manage');
 	}
 
+	public function changepassword(){
+		$tid  = Input::get('row_id');
+		$password = Input::get('password_teacher');
+		$user = User::find(Teacher::find($tid)->user_id);
+		$user->password = Hash::make($password);
+		$user->save();
+	}
+
 	public function update($id){
 		$row_id = Input::get('row_id');
 
 		$firstname      = Input::get('firstname');
 		$lastname       = Input::get('lastname');
+		$username       = Input::get('username');
 		$birthday       = Input::get('birthday');
 		$gender         = Input::get('gender');
 		$address        = Input::get('address');
 		$phone          = Input::get('phone');
 		$email          = Input::get('email');
 		$status			= Input::get('status');
+
+		$user_check     = User::where('id', Teacher::find($row_id)->user_id)->where('username', $username)->count();
+
+		if($user_check){
+			//update 
+			//update here
+			$user  = User::find(Teacher::find($row_id)->user_id);
+			$user->firstname = $firstname;
+			$user->lastname  = $lastname;
+			$user->username  = $username;
+			$user->save();
+		}else{
+			$user_check_ = User::where('id', '!=',Teacher::find($row_id)->user_id)->where('username', $username)->count();
+			if($user_check_){
+				return Response::json(['error'=>true, 'msg'=>'Username already used!']);
+			}else{
+				//update
+				$user  = User::find(Teacher::find($row_id)->user_id);
+				$user->firstname = $firstname;
+				$user->lastname  = $lastname;
+				$user->username  = $username;
+				$user->save();
+			}
+		}
 
 		$check = Teacher::where('id', $row_id)->where('firstname', $firstname)->where('lastname', $lastname)->count();
 
@@ -24,11 +57,7 @@ class TeacherController extends BaseController{
 				if($check_){
 					return Response::json(['error'=>true, 'msg'=>'Teacher already registered!']);
 				}else{
-					//update here
-					$user  = User::find(Teacher::find($row_id)->user_id);
-					$user->firstname = $firstname;
-					$user->lastname  = $lastname;
-					$user->save();
+					
 
 					$t = Teacher::find($row_id);
 					$t->firstname = $firstname;
@@ -48,10 +77,7 @@ class TeacherController extends BaseController{
 				}
 		}else{
 			// update here
-			$user  = User::find(Teacher::find($row_id)->user_id);
-			$user->firstname = $firstname;
-			$user->lastname  = $lastname;
-			$user->save();
+			
 
 			$t = Teacher::find($row_id);
 			$t->firstname = $firstname;
