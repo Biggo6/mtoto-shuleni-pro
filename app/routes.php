@@ -50,6 +50,14 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('sections/edit/{id}', ['as'=>'sections.edit', 'uses'=>'SettingsController@editSection']);
 	Route::post('sections/update/{id}', ['as'=>'sections.update', 'uses'=>'SettingsController@updateSection']);
 	Route::post('sections/delete/{id}', ['as'=>'sections.delete', 'uses'=>'SettingsController@deleteSection']);
+	
+	Route::get('subjects/manage', ['as'=>'subjects.manage', 'uses' => 'SubjectControler@manage']);
+	Route::post('subjects/store', ['as'=>'subjects.store', 'uses'=>'SubjectControler@store']);
+	Route::post('subjects/update/{id}', ['as'=>'subjects.update', 'uses'=>'SubjectControler@update']);
+	Route::get('subjects/refreshWith', ['as'=>'subjects.refreshWith', 'uses'=>'SubjectControler@refreshWith']);
+	Route::post('subjects/destroy/{id}', ['as'=>'subjects.destroy', 'uses'=>'SubjectControler@destroy']);
+	Route::post('subjects/edit/{id}', ['as'=>'subjects.edit', 'uses'=>'SubjectControler@edit']);
+	
 	//Classes
 	
 	Route::post('msclasses/store', ['as'=>'msclasses.store', 'uses'=>'ClassController@store']);
