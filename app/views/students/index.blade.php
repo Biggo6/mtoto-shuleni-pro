@@ -4,7 +4,33 @@
 
 @section('main')
 
+<div class="modal fade" id="modal-add-student">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-user-plus"></i> Add New Student</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="modal-add-student-bulk">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-user-plus"></i> Add Bulk Students</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </div>
+</div
 
 <div class="row">
 
@@ -12,8 +38,8 @@
 		<div class="x_panel">
                   <div class="x_title">
                     <h2>
-                    	<button class="btn btn-success"><i class="fa fa-plus"></i> Admit Student</button>
-                    	<button class="btn btn-warning"><i class="fa fa-plus"></i> Admit Bulk Student</button>
+                    	<button data-toggle="modal" href='#modal-add-student' class="btn btn-success"><i class="fa fa-plus"></i> Admit Student</button>
+                    	<!-- <button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-warning"><i class="fa fa-plus"></i> Admit Bulk Student</button> -->
                     </h2>
                     <div class="clearfix"></div>
                   </div>
