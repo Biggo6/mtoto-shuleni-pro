@@ -80,6 +80,7 @@ class SubjectControler extends \BaseController {
 	public function edit($id)
 	{
 		//
+		return $id;
 	}
 
 	/**
@@ -103,7 +104,8 @@ class SubjectControler extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$row_id  = Input::get('row_id');
+		$subject = Subject::find($row_id)->delete(); 
 	}
 
 }

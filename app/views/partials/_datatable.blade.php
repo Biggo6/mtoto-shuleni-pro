@@ -1,7 +1,7 @@
 @if((count($mapEls)) != (count($columns)-1))
 
 <div class="alert alert-danger">
-  <i class="fa fa-warning"></i> Please <i>"data"</i> count should be equal to <i>"mapEls"</i> count
+  <i class="fa fa-warning"></i> Please <i>"columns"</i> count should be equal to <i>"mapEls"</i> count
 </div>
 
 @else

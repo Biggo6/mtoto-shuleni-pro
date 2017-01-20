@@ -88,7 +88,41 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-		 @include('partials._success')
+		 				@include('partials._success')
+		 				@if(School::count())
+                      		@if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+                      			<!-- -->
+                      			<?php
+                      				$data = DB::table('subjects')->join('msclasses', 'msclasses.id', '=', 'subjects.class_id')->join('teachers', 'teachers.id', '=', 'subjects.teacher_id')->join('sections', 'sections.id', '=', 'subjects.section_id')
+                      				->select('subjects.name as subject', 'msclasses.class_name as classname', DB::raw('CONCAT(teachers.firstname, " ", teachers.lastname) AS teacher'), 'sections.name as section', 'subjects.status', 'subjects.id')->where('subjects.deleted_at', NULL)->orderBy('subjects.created_at', 'DESC')->get();
+                      				
+                      			?>
+                      			@include('partials._datatable', ["columns"=>["Subject", "Class Name", "Section", "Teacher", "Status", "Actions"], "data"=>$data, "mapEls"=>["subject", "classname", "section", "teacher", "status"], "modal"=>"",
+                      				"url_edit"=>"subjects/edit", "url_delete"=>"subjects/destroy", "refreshWix"=>"subjects.refreshWith"
+                      			  ])
+                      		@else
+
+                      		<?php
+                      				$data = DB::table('subjects')->join('msclasses', 'msclasses.id', '=', 'subjects.class_id')->join('teachers', 'teachers.id', '=', 'subjects.teacher_id')->join('sections', 'sections.id', '=', 'subjects.section_id')
+                      				->select('subjects.name as subject', 'msclasses.class_name as classname', DB::raw('CONCAT(teachers.firstname, " ", teachers.lastname) AS teacher'), 'subjects.status', 'subjects.id')->where('subjects.deleted_at', NULL)->orderBy('subjects.created_at', 'DESC')->get();
+                      				
+                      			?>
+                      			@include('partials._datatable', ["columns"=>["Subject", "Class Name", "Teacher", "Status", "Actions"], "data"=>$data, "mapEls"=>["subject", "classname", "teacher", "status"], "modal"=>"",
+                      				"url_edit"=>"subjects/edit", "url_delete"=>"subjects/destroy", "refreshWix"=>"subjects.refreshWith"
+                      			  ])
+
+                      		@endif
+                      	@else
+                      		<!-- -->
+                      		<?php
+                      				$data = DB::table('subjects')->join('msclasses', 'msclasses.id', '=', 'subjects.class_id')->join('teachers', 'teachers.id', '=', 'subjects.teacher_id')->join('sections', 'sections.id', '=', 'subjects.section_id')
+                      				->select('subjects.name as subject', 'msclasses.class_name as classname', DB::raw('CONCAT(teachers.firstname, " ", teachers.lastname) AS teacher'), 'subjects.status', 'subjects.id')->where('subjects.deleted_at', NULL)->orderBy('subjects.created_at', 'DESC')->get();
+                      				
+                      			?>
+                      			@include('partials._datatable', ["columns"=>["Subject", "Class Name", "Teacher", "Status", "Actions"], "data"=>$data, "mapEls"=>["subject", "classname", "teacher", "status"], "modal"=>"lg",
+                      				"url_edit"=>"subjects/edit", "url_delete"=>"subjects/destroy", "refreshWix"=>"subjects.refreshWith"
+                      			  ])
+                      	@endif	
 
 		</div></div></div>
 
