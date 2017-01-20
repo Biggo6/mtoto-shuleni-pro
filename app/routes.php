@@ -19,6 +19,13 @@ Route::get('/', function()
 Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin']);
 
 Route::group(['before'=>'auth'], function(){
+
+	//Parents
+	Route::get('parents/manage', ['as'=>'parents.manage', 'uses' => 'ParentController@index']);
+	Route::get('parents/refreshWith', ['as'=>'parents.refreshWith', 'uses' => 'ParentController@refreshWith']);
+	Route::post('parents/store', ['as'=>'parents.store', 'uses'=>'ParentController@store']);
+	Route::post('parents/destroy/{id}', ['as'=>'parents.destroy', 'uses'=>'ParentController@destroy']);
+
 	//Teachers
 	Route::get('teachers/manage', ['as'=>'teachers.manage', 'uses'=>'TeacherController@manage']);
 	Route::post('teachers/store', ['as'=>'teachers.store', 'uses'=>'TeacherController@store']);

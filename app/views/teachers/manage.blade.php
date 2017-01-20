@@ -46,41 +46,41 @@
                       <div style="display:none" id="more_teacher_fields"> 
 
                       	<div class="form-group">
-                        <label>Status</label>
-                        <select name="status" class="form-control">
-                          <option value="1">Active</option>
-                          <option value="0">Blocked</option>
-                        </select>
-                      </div><br/>
+                          <label>Status</label>
+                          <select name="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Blocked</option>
+                          </select>
+                        </div><br/>
 
-                      	<div class="form-group">
-                      	<label>Birthday</label>
-                      	<input type="text" id="birthday" placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
-                      </div>
+                        	<div class="form-group">
+                        	<label>Birthday</label>
+                        	<input type="text" id="birthday" placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
+                        </div>
 
-                      <div class="form-group">
-                        <label>Gender</label>
-                        <select name="gender" class="form-control">
-                          <option value="">---  Select Gender ----</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                      </div>
+                        <div class="form-group">
+                          <label>Gender</label>
+                          <select name="gender" class="form-control">
+                            <option value="">---  Select Gender ----</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                        </div>
 
-                      <div class="form-group">
-                      	<label>Address</label>
-                      	<input type="text" name="address" placeholder="Enter Address" class="form-control" />
-                      </div>
+                        <div class="form-group">
+                        	<label>Address</label>
+                        	<input type="text" name="address" placeholder="Enter Address" class="form-control" />
+                        </div>
 
-                      <div class="form-group">
-                      	<label>Phone</label>
-                      	<input type="text" name="phone" placeholder="Enter Phone" class="form-control" />
-                      </div>
+                        <div class="form-group">
+                        	<label>Phone</label>
+                        	<input type="text" name="phone" placeholder="Enter Phone" class="form-control" />
+                        </div>
 
-                      <div class="form-group">
-                      	<label>Email</label>
-                      	<input type="text" name="email" placeholder="Enter Email" class="form-control" />
-                      </div>
+                        <div class="form-group">
+                        	<label>Email</label>
+                        	<input type="text" name="email" placeholder="Enter Email" class="form-control" />
+                        </div>
 
                       </div>
 

@@ -32,7 +32,7 @@
       </li>
       <li><a><i class="fa fa-heart"></i> Parents <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Subjects</a></li>
+          <li><a href="{{route('parents.manage')}}"><i class="fa fa-pencil"></i> Manage Parents</a></li>
         </ul>
       </li>
      
