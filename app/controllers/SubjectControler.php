@@ -37,7 +37,7 @@ class SubjectControler extends \BaseController {
 		
 		$subject         = Input::get('subject');
 		$class_name      = Input::get('class_name');
-		$class_section   = (Input::get('class_section') == "all") ? 0 : Input::get('class_section');
+		$class_section   = Input::get('class_section');
 		$subject_teacher = Input::get('subject_teacher');
 		$status 		 = Input::get('status');
 
@@ -80,7 +80,9 @@ class SubjectControler extends \BaseController {
 	public function edit($id)
 	{
 		//
-		return $id;
+		$row_id = Input::get('row_id');
+		$subject = Subject::find($row_id);
+		return View::make('subjects.edit')->withSubject($subject);
 	}
 
 	/**
@@ -92,7 +94,43 @@ class SubjectControler extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$row_id          = Input::get('row_id');
+		$subject         = Input::get('subject');
+		$class_name      = Input::get('class_name');
+		$class_section   = Input::get('class_section');
+		$subject_teacher = Input::get('subject_teacher');
+		$status 		 = Input::get('status');
+
+		$check = Subject::where('id', $row_id)->where('name', $subject)->where('class_id', $class_name)->where('teacher_id', $subject_teacher)->where('section_id', $class_section)->count();
+
+		if($check){
+			//update
+			$s = Subject::find($row_id);
+			$s->name = $subject;
+			$s->class_id = $class_name;
+			$s->section_id = $class_section;
+			$s->teacher_id = $subject_teacher;
+			$s->status = $status;
+			$s->save();
+			return Response::json(['error'=>false, 'msg'=>'Successfully']);
+		}else{
+			$check_ = Subject::where('id', '!=', $row_id)->where('name', $subject)->where('class_id', $class_name)->where('teacher_id', $subject_teacher)->where('section_id', $class_section)->count();
+			if($check_){
+				return Response::json(['error'=>false, 'msg'=>'Subject already registered']);
+			}else{
+				// update
+				$s = Subject::find($row_id);
+				$s->name = $subject;
+				$s->class_id = $class_name;
+				$s->section_id = $class_section;
+				$s->teacher_id = $subject_teacher;
+				$s->status = $status;
+				$s->save();
+				return Response::json(['error'=>false, 'msg'=>'Successfully']);
+			}
+		}
+
+
 	}
 
 	/**

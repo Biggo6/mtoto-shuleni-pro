@@ -38,7 +38,7 @@
                       <div class="form-group">
                         <label>Section/Stream</label>
                         <select name="class_section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required"])}}>
-                          <option value="all">-- For all Sections/Streams --</option>
+                          <option value="">-- Select Sections/Streams --</option>
                           <?php $sections = Section::where('status', 1)->get(); ?>
                           @foreach($sections as $section)
                               <option value="{{$section->id}}">{{$section->name}}</option>
