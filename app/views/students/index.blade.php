@@ -11,9 +11,148 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"><i class="fa fa-user-plus"></i> Add New Student</h4>
             </div>
-            <div class="modal-body">
+            <form class="form-horizontal form-label-left" id="registerStudent">
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Photo</label>
+                                
+                                <input type="file" id="studentphoto" name="studentphoto" class="filestyle" data-input="false" data-buttonName="btn-danger">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Firstname</label>
+                            <input type="text"  name="firstname" {{HelperX::ve(["veName"=>"Firstname", "veVs"=>"required"])}} placeholder="Enter Firstname">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Lastname</label>
+                            <input type="text"  name="lastname" {{HelperX::ve(["veName"=>"Lastname", "veVs"=>"required"])}} placeholder="Enter Lastname">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Username">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Class</label>
+                            <select name="status" class="form-control">
+                            
+                          </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Password">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Section</label>
+                            
+                          <select name="status" class="form-control">
+                            
+                          </select>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Confirm Password">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Admitt Number</label>
+                            <input type="text"  name="admit" {{HelperX::ve(["veName"=>"Admit Number", "veVs"=>"required"])}} placeholder="Enter Admit Number">
+                        </div>
+                    </div>
+                </div>
                 
-            </div>
+                <hr/>
+                <span id="more" class="label label-primary" style="cursor: pointer"><i class="fa fa-arrow-down"></i> More ...</span><br/><br/>
+
+                
+                <div  style="display:none" id="more_teacher_fields">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                          <label>Status</label>
+                          <select name="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Blocked</option>
+                          </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Birthday</label>
+                                <input type="text" id="birthday" placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
+                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Gender</label>
+                              <select name="gender" class="form-control">
+                                <option value="">---  Select Gender ----</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text"  name="address" class="form-control" placeholder="Enter Address Here" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text"  name="phone" class="form-control" placeholder="Enter Phone Here" />
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text"  name="email" class="form-control" placeholder="Enter Email Here" />
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <br/><hr/>
+
+                 @include('partials._buttonSave', ['btnId'=>'saveStudent', 'btn'=>'success', 'title'=>'Save New Student Information']);
+
+                </div>
+            </form>
         </div>
     </div>
 </div>
