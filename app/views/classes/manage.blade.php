@@ -17,10 +17,30 @@
                   <div class="x_content">
                    
                     <form class="form-horizontal form-label-left" id="registerClass">
+                      
+
                       <div class="form-group">
+                        <label>Class</label>
+                        <select id="editable-select" name="class_name" {{HelperX::ve(["veName"=>"Class Name", "veVs"=>"required"])}}>
+                          
+                          
+
+                          <?php $classes =  MsClass::where('status', 1)->select('class_name')
+            ->distinct()
+            ->get(); ?>
+                          @foreach($classes as $c)
+                              <option  value="{{$c->id}}">{{$c->class_name}}</option>
+                          @endforeach
+                        </select>  
+                      </div>
+
+                      <!-- <div class="form-group">
                         <label>Name</label>
+
+
+
                         <input type="text"  name="class_name" {{HelperX::ve(["veName"=>"Class Name", "veVs"=>"required"])}} placeholder="Enter Class Name">
-                      </div><br/>
+                      </div> --><br/>
 
                       @if(School::count())
                       @if(HelperX::getSchoolInfo()->isStreamEnable == 1)

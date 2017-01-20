@@ -20,6 +20,10 @@ Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin'
 
 Route::group(['before'=>'auth'], function(){
 
+	//Students
+	Route::get('students/manage', ['as'=>'students.manage', 'uses'=>'StudentController@index']);
+	Route::post('students/fetch', ['as'=>'students.fetch', 'uses'=>'StudentController@fetch']);
+
 	//Parents
 	Route::get('parents/manage', ['as'=>'parents.manage', 'uses' => 'ParentController@index']);
 	Route::get('parents/refreshWith', ['as'=>'parents.refreshWith', 'uses' => 'ParentController@refreshWith']);

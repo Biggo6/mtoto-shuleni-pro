@@ -24,9 +24,9 @@
           <li><a href="{{route('subjects.manage')}}"><i class="fa fa-pencil"></i> Manage Subjects</a></li>
         </ul>
       </li>
-      <li><a><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Students</a></li>
+      <li id="student"><a ><i class="fa fa-graduation-cap"></i> Students <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu" id="student_menu">
+          <li><a href="{{route('students.manage')}}"><i class="fa fa-pencil"></i> Manage Students</a></li>
           <li><a href="form.html"><i class="fa fa-refresh"></i> Student Promotion</a></li>
         </ul>
       </li>

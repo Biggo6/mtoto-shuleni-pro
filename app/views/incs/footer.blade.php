@@ -1,5 +1,14 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+    <script src="{{url('es/es.js')}}"></script>
+    <script type="text/javascript">
+    $(function(){
+      $('#editable-select').editableSelect({ effects: 'fade' });
+    });
+    </script>
+
+
     <script type="text/javascript" src="{{url('select2/dist/js/select2.min.js')}}"></script>
 
     <script type="text/javascript" src="{{url('sweetalert/dist/sweetalert.min.js')}}"></script>
@@ -34,6 +43,7 @@
       $("#select_2").select2({
         templateResult: formatState
       });
+      $('#sel').select2();
     });
     </script>
     
