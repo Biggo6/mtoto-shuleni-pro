@@ -24,7 +24,10 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('parents/manage', ['as'=>'parents.manage', 'uses' => 'ParentController@index']);
 	Route::get('parents/refreshWith', ['as'=>'parents.refreshWith', 'uses' => 'ParentController@refreshWith']);
 	Route::post('parents/store', ['as'=>'parents.store', 'uses'=>'ParentController@store']);
+	Route::post('parents/changepassword', ['as'=>'parents.changepassword', 'uses'=>'ParentController@changepassword']);
 	Route::post('parents/destroy/{id}', ['as'=>'parents.destroy', 'uses'=>'ParentController@destroy']);
+	Route::post('parents/edit/{id}', ['as'=>'parents.edit', 'uses'=>'ParentController@edit']);
+	Route::post('parents/update/{id}', ['as'=>'parents.update', 'uses'=>'ParentController@update']);
 
 	//Teachers
 	Route::get('teachers/manage', ['as'=>'teachers.manage', 'uses'=>'TeacherController@manage']);

@@ -1,4 +1,4 @@
-<?php $rowId = $teacher->id; ?>
+<?php $rowId = $parentx->id; ?>
 
 
 <div class="row">
@@ -15,7 +15,7 @@
       <li class=""><a href="#profile2" data-toggle="tab" aria-expanded="true"><i class="fa fa-lock"></i>  Password </a>
       </li>
       
-      <li class=""><a href="#profile4" data-toggle="tab" aria-expanded="true"><i class="fa fa-bank"></i> Classes </a>
+      <li class=""><a href="#profile4" data-toggle="tab" aria-expanded="true"><i class="fa fa-graduation-cap"></i> Student </a>
       </li>
       <li class=""><a href="#profile3" data-toggle="tab" aria-expanded="true"><i class="fa fa-cogs"></i> Settings </a>
       </li>
@@ -30,138 +30,66 @@
 
         <div class="x_panel">
                   <div class="x_title">
-                    <h4><i class="fa fa-edit"></i> Edit Teacher Information</h4>
+                    <h4><i class="fa fa-edit"></i> Edit Parent Information</h4>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                   
-                    <form class="form-horizontal form-label-left" id="registerTeacherEdit">
+            <form class="form-horizontal form-label-left" id="registerParentEdit">
+                      
+                      <input type="hidden" name="row_id" value="{{$parentx->id}}" />
+                      <div class="form-group">
+                        <label>Fullname</label>
+                        <input type="text" value="{{$parentx->fullname}}"  name="fullname" {{HelperX::ve(["veName"=>"Fullname", "veVs"=>"required"])}} placeholder="Enter Fullname">
+                      </div>
 
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" value="{{$parentx->email}}"  name="email" class="form-control" placeholder="Enter Email">
+                      </div>
 
-  <input type="hidden" value="{{$rowId}}" name="row_id" />
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" value="{{User::find($parentx->user_id)->username}}"  name="username" {{HelperX::ve(["veName"=>"  Username", "veVs"=>"required"])}} placeholder="Enter UserName">
+                      </div>
 
-<div class="form-group">
-<label>First Name</label>
-<input type="text" value="{{$teacher->firstname}}"  name="firstname" {{HelperX::ve(["veName"=>"First  Name", "veVs"=>"required"])}} placeholder="Enter First Name">
-</div>
+                    
 
-<div class="form-group">
-<label>Last Name</label>
-<input type="text" value="{{$teacher->lastname}}"  name="lastname" {{HelperX::ve(["veName"=>"Last  Name", "veVs"=>"required"])}} placeholder="Enter Last Name">
-</div>
+                      <span id="more_edit" class="label label-primary" style="cursor: pointer"><i class="fa fa-arrow-down"></i> More ...</span><br/><br/>
 
-<div class="form-group">
-  <label>Username</label>
-  <input type="text" value="{{User::find($teacher->user_id)->username}}"   name="username" {{HelperX::ve(["veName"=>"  Username", "veVs"=>"required"])}} placeholder="Enter UserName">
-</div>
+                      <div style="display:none" id="more_teacher_fields_edit"> 
 
+                        <div class="form-group">
+                          <label>Address</label>
+                          <input type="text" value="{{$parentx->address}}" name="address" placeholder="Enter Address" class="form-control" />
+                        </div>
 
+                        <div class="form-group">
+                          <label>Phone</label>
+                          <input type="text" value="{{$parentx->phone}}" name="phone" placeholder="Enter Phone" class="form-control" />
+                        </div>
 
-<span id="more_edit" class="label label-primary" style="cursor: pointer"><i class="fa fa-arrow-down"></i> More ...</span><br/><br/>
+                        <div class="form-group">
+                          <label>Profession</label>
+                          <input type="text" value="{{$parentx->profession}}" name="profession" placeholder="Enter Profession" class="form-control" />
+                        </div>
 
-<div style="display:none" id="more_teacher_fields_edit"> 
+                      </div>
 
-<div class="form-group">
-<label>Status</label>
-<select name="status" class="form-control">
-@if($teacher->status == 1)
-<option value="1">Active</option>
-<option value="0">Blocked</option>
-@else
-<option value="0">Blocked</option>
-<option value="1">Active</option>
-@endif
-</select>
-</div><br/>
+                      <div class="form-group">
+                          <label>Status</label>
+                          <select name="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Blocked</option>
+                          </select>
+                        </div><br/>
 
-<div class="form-group">
-<label>Birthday</label>
-@if($teacher->birthday == '0000-00-00' )
-<input type="text" id="birthday_edit"  placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
-@else
-<input type="text" id="birthday_edit" value="{{$teacher->birthday}}"  placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
-@endif
-</div>
+                        <hr/>
 
-<div class="form-group">
-<label>Gender</label>
-<select name="gender" class="form-control">
-@if($teacher->gender == "")  
-<option value="">---  Select Gender ----</option>
-@endif
-@if($teacher->gender == "male")
-<option value="male">Male</option>
-<option value="female">Female</option>
-@elseif($teacher->gender == "female")
-<option value="female">Female</option>
-<option value="male">Male</option>
-@else
-<option value="male">Male</option>
-<option value="female">Female</option>
-@endif
-</select>
-</div>
+                      @include('partials._buttonSave', ['btnId'=>'saveParentEdit', 'title'=>'Update Parent Info']);
 
-<div class="form-group">
-<label>Address</label>
-<input type="text" value="{{$teacher->address}}" name="address" placeholder="Enter Address" class="form-control" />
-</div>
+                      
 
-<div class="form-group">
-<label>Phone</label>
-<input type="text" value="{{$teacher->phone}}" name="phone" placeholder="Enter Phone" class="form-control" />
-</div>
-
-<div class="form-group">
-<label>Email</label>
-<input type="text" value="{{$teacher->email}}" name="email" placeholder="Enter Email" class="form-control" />
-</div>
-
-</div>
-
-
-
-
-<hr/>
-<div class="form-group">
-<p>Profile Picture 
-  <label id="file" style="cursor: pointer" class="label label-warning">Change Photo</label>
-  <input type="file" style="display:none" id="profile_photo_edit"  name="profile_photo_edit" />​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-</p>
-
-<div id="logo-placeholder-edit">
-
-</div>
-
-<br/>
-<div class="show-image" id="EditImage">
-  <div id="logo-placeholder-edit-2">
-    @if($teacher->profile_photo == "")
-      <img style="width:92px;height: 92px" src="{{url('images/img.jpg')}}" />
-    @else
-      <img style="width:92px;height: 92px" src="{{$teacher->profile_photo}}" />
-    @endif
-  </div>
-  @if($teacher->profile_photo != "")
-  <span class="delete label label-danger photoToRemove" type="button" value=""><i class="fa fa-trash"></i> Remove Photo</span> 
-  @endif
-</div>
-
-
-<br/>
-<p></p>
-
-
-
-</div>
-<hr/>
-
-@include('partials._buttonSave', ['btnId'=>'saveTeacherEdit', 'title'=>'Update Teacher']);
-
-
-
-
-</form>
+                  </form>
                     
                   </div>
         </div>
@@ -171,93 +99,65 @@
       <div class="tab-pane " id="profile">
           <div class="x_panel">
                   <div class="x_title">
-                    <h4><i class="fa fa-user"></i> Teacher Information</h4>
+                    <h4><i class="fa fa-user"></i> Parent Information</h4>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                       <div class="row">
+                      
                         <div class="col-md-3">
                           <div>
-                            <label for="">Profile Photo</label><br/>
-                            @if($teacher->profile_photo == "")
-                              <img src="{{url('images/img.jpg')}}" style="width: 150px" />
-                            @else
-                              <img src="{{$teacher->profile_photo}}" style="width: 50px" />
-                            @endif
+                            <label for="">Fullname</label><br/>
+                            <i>{{$parentx->fullname}}</i>
                           </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Firstname</label><br/>
-                            <i>{{$teacher->firstname}}</i>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Lastname</label><br/>
-                            <i>{{$teacher->lastname}}</i>
-                            
-                        </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Username</label><br/>
-                            <i>{{$teacher->lastname}}</i>
-                            
-                            </div>
-                        </div>
-                      </div>
-                      <hr/>
-                      <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Status</label><br/>
-                            <i>{{HelperX::getStatus($teacher->status)}}</i>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Birthday</label><br/>
-                            <i>{{$teacher->birthday}}</i>
-                            
-                        </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Gender</label><br/>
-                            <i>{{$teacher->gender}}</i>
-                            
-                            </div>
-                        </div>
-                      </div>
-                      <br/>
-                      <hr/>
-                      <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Address</label><br/>
-                            <i>{{($teacher->address)}}</i>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div>
-                            <label for="">Phone</label><br/>
-                            <i>{{$teacher->phone}}</i>
-                            
-                        </div>
                         </div>
                         <div class="col-md-3">
                           <div>
                             <label for="">Email</label><br/>
-                            <i>{{$teacher->email}}</i>
+                            <i>{{$parentx->email}}</i>
+                            
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Phone</label><br/>
+                            <i>{{$parentx->phone}}</i>
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Profession</label><br/>
+                            <i>{{$parentx->profession}}</i>
                             
                             </div>
                         </div>
                       </div>
+                      <hr/>
+                      <div class="row">
+                      
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Username</label><br/>
+                            <i>{{User::find($parentx->user_id)->username}}</i>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Status</label><br/>
+                            <i>{{HelperX::getStatus($parentx->status)}}</i>
+                            
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div>
+                            <label for="">Address</label><br/>
+                            <i>{{$parentx->address}}</i>
+                            
+                            </div>
+                        </div>
+                      </div>
+                      <hr/>
                   </div>  
           </div>
                  
@@ -285,7 +185,7 @@
 
                           @include('partials._buttonSave', ['btnId'=>'changePassword', 'title'=>'Change Password']);
 
-                          @include('partials._saveFunc', ["btnID" => "changePassword", "formID"=>"teacherChangePassword", "route"=>"teachers.changepassword", "routeWith"=>"teachers.refreshWith", "rowId"=>$rowId, "update"=>true, ])
+                          @include('partials._saveFunc', ["btnID" => "changePassword", "formID"=>"teacherChangePassword", "route"=>"parents.changepassword", "routeWith"=>"parents.refreshWith", "rowId"=>$rowId, "update"=>true, ])
 
 
 
@@ -310,34 +210,7 @@
                   </div>
                   <div class="x_content">
 
-                      <table class="table table-striped table-hover">
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Class Name</th>
-                            @if(School::count())
-                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
-                            <th>Section/Stream</th>
-                            @endif
-                            @endif
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php $k = 1; ?>
-                          @foreach(MsClass::where('teacher_id', $teacher->id)->where('status', 1)->get() as $ms)
-                          <tr>
-                            <td>{{$k}}</td>
-                            <td>{{$ms->class_name}}</td>
-                             @if(School::count())
-                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
-                            <td>{{Section::find($ms->class_section)->name}}</td>
-                            @endif
-                            @endif
-                          </tr>
-                          <?php $k++; ?>
-                          @endforeach
-                        </tbody>
-                      </table>
+                      
 
                   </div>
           </div>
@@ -354,6 +227,8 @@
 <!-- jQuery -->
 <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
 
+@include('partials._saveFunc', ["btnID" => "saveParentEdit", "formID"=>"registerParentEdit", "route"=>"parents.update", "routeWith"=>"parents.refreshWith", "rowId"=>$rowId, "update"=>true])
+
  <script type="text/javascript">
     function checkPassMatch(field, rules, i, options){
         var a=rules[i+2];
@@ -362,8 +237,6 @@
         }
     }
 </script>
-
-@include('partials._saveFunc', ["btnID" => "saveTeacherEdit", "formID"=>"registerTeacherEdit", "route"=>"teachers.update", "routeWith"=>"teachers.refreshWith", "rowId"=>$rowId, "update"=>true, "photo"=>"profile_photo_edit"])
 
 <!-- bootstrap-daterangepicker -->
     <script src="{{url('vendors/moment/min/moment.min.js')}}"></script>

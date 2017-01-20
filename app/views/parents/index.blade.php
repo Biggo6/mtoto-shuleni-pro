@@ -75,7 +75,7 @@
                       @include('partials._buttonSave', ['btnId'=>'saveParent', 'title'=>'Save Parent Info']);
 
                        @section('footerScripts')
-                        @include('partials._saveFunc', ["btnID" => "saveParent", "formID"=>"registerParent", "route"=>"parents.store", "routeWith"=>"parents.refreshWith", "debug"=>true])
+                        @include('partials._saveFunc', ["btnID" => "saveParent", "formID"=>"registerParent", "route"=>"parents.store", "routeWith"=>"parents.refreshWith"])
                       @stop
 
                   </form>
@@ -94,7 +94,11 @@
                     <br>
                     @include('partials._success')
 
-                    @include('partials._datatable', ["columns"=>["Fullname", "Email", "Phone", "Status", "Profession", "Actions"], "mapEls"=>["fullname", "email", "phone", "status", "profession"], "data"=>[], "modal"=>"lg", "url_edit"=>"parents/edit", "url_delete"=>"parents/destroy", "refreshWix"=>"parents.refreshWith"])
+                    <?php
+                    	$data = Parentx::all();
+                    ?>
+
+                    @include('partials._datatable', ["columns"=>["Fullname", "Email", "Phone", "Status", "Profession", "Actions"], "mapEls"=>["fullname", "email", "phone", "status", "profession"], "data"=>$data, "modal"=>"lg", "url_edit"=>"parents/edit", "url_delete"=>"parents/destroy", "refreshWix"=>"parents.refreshWith"])
 
 
                   </div>
