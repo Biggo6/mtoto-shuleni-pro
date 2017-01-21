@@ -46,7 +46,7 @@ $(function(){
          
 
           var biggo = Biggo.talkToServer(url, data, isFileUpload).then(function(res){
-
+           
             @if(isset($debug))
                 Biggo.removeOpacity({{$formID}});
                 Biggo.enableEl({{$btnID}});
@@ -59,7 +59,9 @@ $(function(){
             if(res.error){
                 Biggo.showFeedBack({{$formID}}, res.msg, res.error);
             }else{
-                window.location = '{{route($routeWith)}}';
+
+                     window.location = '{{route($routeWith)}}';
+
             }
         });
 

@@ -47,20 +47,23 @@ class ParentController extends \BaseController {
 			return Response::json(['error'=>true, 'msg'=>'Username already exists!']);
 		}else{
 
-			$user  = new User;
-			$user->username  = $username;
-			$user->firstname = $fullname;
-			$user->password  = Hash::make($password);
-			$user->active    = $status;
-			$user->save();
 
-			$user_id  = $user->id;
 
 			$check_ = Parentx::where('fullname', $fullname)->count();
 
 			if($check_){
 				return Response::json(['error'=>true, 'msg'=>'Parent name already exists!']);
 			}else{
+
+                $user  = new User;
+                $user->username  = $username;
+                $user->firstname = $fullname;
+                $user->password  = Hash::make($password);
+                $user->active    = $status;
+                $user->save();
+
+                $user_id  = $user->id;
+
 				$p = new Parentx;
 				$p->fullname = $fullname;
 				$p->email    = $email;

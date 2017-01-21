@@ -50,7 +50,7 @@ class StudentController extends \BaseController {
 	 */
 	public function store()
 	{
-		
+
 		$firstname    = Input::get('firstname');
 		$lastname     = Input::get('lastname');
 		$parentx      = Input::get('parentx');
@@ -64,7 +64,6 @@ class StudentController extends \BaseController {
 		$address      = Input::get('address');
 		$phone        = Input::get('phone');
 		$email        = Input::get('email');
-		$studentphoto = Input::get('studentphoto');
 
 		$check    		= User::where('username', $username)->count();
 
@@ -72,21 +71,24 @@ class StudentController extends \BaseController {
 			return Response::json(['error'=>true, 'msg'=>'Username already exists!']);
 		}else{
 
-			$user  = new User;
-			$user->username  = $username;
-			$user->firstname = $firstname;
-			$user->lastname  = $lastname;
-			$user->password  = Hash::make($password);
-			$user->active    = $status;
-			$user->save();
 
-			$user_id  = $user->id;
 
 			$check_ = Student::where('firstname', $firstname)->where('lastname', $lastname)->where('admit_number', $admitnumber)->count();
 
 			if($check_){
 				return Response::json(['error'=>true, 'msg'=>'Student already exists!']);
 			}else{
+
+                $user  = new User;
+                $user->username  = $username;
+                $user->firstname = $firstname;
+                $user->lastname  = $lastname;
+                $user->password  = Hash::make($password);
+                $user->active    = $status;
+                $user->save();
+
+                $user_id  = $user->id;
+
 				$s = new Student;
 				$s->firstname = $firstname;
 				$s->lastname  = $lastname;
@@ -98,12 +100,14 @@ class StudentController extends \BaseController {
 				$s->phone     = $phone;
 				$s->status    = $status;
 				$s->email     = $email;
+                $s->parent_id = $parentx;
+                $s->user_id   = $user_id;
 
 				if(Input::has('section')){
 					$s->section_name = Input::get('section');
 				}
 
-				if(Input::has('studentphoto')){
+				if(Input::hasFile("studentphoto")){
 					$s->profile_photo = HelperX::uplodFileThenReturnPath('studentphoto');
 				}
 
@@ -142,7 +146,9 @@ class StudentController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$student_id = Input::get('student_id');
+        $student = Student::find($student_id);
+        return View::make('students.edit')->withStudent($student);
 	}
 
 	/**
@@ -166,7 +172,8 @@ class StudentController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$student_id = Input::get('student_id');
+        Student::find($student_id)->delete();
 	}
 
 }

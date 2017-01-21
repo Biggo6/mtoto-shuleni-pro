@@ -1,3 +1,5 @@
+
+
 <?php
 	
 	$sections = MsClass::where('class_name', $c)->where('status',1)->where('class_section', '!=', 0)->count();
@@ -21,21 +23,59 @@
 </div>
 <hr/>
 
+<div class="modal fade" id="modal-mark-sheet">
+                            	<div class="modal-dialog modal-lg">
+                            		<div class="modal-content">
+                            			<div class="modal-header">
+                            				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            				<h4 class="modal-title">Modal title</h4>
+                            			</div>
+                            			<div class="modal-body">
 
+                            			</div>
+                            			<div class="modal-footer">
+                            				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            				<button type="button" class="btn btn-primary">Save changes</button>
+                            			</div>
+                            		</div>
+                            	</div>
+                            </div>
+                            <div class="modal fade" id="modal-student-edit">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Student Information</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                <center>
+                                                    <img id="loader_" style="display: none" src="{{url('images/loader.gif')}}" />
+                                                </center>
+                                                <div id="student_editor"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
 <div class="" role="tabpanel" data-example-id="togglable-tabs">
   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> All Students</a>
+    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> All Students ({{Student::where('class_name', $c)->orderBy('created_at', 'DESC')->count()}})</a>
     </li>
+    @if(School::count())
+                          @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
     @if($sections!=0)
-      <?php $c=2; ?>
+      <?php $cc=2; ?>
       @foreach($real_sections as $rs)
         @if(in_array($rs->name, $css))
-      <li role="presentation" class=""><a href="#tab_content{{$c}}" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-list"></i> Section {{$rs->name}}</a>
+      <li role="presentation" class=""><a href="#tab_content{{$cc}}" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-list"></i> Section {{$rs->name}} ({{Student::where('section_name', $rs->name)->where('class_name', $c)->orderBy('created_at', 'DESC')->count()}})</a>
       </li>
       @endif
-      <?php $c++; ?>
+      <?php $cc++; ?>
       @endforeach
+    @endif
+
+    @endif
     @endif
     
   </ul>
@@ -48,6 +88,8 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+
+
                             <table id="datatable" class="table  table-striped table-bordered">
                               <thead>
                                   <tr>
@@ -61,15 +103,35 @@
                                   </tr>
                               </thead>
                               <tbody>
+
+                                  <?php 
+                                      $students = Student::where('class_name', $c)->orderBy('created_at', 'DESC')->get();
+
+                                      $i = 1;
+                                  ?>
+
+                                 @foreach($students as $s)
                                   <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$i}}</td>
+                                    <td>{{$s->admit_number}}</td>
+                                    <td>
+                                        @if($s->profile_photo == "")
+                                            <img src="{{url('images/img.jpg')}}" style="width:52px" />
+                                        @else
+                                             <img src="{{$s->profile_photo}}" style="width:52px" />
+                                        @endif
+                                    </td>
+                                    <td>{{$s->firstname}} {{$s->lastname}}</td>
+                                    <td>{{$s->address}}</td>
+                                    <td>{{$s->email}}</td>
+                                    <td>
+                                        <span data-toggle="modal" href='#modal-mark-sheet' style="cursor: pointer" class="label label-primary mark_sheet_student" row_id="{{$s->id}}"><i class="fa fa-signal"></i> Mark Sheet</span>
+                                        <span data-toggle="modal" href='#modal-student-edit' style="cursor: pointer" class="label label-success edit_student" row_id="{{$s->id}}"><i class="fa fa-edit"></i> Edit</span>
+                                        <span style="cursor: pointer" class="label label-danger delete_student" row_id="{{$s->id}}"><i class="fa fa-trash"></i> Delete</span>
+                                    </td>
                                   </tr>
+                                  <?php $i++; ?>
+                                  @endforeach
                               </tbody>
                             </table> 
                   </div>
@@ -78,10 +140,10 @@
          
     </div>
     @if($sections!=0)
-      <?php $c=2; ?>
+      <?php $ccc=2; ?>
       @foreach($real_sections as $rs)
         @if(in_array($rs->name, $css))
-        <div role="tabpanel" class="tab-pane fade in" id="tab_content{{$c}}" aria-labelledby="home-tab">
+        <div role="tabpanel" class="tab-pane fade in" id="tab_content{{$ccc}}" aria-labelledby="home-tab">
 
           <div class="x_panel">
                   <div class="x_title">
@@ -89,7 +151,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-<table id="datatable{{$c}}" class="table  table-striped table-bordered">
+<table id="datatable{{$ccc}}" class="table  table-striped table-bordered">
                               <thead>
                                   <tr>
                                       <th>#</th>
@@ -102,15 +164,35 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
+                                 <?php
+                                                                       $students = Student::where('section_name',$rs->name )->where('class_name', $c)->orderBy('created_at', 'DESC')->get();
+
+                                                                       $i = 1;
+                                                                   ?>
+
+                                                                  @foreach($students as $s)
+                                                                   <tr>
+                                                                     <td>{{$i}}</td>
+                                                                     <td>{{$s->admit_number}}</td>
+                                                                     <td>
+                                                                         @if($s->profile_photo == "")
+                                                                             <img src="{{url('images/img.jpg')}}" style="width:52px" />
+                                                                         @else
+                                                                              <img src="{{$s->profile_photo}}" style="width:52px" />
+                                                                         @endif
+                                                                     </td>
+                                                                     <td>{{$s->firstname}} {{$s->lastname}}</td>
+                                                                     <td>{{$s->address}}</td>
+                                                                     <td>{{$s->email}}</td>
+                                                                     <td>
+                                                                             <span data-toggle="modal" href='#modal-mark-sheet' style="cursor: pointer" class="label label-primary mark_sheet_student" row_id="{{$s->id}}"><i class="fa fa-signal"></i> Mark Sheet</span>
+                                                                              <span data-toggle="modal" href='#modal-student-edit' style="cursor: pointer" class="label label-success edit_student" row_id="{{$s->id}}"><i class="fa fa-edit"></i> Edit</span>
+                                                                                                                    <span style="cursor: pointer" class="label label-danger delete_student" row_id="{{$s->id}}"><i class="fa fa-trash"></i> Delete</span>
+
+                                                                     </td>
+                                                                   </tr>
+                                                                   <?php $i++; ?>
+                                                                   @endforeach
                               </tbody>
                             </table> 
                   </div>
@@ -119,7 +201,7 @@
 
     </div>
       @endif
-      <?php $c++; ?>
+      <?php $ccc++; ?>
       @endforeach
     @endif
     
@@ -127,6 +209,63 @@
 </div>
 
      <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+     <script>
+        $(function(){
+
+            $('.edit_student').on('click', function(){
+                 var student_id  = $(this).attr('row_id');
+                 $('#loader_').show();
+                 $('#student_editor').html('');
+                  $.post('{{route('students.edit', 1)}}', {student_id:student_id}, function(res){
+                        $('#loader_').hide();
+                        $('#student_editor').hide().html(res).fadeIn();
+                 });
+            });
+
+            $('.delete_student').on('click', function(){
+
+                        var student_id  = $(this).attr('row_id');
+
+                        var that = $(this);
+
+                        swal({
+                          title: "Are you sure?",
+                          text: "You will not be able to recover this imaginary file!",
+                          type: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#DD6B55",
+                          confirmButtonText: "Yes, delete it!",
+                          cancelButtonText: "No, cancel plx!",
+                          closeOnConfirm: false,
+                          closeOnCancel: true
+                        },
+                        function(isConfirm){
+                          if (isConfirm) {
+
+                                            $(that).parent().parent().css('opacity', 0.2);
+
+                                            $.post('{{route('students.destroy', 1)}}', {student_id:student_id}, function(res){
+                                                    $(that).parent().parent().delay(100).fadeOut();
+                                                    swal({
+                                                        title: 'Deleted',
+                                                        text: 'Successfully deleted!',
+                                                        type: 'success'
+                                                    }, function() {
+
+                                                    });
+                                            });
+
+
+
+                          }
+                        });
+
+
+
+            });
+        });
+     </script>
 
        <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
                   <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>

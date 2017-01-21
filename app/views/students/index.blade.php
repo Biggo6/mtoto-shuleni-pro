@@ -238,7 +238,7 @@
                   <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
                   <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
 
-                        @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto"])
+                        @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto", "redirect"=> true, "redirect"=>false])
                       @stop
 
                 </div>
@@ -268,7 +268,9 @@
                   <div class="x_title">
                     <h2>
                     	<button data-toggle="modal" href='#modal-add-student' class="btn btn-success"><i class="fa fa-plus"></i> Admit Student</button>
-                    	<!-- <button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-warning"><i class="fa fa-plus"></i> Admit Bulk Student</button> -->
+                    	<button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-warning"><i class="fa fa-plus"></i> Admit Bulk Student</button>
+                    	<button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-primary"><i class="fa fa-file-o"></i> Import Students From Excel File</button>
+
                     </h2>
                     <div class="clearfix"></div>
                   </div>

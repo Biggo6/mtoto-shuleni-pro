@@ -129,21 +129,24 @@ class TeacherController extends BaseController{
 			return Response::json(['error'=>true, 'msg'=>'Username already exists!']);
 		}else{
 
-			$user  = new User;
-			$user->username  = $username;
-			$user->firstname = $firstname;
-			$user->lastname  = $lastname;
-			$user->password  = Hash::make($password);
-			$user->active    = $status;
-			$user->save();
 
-			$user_id  = $user->id;
 
 			$check_ = Teacher::where('firstname', $firstname)->where('lastname', $lastname)->count();
 
 			if($check_){
 				return Response::json(['error'=>true, 'msg'=>'Teacher name already exists!']);
 			}else{
+
+                $user  = new User;
+                $user->username  = $username;
+                $user->firstname = $firstname;
+                $user->lastname  = $lastname;
+                $user->password  = Hash::make($password);
+                $user->active    = $status;
+                $user->save();
+
+                $user_id  = $user->id;
+
 				$t = new Teacher;
 				$t->firstname = $firstname;
 				$t->lastname  = $lastname;
