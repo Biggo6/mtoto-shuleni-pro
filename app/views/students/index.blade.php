@@ -14,13 +14,7 @@
             <form class="form-horizontal form-label-left" id="registerStudent">
                 <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Photo</label>
-                                
-                                <input type="file" id="studentphoto" name="studentphoto" class="filestyle" data-input="false" data-buttonName="btn-danger">
-                        </div>
-                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Firstname</label>
@@ -29,71 +23,111 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Lastname</label>
+                            <label>Lastname</label><br/>
                             <input type="text"  name="lastname" {{HelperX::ve(["veName"=>"Lastname", "veVs"=>"required"])}} placeholder="Enter Lastname">
 
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        
+                    
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Parent</label>
+                            <?php $parents = Parentx::where('status', 1)->get();  ?>
+                            <select name="parentx" style="width:100%"   {{HelperX::ve(["veName"=>"Student Parent", "veVs"=>"required", "clx"=>"select_2", "vePos"=>"topRight"])}}>
+
+                                
+
+                                <option value="">--- Select Parent ----</option>
+
+                                @foreach($parents as $p)
+                                    <option value="{{$p->id}}">{{$p->fullname}}</option>
+                                @endforeach
+
+                            
+                            </select>
+                        </div>
                     </div>
+                    
+                </div>
+
+                <div class="row">
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Username">
+                            <input type="text"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required", "vePos"=>"bottomLeft"])}} placeholder="Enter Username">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Class</label>
-                            <select name="status" class="form-control">
+                            <?php $classes = MsClass::where('status', 1)->select('class_name')
+            ->distinct()
+            ->get();  ?>
+                            <select id="student_class_select"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+
+                                
+
+                                <option value="">--- Select Class ----</option>
+
+                                @foreach($classes as $c)
+                                    <option value="{{$c->class_name}}">{{$c->class_name}}</option>
+                                @endforeach
+
                             
-                          </select>
+                            </select>    
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        
-                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Password">
+                            <input type="password" id="password"  name="password" {{HelperX::ve(["veName"=>"Password", "veVs"=>"required,funcCall[checkPassMatch[cpassword]]", "vePos"=>"bottomLeft"])}} placeholder="Enter Password">
                         </div>
                     </div>
+
+                    @if(School::count())
+                      @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Section</label>
                             
-                          <select name="status" class="form-control">
+                          <select id="sectionS"  name="section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
+
+                            
                             
                           </select>
                         </div>
                         
                     </div>
+
+                    @endif
+
+                    @endif
+
+
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        
-                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Confirm Password</label>
-                            <input type="password"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required"])}} placeholder="Enter Confirm Password">
+                            <input type="password"  id="cpassword"  name="cpassword" {{HelperX::ve(["veName"=>"Confirm Password", "veVs"=>"required,funcCall[checkPassMatch[password]]", "vePos"=>"bottomLeft"])}} placeholder="Enter Confirm Password">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Admitt Number</label>
-                            <input type="text"  name="admit" {{HelperX::ve(["veName"=>"Admit Number", "veVs"=>"required"])}} placeholder="Enter Admit Number">
+                            <input type="text"  name="admitnumber" {{HelperX::ve(["veName"=>"Admit Number", "veVs"=>"required"])}} placeholder="Enter Admit Number">
                         </div>
                     </div>
                 </div>
                 
-                <hr/>
                 <span id="more" class="label label-primary" style="cursor: pointer"><i class="fa fa-arrow-down"></i> More ...</span><br/><br/>
 
                 
@@ -149,7 +183,63 @@
                 </div>
                 <br/><hr/>
 
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Photo</label>
+                                
+                                <input type="file" id="studentphoto" name="studentphoto" class="filestyle" data-input="false" data-buttonName="btn-warning">
+
+                                
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="logo-placeholder">
+                        </div>
+                    </div>
+                </div>
+                <br/><hr/>
+
                  @include('partials._buttonSave', ['btnId'=>'saveStudent', 'btn'=>'success', 'title'=>'Save New Student Information']);
+
+                  @section('footerScripts')
+
+                        <script type="text/javascript">
+                            $(function(){
+                                    $('body').on('change', '#student_class_select', function(){
+                                          var sel = $(this).val();
+                                          if(sel!=""){
+                                              $('#sectionS').prop('disabled', true);
+                                              $('#sectionS').html('');
+                                              $.post('{{route('students.getSections')}}', {className:sel}, function(res){
+                                                    $('#sectionS').html(res);
+                                                    $('#sectionS').prop('disabled', false);
+                                              });
+                                          }
+                                    });
+
+                                    $('body').on('change', '#sel', function(){
+                                     var sel = $(this).val();
+                                     if(sel!=""){
+                                       $('#ijax').show();
+                                       $('#sel').prop('disabled', true);
+                                       $('#students_area').html('');
+                                       $.post('{{route('students.fetch')}}', {class_name:sel}, function(res){
+                                         $('#ijax').hide();
+                                         $('#sel').prop('disabled', false);
+                                         $('#students_area').hide().html(res).fadeIn();
+                                       });
+                                     }
+                                    });    
+                            });
+                        </script>
+                        
+                  <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+                  <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+
+                        @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto", "debug"=>true])
+                      @stop
 
                 </div>
             </form>
@@ -224,24 +314,3 @@
 
 @stop
 
-@section('footerScripts')
-
-<script type="text/javascript">
-$(function(){
-	$('body').on('change', '#sel', function(){
-		var sel = $(this).val();
-		if(sel!=""){
-			$('#ijax').show();
-			$('#sel').prop('disabled', true);
-			$('#students_area').html('');
-			$.post('{{route('students.fetch')}}', {class_name:sel}, function(res){
-				$('#ijax').hide();
-				$('#sel').prop('disabled', false);
-				$('#students_area').hide().html(res).fadeIn();
-			});
-		}
-	});
-});	
-</script>
-
-@stop

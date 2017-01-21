@@ -1,6 +1,4 @@
-function changePhotoDiv(target='appLogo', placeholder='logo-placeholder', width=250, height=250, imgsrc){
-	
-
+function changePhotoDiv(target='appLogo', placeholder='logo-placeholder', w=50, h=50, imgsrc){
 	
 	var fileInput = document.getElementById(target);
 	var fileDisplayArea = document.getElementById(placeholder);
@@ -11,8 +9,8 @@ function changePhotoDiv(target='appLogo', placeholder='logo-placeholder', width=
 			// Create a new image.
 			var img = new Image();
 			// Set the img src property using the data URL.
-			img.width = width;
-			img.height = height;
+			img.width = w;
+			img.height = h;
 			img.src = imgsrc;
 
 			// Add the image to the page.
@@ -34,8 +32,8 @@ function changePhotoDiv(target='appLogo', placeholder='logo-placeholder', width=
 			// Create a new image.
 			var img = new Image();
 			// Set the img src property using the data URL.
-			img.width = 250;
-			img.height = 250;
+			img.width = w;
+			img.height = h;
 			img.src = reader.result;
 
 			// Add the image to the page.

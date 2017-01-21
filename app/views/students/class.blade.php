@@ -11,8 +11,6 @@
           foreach ($class_sections as $cs) {
               $css[] = Section::find($cs->class_section)->name;
           }
-
-
   }
   
 
@@ -129,6 +127,9 @@
 </div>
 
      <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+       <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+                  <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
 
 <!-- Datatables -->
     <script src="{{url('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>

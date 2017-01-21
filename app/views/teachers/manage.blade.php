@@ -93,7 +93,7 @@
                       	<input type="file" id="profile_photo" name="profile_photo" class="filestyle" data-input="false" data-buttonName="btn-success">
                       	<hr/>
                       	<div id="logo-placeholder">
-						</div>
+						            </div>
                       </div>
                      <hr/>
 

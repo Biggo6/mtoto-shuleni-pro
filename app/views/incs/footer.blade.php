@@ -4,6 +4,9 @@
     <script src="{{url('es/es.js')}}"></script>
     <script type="text/javascript">
     $(function(){
+
+        
+
       $('#editable-select').editableSelect({ effects: 'fade' });
     });
     </script>
@@ -44,6 +47,7 @@
         templateResult: formatState
       });
       $('#sel').select2();
+       $('.select_2').select2();
     });
     </script>
     
@@ -137,6 +141,12 @@
         
         @if(Route::currentRouteName() == "settings.school")
         Biggo.changePhotoDiv('schoolLogo', 'logo-placeholder', 72, 72, '');
+        @endif
+
+        @if(Route::currentRouteName() == "students.manage")
+
+        Biggo.changePhotoDiv('studentphoto', 'logo-placeholder', 70, 72, '');
+
         @endif
 
         @if(Route::currentRouteName() == "teachers.manage")

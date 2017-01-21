@@ -17,8 +17,8 @@ class CreateStudentsTable extends Migration {
 			$table->increments('id');
 			$table->string('firstname');
 			$table->string('lastname');
-			$table->integer('class_id');
-			$table->integer('section_id');
+			$table->string('class_name');
+			$table->string('section_name');
 			$table->string('admit_number');
 			$table->date('birthday');
 			$table->string('gender');
