@@ -14,7 +14,7 @@
             <form class="form-horizontal form-label-left" id="registerStudent">
                 <div class="modal-body">
                 <div class="row">
-                    
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Firstname</label>
@@ -30,14 +30,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+
                     <div class="col-md-8">
                         <div class="form-group">
                             <label>Parent</label>
                             <?php $parents = Parentx::where('status', 1)->get();  ?>
                             <select name="parentx" style="width:100%"   {{HelperX::ve(["veName"=>"Student Parent", "veVs"=>"required", "clx"=>"select_2", "vePos"=>"topRight"])}}>
 
-                                
+
 
                                 <option value="">--- Select Parent ----</option>
 
@@ -45,15 +45,15 @@
                                     <option value="{{$p->id}}">{{$p->fullname}}</option>
                                 @endforeach
 
-                            
+
                             </select>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="row">
-                    
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Username</label>
@@ -68,7 +68,7 @@
             ->get();  ?>
                             <select id="student_class_select"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
 
-                                
+
 
                                 <option value="">--- Select Class ----</option>
 
@@ -76,13 +76,13 @@
                                     <option value="{{$c->class_name}}">{{$c->class_name}}</option>
                                 @endforeach
 
-                            
-                            </select>    
+
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Password</label>
@@ -96,14 +96,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Section</label>
-                            
+
                           <select id="sectionS"  name="section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
 
-                            
-                            
+
+
                           </select>
                         </div>
-                        
+
                     </div>
 
                     @endif
@@ -113,7 +113,7 @@
 
                 </div>
                 <div class="row">
-                    
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Confirm Password</label>
@@ -127,10 +127,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <span id="more" class="label label-primary" style="cursor: pointer"><i class="fa fa-arrow-down"></i> More ...</span><br/><br/>
 
-                
+
                 <div  style="display:none" id="more_teacher_fields">
                     <div class="row">
                         <div class="col-md-4">
@@ -170,7 +170,7 @@
                             <div class="form-group">
                                 <label>Phone</label>
                                 <input type="text"  name="phone" class="form-control" placeholder="Enter Phone Here" />
-                                
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -187,10 +187,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Photo</label>
-                                
+
                                 <input type="file" id="studentphoto" name="studentphoto" class="filestyle" data-input="false" data-buttonName="btn-warning">
 
-                                
+
 
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                                          $('#students_area').hide().html(res).fadeIn();
                                        });
                                      }
-                                    });    
+                                    });
                             });
                         </script>
 
@@ -246,6 +246,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-student-edit">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Student Information</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                <center>
+                                                    <img id="loader_" style="display: none" src="{{url('images/loader.gif')}}" />
+                                                </center>
+                                                <div id="student_editor"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
 
 <div class="modal fade" id="modal-add-student-bulk">
     <div class="modal-dialog modal-lg">

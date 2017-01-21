@@ -95,7 +95,7 @@
                     @include('partials._success')
 
                     <?php
-                    	$data = Parentx::all();
+                    	$data = Parentx::orderBy('created_at', 'DESC')->get();
                     ?>
 
                     @include('partials._datatable', ["columns"=>["Fullname", "Email", "Phone", "Status", "Profession", "Actions"], "mapEls"=>["fullname", "email", "phone", "status", "profession"], "data"=>$data, "modal"=>"lg", "url_edit"=>"parents/edit", "url_delete"=>"parents/destroy", "refreshWix"=>"parents.refreshWith"])

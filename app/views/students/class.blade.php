@@ -28,35 +28,16 @@
                             		<div class="modal-content">
                             			<div class="modal-header">
                             				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            				<h4 class="modal-title">Modal title</h4>
+                            				<h4 class="modal-title"><i class="fa fa-file"></i> Marking Sheet</i></h4>
                             			</div>
                             			<div class="modal-body">
 
                             			</div>
-                            			<div class="modal-footer">
-                            				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            				<button type="button" class="btn btn-primary">Save changes</button>
-                            			</div>
+
                             		</div>
                             	</div>
                             </div>
-                            <div class="modal fade" id="modal-student-edit">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Student Information</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                                <center>
-                                                    <img id="loader_" style="display: none" src="{{url('images/loader.gif')}}" />
-                                                </center>
-                                                <div id="student_editor"></div>
-                                        </div>
 
-                                    </div>
-                                </div>
-                            </div>
 
 <div class="" role="tabpanel" data-example-id="togglable-tabs">
   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">

@@ -48,7 +48,7 @@
                                     <div class="form-group">
                                         <label>Parent</label>
                                         <?php $parents = Parentx::where('status', 1)->get();  ?>
-                                        <select name="parentx" style="width:100%"   {{HelperX::ve(["veName"=>"Student Parent", "veVs"=>"required", "clx"=>"select_2", "vePos"=>"topRight"])}}>
+                                        <select name="parentx" style="width:100%"   {{HelperX::ve(["veName"=>"Student Parent", "veVs"=>"required", "clx"=>"select_3", "vePos"=>"topRight"])}}>
 
 
                                             <option value="{{$student->parent_id}}">{{Parentx::find($student->parent_id)->fullname}}</option>
@@ -90,7 +90,7 @@
                                                                                 <?php $classes = MsClass::where('status', 1)->select('class_name')
                                                                 ->distinct()
                                                                 ->get();  ?>
-                                                                                <select id="student_class_select_edit"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+                                                                                <select id="student_class_select_edit"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_3", "vePos"=>"topRight"])}}>
 
 
                                                                                       <option value="{{$student->class_name}}">{{$student->class_name}}</option>
@@ -281,8 +281,171 @@
                             </div>
                         </form>
      </div>
-     <div class="tab-pane" id="profile">erwetw</div>
-     <div class="tab-pane" id="profile2">erwetw3</div>
+     <div class="tab-pane" id="profile">
+
+         <div class="x_panel">
+                           <div class="x_title">
+                             <h4><i class="fa fa-user"></i> Student Information</h4>
+                             <div class="clearfix"></div>
+                           </div>
+                           <div class="x_content">
+
+
+                           <div class="row">
+                               <div class="col-md-3">
+                                 <div>
+                                   <label for="">Profile Photo</label><br/>
+                                   @if($student->profile_photo == "")
+                                     <img src="{{url('images/img.jpg')}}" style="width: 150px" />
+                                   @else
+                                     <img src="{{$student->profile_photo}}" style="width: 50px" />
+                                   @endif
+                                 </div>
+                               </div>
+                               <div class="col-md-3">
+                                 <div>
+                                   <label for="">Firstname</label><br/>
+                                   <i>{{$student->firstname}}</i>
+                                 </div>
+                               </div>
+                               <div class="col-md-3">
+                                 <div>
+                                   <label for="">Firstname</label><br/>
+                                   <i>{{$student->firstname}}</i>
+                                 </div>
+                               </div>
+
+
+
+                           </div>
+                           <div class="row">
+                                                          <div class="col-md-3">
+
+                                                          </div>
+                                                          <div class="col-md-3">
+                                                            <div>
+                                                              <label for="">Parent</label><br/>
+                                                              <i>{{Parentx::find($student->parent_id)->fullname}}</i>
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-md-3">
+                                                            <div>
+                                                              <label for="">Firstname</label><br/>
+                                                              <i>{{User::find($student->user_id)->username}}</i>
+                                                            </div>
+                                                          </div>
+
+
+
+                                                      </div>
+                           <br/>
+                           <div class="row">
+                                                                                     <div class="col-md-3">
+
+                                                                                     </div>
+                                                                                     <div class="col-md-3">
+                                                                                       <div>
+                                                                                         <label for="">Admit Number</label><br/>
+                                                                                         <i>{{$student->admit_number}}</i>
+                                                                                       </div>
+                                                                                     </div>
+                                                                                     <div class="col-md-3">
+                                                                                       <div>
+                                                                                         <label for="">Class Name</label><br/>
+                                                                                         <i>{{$student->class_name}}</i>
+                                                                                       </div>
+                                                                                     </div>
+                                                                                      <div class="col-md-3">
+                                                                                        <div>
+                                                                                          <label for="">Section</label><br/>
+                                                                                          <i>{{$student->section_name}}</i>
+                                                                                        </div>
+                                                                                      </div>
+
+
+
+                                                                                 </div>
+                            <br/>
+                            <div class="row">
+                            <div class="col-md-3">
+
+                            </div>
+                            <div class="col-md-3">
+                            <div>
+                            <label for="">Status</label><br/>
+                            <i>{{HelperX::getStatus($student->status)}}</i>
+                            </div>
+                            </div>
+                            <div class="col-md-3">
+                            <div>
+                            <label for="">Birthday</label><br/>
+                            <i>{{$student->birthday == "0000-00-00" ? '' : $student->birthday}}</i>
+                            </div>
+                            </div>
+                            <div class="col-md-3">
+                            <div>
+                            <label for="">Gender</label><br/>
+                            <i>{{$student->gender}}</i>
+                            </div>
+                            </div>
+
+
+
+                            </div>
+                            <br/>
+                             <div class="row">
+                                                        <div class="col-md-3">
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                        <div>
+                                                        <label for="">Address</label><br/>
+                                                        <i>{{$student->address}}</i>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                        <div>
+                                                        <label for="">Phone</label><br/>
+                                                        <i>{{$student->phone}}</i>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                        <div>
+                                                        <label for="">Email</label><br/>
+                                                        <i>{{$student->email}}</i>
+                                                        </div>
+                                                        </div>
+
+
+
+                                                        </div>
+
+                           </div>
+         </div>
+
+     </div>
+     <div class="tab-pane" id="profile2">
+     <form class="form-horizontal form-label-left" id="teacherChangePassword">
+                               <input type="hidden" value="{{$student->id}}" name="row_id" />
+                               <div class="form-group">
+                               <label>New Password</label>
+                               <input type="password" value="" id="password_teacher"  name="password_teacher" {{HelperX::ve(["veName"=>"Password", "veVs"=>"required,funcCall[checkPassMatch[cpassword_teacher]]"])}} placeholder="Enter Password">
+                               </div>
+                               <div class="form-group">
+                               <label>Confirm New Password</label>
+                               <input type="password" id="cpassword_teacher"  name="cpassword_teacher" {{HelperX::ve(["veName"=>"Confirm Password", "veVs"=>"required,funcCall[checkPassMatch[password_teacher]]"])}} placeholder="Enter Confirm Password">
+                               </div>
+
+                               <hr/>
+
+                               @include('partials._buttonSave', ['btnId'=>'changePassword', 'title'=>'Change Password']);
+
+                               @include('partials._saveFunc', ["btnID" => "changePassword", "formID"=>"teacherChangePassword", "route"=>"students.changepassword", "routeWith"=>"students.refreshWith", "rowId"=>$student->id, "update"=>true, ])
+
+
+
+                           </form>
+     </div>
      <div class="tab-pane" id="profile4">erwetw4</div>
      <div class="tab-pane" id="profile3">erwetw5</div>
  </div>
@@ -294,6 +457,17 @@
 
 <!-- jQuery -->
 <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+ <script type="text/javascript">
+    function checkPassMatch(field, rules, i, options){
+        var a=rules[i+2];
+        if((field.val()) != ( $("#"+a).val() ) ){
+           return "Password Mismatches"
+        }
+    }
+</script>
+
+
 <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
                               <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
 
@@ -304,7 +478,7 @@
 
 <script>
 $(function(){
-    $('.select_2').select2();
+    $('.select_3').select2();
 });
 </script>
 

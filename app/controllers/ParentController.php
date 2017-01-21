@@ -70,6 +70,7 @@ class ParentController extends \BaseController {
 				$p->status   = $status;
 				$p->phone    = $phone;
 				$p->address  = $address;
+                $p->user_id = $user_id;
 				$p->profession = $profession;
 				$p->save();
 				return Response::json(['error'=>false, 'msg'=>'Successfully']);

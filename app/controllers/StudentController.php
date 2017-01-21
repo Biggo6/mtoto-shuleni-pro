@@ -9,6 +9,15 @@ class StudentController extends \BaseController
      *
      * @return Response
      */
+    public function  changepassword()
+    {
+        $tid  = Input::get('row_id');
+        $password = Input::get('password_teacher');
+        $user = User::find(Student::find($tid)->user_id);
+        $user->password = Hash::make($password);
+        $user->save();
+    }
+
     public function index()
     {
         //
