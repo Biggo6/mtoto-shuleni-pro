@@ -24,10 +24,10 @@
     <!-- Tab panes -->
  <div class="tab-content">
       <div class="tab-pane active" id="home">
-             <form class="form-horizontal form-label-left" id="registerStudent">
+             <form class="form-horizontal form-label-left" id="registerStudentEdit">
                             <div class="modal-body">
                             <div class="row">
-
+                                  <input type="hidden" name="row_id" value="{{$student->id}}" />
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Firstname</label>
@@ -72,13 +72,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text"  name="username" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required", "vePos"=>"bottomLeft"])}} placeholder="Enter Username">
+                                        <input type="text"   name="username" value="{{User::find($student->user_id)->username}}" {{HelperX::ve(["veName"=>"Username", "veVs"=>"required", "vePos"=>"bottomLeft"])}} placeholder="Enter Username">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                             <div class="form-group">
                                                                                     <label>Admitt Number</label>
-                                                                                    <input type="text"  name="admitnumber" {{HelperX::ve(["veName"=>"Admit Number", "veVs"=>"required"])}} placeholder="Enter Admit Number">
+                                                                                    <input type="text" value="{{$student->admit_number}}"  name="admitnumber" {{HelperX::ve(["veName"=>"Admit Number", "veVs"=>"required"])}} placeholder="Enter Admit Number">
                                                                                 </div>
                                 </div>
                             </div>
@@ -90,10 +90,10 @@
                                                                                 <?php $classes = MsClass::where('status', 1)->select('class_name')
                                                                 ->distinct()
                                                                 ->get();  ?>
-                                                                                <select id="student_class_select"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+                                                                                <select id="student_class_select_edit"  name="class_name" style="width:100%"   {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
 
 
-
+                                                                                      <option value="{{$student->class_name}}">{{$student->class_name}}</option>
                                                                                     <option value="">--- Select Class ----</option>
 
                                                                                     @foreach($classes as $c)
@@ -110,10 +110,11 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Section</label>
+                                        <label>Section </label>
 
-                                      <select id="sectionS"  name="section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
+                                      <select id="sectionS_edit"  name="section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
 
+                                            <option value="{{$student->section_name}}">{{$student->section_name}}</option>
 
 
                                       </select>
@@ -146,24 +147,37 @@
                                         <div class="form-group">
                                       <label>Status</label>
                                       <select name="status" class="form-control">
+                                      @if($student->status == 1)
                                         <option value="1">Active</option>
                                         <option value="0">Blocked</option>
+                                      @else
+                                         <option value="0">Blocked</option>
+                                         <option value="1">Active</option>
+                                      @endif
                                       </select>
                                     </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Birthday</label>
-                                            <input type="text" id="birthday_edit" placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
+                                            <input type="text" value="{{$student->birthday}}" id="birthday_edit" placeholder="Enter Birthday"  name="birthday" class="form-control date-picker" />
                                          </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                           <label>Gender</label>
                                           <select name="gender" class="form-control">
-                                            <option value="">---  Select Gender ----</option>
+                                            @if($student->gender == "male")
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
+                                            @elseif($student->gender == "female")
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                            @else
+                                            <option value="">--select gender--</option>
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                            @endif
                                           </select>
                                         </div>
                                     </div>
@@ -172,20 +186,20 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Address</label>
-                                            <input type="text"  name="address" class="form-control" placeholder="Enter Address Here" />
+                                            <input type="text" value="{{$student->address}}"  name="address" class="form-control" placeholder="Enter Address Here" />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Phone</label>
-                                            <input type="text"  name="phone" class="form-control" placeholder="Enter Phone Here" />
+                                            <input type="text" value="{{$student->phone}}"  name="phone" class="form-control" placeholder="Enter Phone Here" />
 
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="text"  name="email" class="form-control" placeholder="Enter Email Here" />
+                                            <input type="text"  value="{{$student->email}}" name="email" class="form-control" placeholder="Enter Email Here" />
                                        </div>
                                     </div>
                                 </div>
@@ -228,7 +242,7 @@
 
                             <br/><hr/>
 
-                             @include('partials._buttonSave', ['btnId'=>'saveStudent', 'btn'=>'success', 'title'=>'Save New Student Information']);
+                             @include('partials._buttonSave', ['btnId'=>'saveStudentEdit', 'btn'=>'success', 'title'=>'Update Student Information']);
 
                               @section('footerScripts')
 
@@ -237,11 +251,11 @@
                                                 $('body').on('change', '#student_class_select', function(){
                                                       var sel = $(this).val();
                                                       if(sel!=""){
-                                                          $('#sectionS').prop('disabled', true);
-                                                          $('#sectionS').html('');
+                                                          $('#sectionS_edit').prop('disabled', true);
+                                                          $('#sectionS_edit').html('');
                                                           $.post('{{route('students.getSections')}}', {className:sel}, function(res){
-                                                                $('#sectionS').html(res);
-                                                                $('#sectionS').prop('disabled', false);
+                                                                $('#sectionS_edit').html(res);
+                                                                $('#sectionS_edit').prop('disabled', false);
                                                           });
                                                       }
                                                 });
@@ -262,10 +276,6 @@
                                         });
                                     </script>
 
-                              <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
-                              <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
-
-                                    @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto",  "debug"=>true])
                                   @stop
 
                             </div>
@@ -284,6 +294,19 @@
 
 <!-- jQuery -->
 <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+                              <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+
+    @include('partials._saveFunc', ["btnID" => "saveStudentEdit", "formID"=>"registerStudentEdit", "route"=>"students.update", "routeWith"=>"students.refreshWith","photo"=>"profile_photo_edit"])
+
+
+ <script type="text/javascript" src="{{url('select2/dist/js/select2.min.js')}}"></script>
+
+<script>
+$(function(){
+    $('.select_2').select2();
+});
+</script>
 
 <!-- bootstrap-daterangepicker -->
     <script src="{{url('vendors/moment/min/moment.min.js')}}"></script>
@@ -291,6 +314,19 @@
 
   <script>
   $(function(){
+
+         $('body').on('change', '#student_class_select_edit', function(){
+              var sel = $(this).val();
+              if(sel!=""){
+                  $('#sectionS_edit').prop('disabled', true);
+                  $('#sectionS_edit').html('');
+                  $.post('{{route('students.getSections')}}', {className:sel}, function(res){
+                        $('#sectionS_edit').html(res);
+                        $('#sectionS_edit').prop('disabled', false);
+                  });
+              }
+        });
+
         var i = 0;
         $('body').on('click', '#more_edit', function(){
             if(i==0){
