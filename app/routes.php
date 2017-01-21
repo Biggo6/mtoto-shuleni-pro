@@ -24,7 +24,7 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('students/manage', ['as'=>'students.manage', 'uses'=>'StudentController@index']);
 	Route::post('students/fetch', ['as'=>'students.fetch', 'uses'=>'StudentController@fetch']);
 	Route::post('students/store', ['as'=>'students.store', 'uses'=>'StudentController@store']);
-	Route::post('students/refreshWith', ['as'=>'students.refreshWith', 'uses'=>'StudentController@refreshWith']);
+	Route::get('students/refreshWith', ['as'=>'students.refreshWith', 'uses'=>'StudentController@refreshWith']);
 	Route::post('students/getSections', ['as'=>'students.getSections', 'uses'=>'StudentController@getSections']);
 	//Parents
 	Route::get('parents/manage', ['as'=>'parents.manage', 'uses' => 'ParentController@index']);

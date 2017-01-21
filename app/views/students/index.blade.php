@@ -234,11 +234,11 @@
                                     });    
                             });
                         </script>
-                        
+
                   <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
                   <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
 
-                        @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto", "debug"=>true])
+                        @include('partials._saveFunc', ["btnID" => "saveStudent", "formID"=>"registerStudent", "route"=>"students.store", "routeWith"=>"students.refreshWith","photo"=>"studentphoto"])
                       @stop
 
                 </div>
@@ -274,6 +274,8 @@
                   </div>
                   <div class="x_content">
                     <br>
+
+                    @include('partials._success')
 
                     <div class="row">
                     	

@@ -19,6 +19,8 @@ class StudentController extends \BaseController {
 		return View::make('students.getSections')->withC($className);
 	}
 
+	
+
 
 	public function refreshWith(){
 		return Redirect::back()->withSuccess('Successfully processed!');
@@ -48,6 +50,7 @@ class StudentController extends \BaseController {
 	 */
 	public function store()
 	{
+		
 		$firstname    = Input::get('firstname');
 		$lastname     = Input::get('lastname');
 		$parentx      = Input::get('parentx');
@@ -79,7 +82,7 @@ class StudentController extends \BaseController {
 
 			$user_id  = $user->id;
 
-			$check_ = Student::where('firstname', $firstname)->where('lastname', $lastname)->where('admit_number', $admit_number)->count();
+			$check_ = Student::where('firstname', $firstname)->where('lastname', $lastname)->where('admit_number', $admitnumber)->count();
 
 			if($check_){
 				return Response::json(['error'=>true, 'msg'=>'Student already exists!']);
@@ -87,8 +90,8 @@ class StudentController extends \BaseController {
 				$s = new Student;
 				$s->firstname = $firstname;
 				$s->lastname  = $lastname;
-				$s->class_id  = $class_name;
-				$s->admit_number = $admit_number;
+				$s->class_name  = $class_name;
+				$s->admit_number = $admitnumber;
 				$s->birthday  = $birthday;
 				$s->gender    = $gender;
 				$s->address   = $address;
@@ -97,7 +100,7 @@ class StudentController extends \BaseController {
 				$s->email     = $email;
 
 				if(Input::has('section')){
-					$c->section_id = Input::get('section');
+					$s->section_name = Input::get('section');
 				}
 
 				if(Input::has('studentphoto')){
