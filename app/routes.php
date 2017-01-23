@@ -31,6 +31,7 @@ Route::group(['before'=>'auth'], function(){
 	//Students
     Route::get('students/admit', ['as'=>'students.admit', 'uses'=>'StudentController@admit']);
 	Route::get('students/manage', ['as'=>'students.manage', 'uses'=>'StudentController@index']);
+	Route::get('students/promotion', ['as'=>'students.promotion', 'uses'=>'StudentController@promotion']);
 	Route::post('students/fetch', ['as'=>'students.fetch', 'uses'=>'StudentController@fetch']);
 	Route::post('students/changepassword', ['as'=>'students.changepassword', 'uses'=>'StudentController@changepassword']);
 	Route::post('students/destroy/{id}', ['as'=>'students.destroy', 'uses'=>'StudentController@destroy']);

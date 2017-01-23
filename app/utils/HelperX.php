@@ -12,6 +12,14 @@ class HelperX {
 		return $models;
 	}
 
+    public static function getNextYear(){
+        return date('Y', strtotime('+1 year'));
+    }
+
+    public static function getNextOfNextYear(){
+        return date('Y', strtotime('+2 year'));
+    }
+
     public static function getVersionLabel(){
         return '<label class="label label-warning">' . HelperX::getSystemVersion() .'</label>';
     }

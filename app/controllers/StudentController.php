@@ -36,6 +36,10 @@ class StudentController extends \BaseController
         return View::make('students.getSections')->withC($className);
     }
 
+    public function  promotion(){
+        return View::make('students.promotion');
+    }
+
 
     public function refreshWith()
     {
