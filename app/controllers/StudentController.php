@@ -74,11 +74,118 @@ class StudentController extends \BaseController
     public function  bulkImport_()
     {
         if (Input::hasFile('bulkImport')) {
-            $file_path = HelperX::uplodFileThenReturnPath('bulkImport', 'students/excelfiles/');
+            $file_path = 'students/excelfiles/' . explode('/',
+                    HelperX::uplodFileThenReturnPath('bulkImport', 'students/excelfiles/'))[7];
 
-            //excel codes starts here
 
-            return Response::json(['error' => false, 'msg' => $file_path]);
+            try {
+                //excel codes starts here
+                Excel::load($file_path, function ($reader) {
+
+                    $results = ($reader->get(array(
+                        'firstname',
+                        'lastname',
+                        'parent',
+                        'username',
+                        'password',
+                        'class',
+                        'section',
+                        'admit'
+                    )));
+
+
+                    if (count($results->all()) == 0) {
+                        throw new Exception('Excel has no data in it!');
+                        //return Response::json(['error' => true, 'msg' => 'Excel has no data in it!']);
+                    } else {
+
+                        // scanning
+                        foreach ($results->all() as $rr) {
+                            $firstname = $rr["firstname"];
+                            $lastname = $rr["lastname"];
+                            $parentx = $rr["parent"];
+                            $username = $rr["username"];
+                            $password = $rr["password"];
+                            $class = $rr["class"];
+                            $section = $rr["section"];
+                            $admitnumber = $rr["admit"];
+
+                            $check = User::where('username', $username)->count();
+
+                            if ($check) {
+                                throw new Exception('Username already exists, please edit again the excel and import again');
+                                //return Response::json(['error' => true, 'msg' => 'Username already exists, please edit again the excel and import again']);
+                            } else {
+
+                                $parent_check = Parentx::where('fullname', $parentx)->count();
+
+                                if($parent_check){
+                                    throw new Exception('Parent already exists, please edit again the excel and import again');
+                                    //return Response::json(['error' => true, 'msg' => 'Parent already exists, please edit again the excel and import again']);
+                                }
+
+                                $check_ = Student::where('firstname', $firstname)->where('lastname', $lastname)->where('admit_number',
+                                    $admitnumber)->count();
+
+                                if($check_){
+                                    throw new Exception('Student already exists, please edit again the excel and import again');
+                                   // return Response::json(['error' => true, 'msg' => 'Student already exists, please edit again the excel and import again']);
+                                }
+                            }
+
+                        }
+
+                        // store students
+
+                        foreach ($results->all() as $rr) {
+
+
+
+                            $firstname = $rr["firstname"];
+                            $lastname = $rr["lastname"];
+                            $parent = $rr["parent"];
+                            $username = $rr["username"];
+                            $password = $rr["password"];
+                            $class = $rr["class"];
+                            $section = $rr["section"];
+                            $admitnumber = $rr["admit"];
+
+                            $user = new User;
+                            $user->username = $username;
+                            $user->firstname = $firstname;
+                            $user->lastname = $lastname;
+                            $user->password = Hash::make($password);
+                            $user->save();
+
+                            $user_id = $user->id;
+
+                            $s = new Student;
+                            $s->firstname = $firstname;
+                            $s->lastname = $lastname;
+                            $s->class_name = $class;
+                            $s->admit_number = $admitnumber;
+                            $s->parent_id = Parentx::where('fullname', $parent)->first()->id;
+                            $s->user_id = $user_id;
+                            $s->save();
+
+                        }
+
+                        //return Response::json(['error' => false, 'msg' => 'Successfully added!']);
+
+                    }
+                })->get();
+
+            } catch (Exception $x) {
+                $fmsg = explode(':', $x->getMessage())[0];
+
+                if($fmsg == "Undefined index"){
+                    return Response::json(['error' => true, 'msg' => "Check your Excel File does not follow the diagram below"]);
+                }else{
+                    return Response::json(['error' => true, 'msg' => $x->getMessage()]);
+                }
+            }
+
+
         }
 
     }

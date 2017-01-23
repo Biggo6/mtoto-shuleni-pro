@@ -196,7 +196,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Authority'         => 'Authority\AuthorityL4\Facades\Authority',
 		'Zipper'            => 'Chumper\Zipper\Zipper',
-        'Excel'             => 'sMaatwebsite\Excel\Facades\Excel',
+        'Excel'             => 'Maatwebsite\Excel\Facades\Excel',
 
 	),
 
