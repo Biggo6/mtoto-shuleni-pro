@@ -20,7 +20,16 @@ Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin'
 
 Route::group(['before'=>'auth'], function(){
 
+    Route::group(['prefix' => 'messages'], function () {
+        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+        Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    });
+
 	//Students
+    Route::get('students/admit', ['as'=>'students.admit', 'uses'=>'StudentController@admit']);
 	Route::get('students/manage', ['as'=>'students.manage', 'uses'=>'StudentController@index']);
 	Route::post('students/fetch', ['as'=>'students.fetch', 'uses'=>'StudentController@fetch']);
 	Route::post('students/changepassword', ['as'=>'students.changepassword', 'uses'=>'StudentController@changepassword']);
@@ -28,8 +37,11 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('students/edit/{id}', ['as'=>'students.edit', 'uses'=>'StudentController@edit']);
 	Route::post('students/update/{id}', ['as'=>'students.update', 'uses'=>'StudentController@update']);
 	Route::post('students/store', ['as'=>'students.store', 'uses'=>'StudentController@store']);
+	Route::post('students/storex', ['as'=>'students.store', 'uses'=>'StudentController@storex']);
 	Route::get('students/refreshWith', ['as'=>'students.refreshWith', 'uses'=>'StudentController@refreshWith']);
 	Route::post('students/getSections', ['as'=>'students.getSections', 'uses'=>'StudentController@getSections']);
+    Route::get('students/bulkImport', ['as'=>'students.bulkImport', 'uses'=>'StudentController@bulkImport']);
+    Route::post('students/bulkImport', ['as'=>'students.bulkImport_', 'uses'=>'StudentController@bulkImport_']);
 	//Parents
 	Route::get('parents/manage', ['as'=>'parents.manage', 'uses' => 'ParentController@index']);
 	Route::get('parents/refreshWith', ['as'=>'parents.refreshWith', 'uses' => 'ParentController@refreshWith']);

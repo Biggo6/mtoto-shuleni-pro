@@ -11,11 +11,17 @@ class StudentController extends \BaseController
      */
     public function  changepassword()
     {
-        $tid  = Input::get('row_id');
+        $tid = Input::get('row_id');
         $password = Input::get('password_teacher');
         $user = User::find(Student::find($tid)->user_id);
         $user->password = Hash::make($password);
         $user->save();
+    }
+
+    public function admit()
+    {
+        sleep(1);
+        return View::make('students.admit');
     }
 
     public function index()
@@ -59,8 +65,105 @@ class StudentController extends \BaseController
      *
      * @return Response
      */
+
+    public function  bulkImport()
+    {
+        return View::make('students.bulkImport');
+    }
+
+    public function  bulkImport_()
+    {
+        if (Input::hasFile('bulkImport')) {
+            $file_path = HelperX::uplodFileThenReturnPath('bulkImport', 'students/excelfiles/');
+
+            //excel codes starts here
+
+            return Response::json(['error' => false, 'msg' => $file_path]);
+        }
+
+    }
+
+
+    public function storex()
+    {
+
+
+        $firstname = Input::get('firstname');
+        $lastname = Input::get('lastname');
+        $parentx = Input::get('parentx');
+        $username = Input::get('username');
+        $class_name = Input::get('class_name');
+        $password = Input::get('password');
+        $admitnumber = Input::get('admitnumber');
+        $status = Input::get('status');
+        $birthday = Input::get('birthday');
+        $gender = Input::get('gender');
+        $address = Input::get('address');
+        $phone = Input::get('phone');
+        $email = Input::get('email');
+
+        $check = User::where('username', $username)->count();
+
+        if ($check) {
+            return Response::json(['error' => true, 'msg' => 'Username already exists!']);
+        } else {
+
+
+            $check_ = Student::where('firstname', $firstname)->where('lastname', $lastname)->where('admit_number',
+                $admitnumber)->count();
+
+            if ($check_) {
+                return Response::json(['error' => true, 'msg' => 'Student already exists!']);
+            } else {
+
+                $user = new User;
+                $user->username = $username;
+                $user->firstname = $firstname;
+                $user->lastname = $lastname;
+                $user->password = Hash::make($password);
+                $user->active = $status;
+                $user->save();
+
+                $user_id = $user->id;
+
+                $s = new Student;
+                $s->firstname = $firstname;
+                $s->lastname = $lastname;
+                $s->class_name = $class_name;
+                $s->admit_number = $admitnumber;
+                $s->birthday = $birthday;
+                $s->gender = $gender;
+                $s->address = $address;
+                $s->phone = $phone;
+                $s->status = $status;
+                $s->email = $email;
+                $s->parent_id = $parentx;
+                $s->user_id = $user_id;
+
+                if (Input::has('section')) {
+                    $s->section_name = Input::get('section');
+                }
+
+                if (Input::hasFile("profile_photo_edit")) {
+                    $s->profile_photo = HelperX::uplodFileThenReturnPath('profile_photo_edit');
+                }
+
+                $s->save();
+
+                return Response::json(['error' => false, 'msg' => 'Successfully Saved']);
+
+
+            }
+
+
+        }
+
+
+    }
+
     public function store()
     {
+
 
         $firstname = Input::get('firstname');
         $lastname = Input::get('lastname');
@@ -124,7 +227,7 @@ class StudentController extends \BaseController
 
                 $s->save();
 
-                return Response::json(['error' => false, 'msg' => 'Successfully']);
+                return Response::json(['error' => false, 'msg' => 'Successfully Saved']);
 
 
             }

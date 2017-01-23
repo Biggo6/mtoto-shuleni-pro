@@ -5,9 +5,12 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
+use Cmgmyr\Messenger\Traits\Messagable;
+
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use SoftDeletingTrait;
+    use Messagable;
 	protected $dates = ['deleted_at'];
 
 	use UserTrait, RemindableTrait;

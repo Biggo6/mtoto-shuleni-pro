@@ -446,7 +446,33 @@
 
                            </form>
      </div>
-     <div class="tab-pane" id="profile4">erwetw4</div>
+     <div class="tab-pane" id="profile4">
+
+     <table class="table table-striped table-hover">
+                             <thead>
+                               <tr>
+                                 <th>#</th>
+                                 <th>Subject Name</th>
+                                 <th>Teacher Name</th>
+
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <?php $k = 1; ?>
+
+                               @foreach(Subject::where('class_id', MsClass::where('class_name', $student->class_name)->first()->id)->where('status', 1)->get() as $ms)
+                               <tr>
+                                 <td>{{$k}}</td>
+                                 <td>{{$ms->name}}</td>
+                                 <td>{{Teacher::find($ms->teacher_id)->firstname}} {{Teacher::find($ms->teacher_id)->lastname}}</td>
+
+                               </tr>
+                               <?php $k++; ?>
+                               @endforeach
+                             </tbody>
+                           </table>
+
+     </div>
      <div class="tab-pane" id="profile3">erwetw5</div>
  </div>
 

@@ -124,7 +124,9 @@ return array(
 		'Authority\AuthorityL4\AuthorityL4ServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Biggo6\LaravelUpdater\LaravelUpdaterServiceProvider',
-		'Chumper\Zipper\ZipperServiceProvider'
+		'Chumper\Zipper\ZipperServiceProvider',
+        'Cmgmyr\Messenger\MessengerServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
 
 	),
 
@@ -194,6 +196,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Authority'         => 'Authority\AuthorityL4\Facades\Authority',
 		'Zipper'            => 'Chumper\Zipper\Zipper',
+        'Excel'             => 'sMaatwebsite\Excel\Facades\Excel',
 
 	),
 

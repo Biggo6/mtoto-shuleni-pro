@@ -274,7 +274,10 @@
                 <h4 class="modal-title"><i class="fa fa-user-plus"></i> Add Bulk Students</h4>
             </div>
             <div class="modal-body">
-                
+                    <center>
+                        <img style="display: none" id="loader_bulk" src="{{url('images/loader.gif')}}" />
+                    </center>
+                    <div id="students_import_area"></div>
             </div>
         </div>
     </div>
@@ -286,14 +289,14 @@
 		<div class="x_panel">
                   <div class="x_title">
                     <h2>
-                    	<button data-toggle="modal" href='#modal-add-student' class="btn btn-success"><i class="fa fa-plus"></i> Admit Student</button>
-                    	<button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-warning"><i class="fa fa-plus"></i> Admit Bulk Student</button>
-                    	<button data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-primary"><i class="fa fa-file-o"></i> Import Students From Excel File</button>
+                    	<button data-toggle="modal" href='#modal-add-student' class="btn btn-success"><i class="fa fa-plus"></i> Quick Admit Student</button>
+                    	<button id="admit" class="btn btn-warning"><i class="fa fa-plus"></i> Admit Student </button>
+                    	<button id="importBulk" data-toggle="modal" href='#modal-add-student-bulk' class="btn btn-primary"><i class="fa fa-file-o"></i> Import Students From Excel File</button>
 
                     </h2>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" id="admit_area">
                     <br>
 
                     @include('partials._success')

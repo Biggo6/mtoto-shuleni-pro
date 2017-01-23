@@ -59,6 +59,17 @@
     <!-- bootstrap-daterangepicker -->
     <script>
       $(document).ready(function() {
+
+        $('#importBulk').on('click', function(){
+                $('#loader_bulk').show();
+                $('#students_import_area').html('');
+                $.get('{{route('students.bulkImport')}}', function(res){
+                                    $('#loader_bulk').hide();
+                                    $('#students_import_area').html(res);
+                });
+        });
+
+
         $('#birthday').daterangepicker({
           autoUpdateInput: false,
           singleDatePicker: true,
@@ -88,6 +99,16 @@
 
     <script type="text/javascript">
     $(function(){
+
+        $('#admit').on('click', function(){
+            $('#admit_area').css('opacity', 0.2).css('cursor', 'wait');
+            $(this).css('cursor', 'wait');
+            $.get('{{route('students.admit')}}', function(res){
+                $('#admit_area').css('opacity', 1).css('cursor', 'pointer').html(res);
+                $('#admit').css('cursor', 'pointer');
+            });
+        });
+
         $('#datatable').dataTable();
 
         var i = 0;

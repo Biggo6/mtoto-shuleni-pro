@@ -205,12 +205,44 @@
       <div class="tab-pane " id="profile4">
           <div class="x_panel">
                   <div class="x_title">
-                    <h4><i class="fa fa-bank"></i> Classes Taught By This Teacher</h4>
+                    <h4><i class="fa fa-users"></i> Parent's Students Information</h4>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
 
-                      
+                         <table class="table table-striped table-hover">
+                             <thead>
+                               <tr>
+                                 <th>#</th>
+                                 <th>Photo</th>
+                                 <th>Fullname</th>
+                                 <th>Class Name</th>
+                                 <th>Section</th>
+`
+                               </tr>
+                             </thead>
+                             <tbody>
+                               <?php $k = 1; ?>
+                               @foreach(Student::where('parent_id', $parentx->id)->where('status', 1)->get() as $s)
+                               <tr>
+                                 <td>{{$k}}</td>
+                                 <td>
+                                    @if($s->profile_photo == "")
+                                        <img src="{{url('images/img.jpg')}}" style="width: 52px" />
+                                    @else
+                                        <img src="{{url($s->profile_photo)}}" style="width: 53px" />
+                                    @endif
+                                 </td>
+                                 <td>{{$s->firstname}} {{$s->lastname}}</td>
+                                 <td>{{$s->class_name}}</td>
+                                 <td>{{$s->section_name}}</td>
+
+                               </tr>
+                               <?php $k++; ?>
+                               @endforeach
+                             </tbody>
+                           </table>
+
 
                   </div>
           </div>
