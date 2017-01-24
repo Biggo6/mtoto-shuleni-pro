@@ -29,6 +29,7 @@
 
         <!-- top navigation -->
         @include('partials._top_nav')
+
         <!-- /top navigation -->
 
         <!-- page content -->

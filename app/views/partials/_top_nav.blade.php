@@ -3,11 +3,17 @@
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+
               </div>
+
+
+
+
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
                     <img src="{{url('images/img.jpg')}}" alt="">{{Auth::user()->firstname}} {{Auth::user()->lastname}}
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -28,4 +34,4 @@
               </ul>
             </nav>
           </div>
-        </div>
+</div>

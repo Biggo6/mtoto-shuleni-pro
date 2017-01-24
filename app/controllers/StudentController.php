@@ -36,6 +36,22 @@ class StudentController extends \BaseController
         return View::make('students.getSections')->withC($className);
     }
 
+    public function promotionx(){
+        sleep(1);
+        $class_name_from = Input::get('class_name_from');
+        $class_name_to   = Input::get('class_name_to');
+        $currentYear     = Input::get('currentYear');
+        $promotedYear    = Input::get('promotedYear');
+        $section_from    = Input::get('section_from');
+        $section_to      = Input::get('section_to');
+        $check = Student::where('class_name', $class_name_from)->where('section_name', $section_from)->get();
+        if(count($check)){
+            return View::make('students.promotionx')->withStudents($check)->withPromo(Input::all());
+        }else{
+            return '<div class="alert alert-danger"><i class="fa fa-warning"></i> No data Found for Student Promotion</div>';
+        }
+    }
+
     public function  promotion(){
         return View::make('students.promotion');
     }
