@@ -56,6 +56,49 @@ class StudentController extends \BaseController
         return View::make('students.promotion');
     }
 
+    public function  doPromo(){
+        $students = Input::get('students');
+        $promo    = json_decode(Input::get('promo'));
+        foreach($students as $student){
+            $student_id = (integer)$student;
+            $check = Studentpromotion::where('running_year', $promo->currentYear)->where('student_id', $student_id)->count();
+            if($check){
+                $sp = Studentpromotion::where('student_id', $student_id)->first();
+                $sp->currentyear = $promo->currentYear;
+                $sp->promotedyear = $promo->promotedYear;
+                $sp->classfrom = $promo->class_name_from;
+                $sp->classpromoted = $promo->class_name_to;
+                $sp->sectionfrom = $promo->section_from;
+                $sp->sectionto = $promo->section_to;
+                $sp->running_year = $promo->promotedYear;
+                $sp->save();
+
+                $stx = Student::find($student_id);
+                $stx->class_name = $promo->class_name_to;
+                $stx->section_name = $promo->section_to;
+                $stx->save();
+
+            }else{
+                // admit
+                $sp = new Studentpromotion;
+                $sp->currentyear = $promo->currentYear;
+                $sp->promotedyear = $promo->promotedYear;
+                $sp->classfrom = $promo->class_name_from;
+                $sp->classpromoted = $promo->class_name_to;
+                $sp->sectionfrom = $promo->section_from;
+                $sp->sectionto = $promo->section_to;
+                $sp->student_id = $student_id;
+                $sp->running_year = $promo->promotedYear;
+                $sp->save();
+
+                $stx = Student::find($student_id);
+                $stx->class_name = $promo->class_name_to;
+                $stx->section_name = $promo->section_to;
+                $stx->save();
+            }
+        }
+    }
+
 
     public function refreshWith()
     {

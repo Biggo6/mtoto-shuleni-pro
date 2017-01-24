@@ -30,6 +30,7 @@ Route::group(['before'=>'auth'], function(){
     });
 
 	//Students
+    Route::post('students/doPromo', ['as'=>'students.doPromo', 'uses'=>'StudentController@doPromo']);
     Route::get('students/admit', ['as'=>'students.admit', 'uses'=>'StudentController@admit']);
 	Route::get('students/manage', ['as'=>'students.manage', 'uses'=>'StudentController@index']);
     Route::get('students/promotion', ['as'=>'students.promotion', 'uses'=>'StudentController@promotion']);

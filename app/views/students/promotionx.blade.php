@@ -24,7 +24,9 @@ float: left !important;
 <table id="datatable" class="table  table-striped table-bordered">
   <thead>
       <tr>
-          <th><input class="check_box" id="check_all" type="checkbox" /></th>
+          <th>
+            <input student_id="" class="check_box" id="check_all" type="checkbox" />
+          </th>
           <th>#</th>
           <th>Admit Number</th>
           <th>Photo</th>
@@ -44,7 +46,7 @@ float: left !important;
 
                                  @foreach($students as $s)
                                   <tr>
-                                    <td><input class="check_box" type="checkbox" /></td>
+                                    <td><input student_id="{{$s->id}}" class="check_box" type="checkbox" /></td>
                                     <td>{{$i}}</td>
                                     <td>{{$s->admit_number}}</td>
                                     <td>
@@ -58,6 +60,15 @@ float: left !important;
                                     <td>{{$s->address}}</td>
                                     <td>{{$s->email}}</td>
                                     <td>
+                                        <?php
+                                            $student_id = $s->id;
+                                            $check = Studentpromotion::where('student_id', $student_id)->where('running_year', date('Y'))->count();
+                                        ?>
+                                        @if($check)
+                                            <label class="label label-success"><i class="fa fa-check-circle"></i> Promoted</label>
+                                        @else
+                                             <label class="label label-danger"><i class="fa fa-ban"></i> Not Promoted yet</label>
+                                        @endif
                                     </td>
                                   </tr>
                                   <?php $i++; ?>
@@ -132,6 +143,27 @@ float: left !important;
                     type: 'error'
                 }, function() {
 
+                });
+            }else{
+                var students = [];
+                $('.check_box').each(function(i,k){
+                    var sel = $(this).prop('checked');
+                    if(sel){
+                        students.push($(this).attr('student_id'));
+                    }
+                });
+                $('#promotion_area').css('opacity', 0.2).css('cursor', 'wait');
+                $(this).css('cursor', 'wait');
+                $.post('{{route('students.doPromo')}}', {students:students, promo:'{{json_encode($promo)}}' }, function(res){
+                    $('#promotion_area').css('opacity', 1).css('cursor', 'pointer');
+                    $('#promoteSelected').css('cursor', 'pointer');
+                    swal({
+                        title: 'Students Promotion',
+                        text: 'Successfully promoted!',
+                        type: 'success'
+                    }, function() {
+                            window.location = "";
+                    });
                 });
             }
         });
