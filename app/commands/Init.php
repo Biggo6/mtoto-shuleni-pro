@@ -48,8 +48,15 @@ class Init extends Command {
 		}catch(Exception $x){
 			$this->call('migrate');
 		}finally{
+            $faker = Faker\Factory::create();
 			$s = new School;
 			$s->name = "MtotoShuleni Pro";
+            $s->slogan = $faker->text;
+            $s->phone = "+255712315840";
+            $s->address = "P.O BOX 8545";
+            $s->email = "info@mtotoshuleni.co.tz";
+            $s->website = "http://mtotoshuleni.co.tz";
+            $s->logo = url("/uploads/companylogos/w2bnif8zwz.png");
 			$s->save();
 			$this->info('dump data was added successfully........');
 			$this->call('mtotoshuleni:add-admin');	

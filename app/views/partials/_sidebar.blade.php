@@ -45,9 +45,55 @@
       </li>
       <li><a><i class="fa fa-pencil"></i> Exams <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Subjects</a></li>
+          <li><a href="form.html"><i class="fa fa-circle-o"></i> Exam List</a></li>
+          <li><a href="form.html"><i class="fa fa-circle-o"></i> Exam Grades</a></li>
+          <li><a href="form.html"><i class="fa fa-circle-o"></i> Exam Manage Marks</a></li>
+          <li><a href="form.html"><i class="fa fa-circle-o"></i> Send Marks By SMS</a></li>
+          <li><a href="form.html"><i class="fa fa-circle-o"></i> Tabulation Sheet</a></li>
         </ul>
       </li>
+      <li><a><i class="fa fa-line-chart"></i>  Attendance <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                      <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                      <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                    </ul>
+
+
+                    <li><a><i class="fa fa-bullhorn"></i>  NoticeBoard <span class="fa fa-chevron-down"></span></a>
+                                                          <ul class="nav child_menu">
+                                                            <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                                                            <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                                                            <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                                                          </ul>
+                                                        </li>
+
+                                                        <li><a><i class="fa fa-dollar"></i>  Accounting <span class="fa fa-chevron-down"></span></a>
+                                                                                              <ul class="nav child_menu">
+                                                                                                <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                                                                                                <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                                                                                                <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                                                                                              </ul>
+                                                                                            </li>
+
+                  <li><a><i class="fa fa-dollar"></i>  Accounting <span class="fa fa-chevron-down"></span></a>
+                                      <ul class="nav child_menu">
+                                        <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                                        <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                                        <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                                      </ul>
+                                    </li>
+       <li><a><i class="fa fa-calendar"></i>  Timetable <span class="fa fa-chevron-down"></span></a>
+                                                                 <ul class="nav child_menu">
+                                                                   <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                                                                   <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                                                                   <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                                                                 </ul>
+                                                               </li>
+                                                                               <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                                                                               <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                                                                             </ul>
+                                                                           </li>
     </ul>
   </div>
   <div class="menu_section">
