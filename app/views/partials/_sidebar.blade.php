@@ -57,7 +57,7 @@
                       <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
                       <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
                       <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
-                    </ul>
+                    </ul></li>
 
 
                     <li><a><i class="fa fa-bullhorn"></i>  NoticeBoard <span class="fa fa-chevron-down"></span></a>
@@ -68,7 +68,7 @@
                                                           </ul>
                                                         </li>
 
-                                                        <li><a><i class="fa fa-dollar"></i>  Accounting <span class="fa fa-chevron-down"></span></a>
+                                                        <li><a><i class="fa fa-bar-chart-o"></i>  Reports <span class="fa fa-chevron-down"></span></a>
                                                                                               <ul class="nav child_menu">
                                                                                                 <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
                                                                                                 <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
@@ -84,16 +84,19 @@
                                       </ul>
                                     </li>
        <li><a><i class="fa fa-calendar"></i>  Timetable <span class="fa fa-chevron-down"></span></a>
-                                                                 <ul class="nav child_menu">
-                                                                   <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
-                                                                   <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
-                                                                   <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
-                                                                 </ul>
-                                                               </li>
-                                                                               <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
-                                                                               <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
-                                                                             </ul>
-                                                                           </li>
+              <ul class="nav child_menu">
+                <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+              </ul>
+            </li>
+             <li><a><i class="fa fa-smile-o"></i>  Behaviors   <span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
+                            <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+                            <li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>
+                          </ul>
+                        </li>
     </ul>
   </div>
   <div class="menu_section">
