@@ -41,7 +41,7 @@
 
 <div class="" role="tabpanel" data-example-id="togglable-tabs">
   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> All Students ({{Student::where('class_name', $c)->orderBy('created_at', 'DESC')->count()}})</a>
+    <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> All Students ({{Student::where('class_name', $c)->where('running_year', date('Y'))->orderBy('created_at', 'DESC')->count()}})</a>
     </li>
     @if(School::count())
                           @if(HelperX::getSchoolInfo()->isStreamEnable == 1)
@@ -49,7 +49,7 @@
       <?php $cc=2; ?>
       @foreach($real_sections as $rs)
         @if(in_array($rs->name, $css))
-      <li role="presentation" class=""><a href="#tab_content{{$cc}}" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-list"></i> Section {{$rs->name}} ({{Student::where('section_name', $rs->name)->where('class_name', $c)->orderBy('created_at', 'DESC')->count()}})</a>
+      <li role="presentation" class=""><a href="#tab_content{{$cc}}" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-list"></i> Section {{$rs->name}} ({{Student::where('section_name', $rs->name)->where('running_year', date('Y'))->where('class_name', $c)->orderBy('created_at', 'DESC')->count()}})</a>
       </li>
       @endif
       <?php $cc++; ?>
@@ -86,7 +86,7 @@
                               <tbody>
 
                                   <?php 
-                                      $students = Student::where('class_name', $c)->orderBy('created_at', 'DESC')->get();
+                                      $students = Student::where('class_name', $c)->where('running_year', date('Y'))->orderBy('created_at', 'DESC')->get();
 
                                       $i = 1;
                                   ?>
@@ -146,7 +146,7 @@
                               </thead>
                               <tbody>
                                  <?php
-                                                                       $students = Student::where('section_name',$rs->name )->where('class_name', $c)->orderBy('created_at', 'DESC')->get();
+                                                                       $students = Student::where('section_name',$rs->name )->where('running_year', date('Y'))->where('class_name', $c)->orderBy('created_at', 'DESC')->get();
 
                                                                        $i = 1;
                                                                    ?>

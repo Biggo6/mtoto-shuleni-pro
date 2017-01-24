@@ -76,6 +76,7 @@ class StudentController extends \BaseController
                 $stx = Student::find($student_id);
                 $stx->class_name = $promo->class_name_to;
                 $stx->section_name = $promo->section_to;
+                $stx->running_year = $promo->promotedYear;
                 $stx->save();
 
             }else{
@@ -94,6 +95,7 @@ class StudentController extends \BaseController
                 $stx = Student::find($student_id);
                 $stx->class_name = $promo->class_name_to;
                 $stx->section_name = $promo->section_to;
+                $stx->running_year = $promo->promotedYear;
                 $stx->save();
             }
         }
@@ -307,6 +309,7 @@ class StudentController extends \BaseController
                 $s->phone = $phone;
                 $s->status = $status;
                 $s->email = $email;
+                $s->running_year = date('Y');
                 $s->parent_id = $parentx;
                 $s->user_id = $user_id;
 
@@ -384,6 +387,7 @@ class StudentController extends \BaseController
                 $s->phone = $phone;
                 $s->status = $status;
                 $s->email = $email;
+                $s->running_year = date('Y');
                 $s->parent_id = $parentx;
                 $s->user_id = $user_id;
 

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80a6e2a7-8e10-40e7-b8fc-86ea16d03501" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/database/migrations/2017_01_24_162144_add_running_year_to_students_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/StudentController.php" afterPath="$PROJECT_DIR$/app/controllers/StudentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/students/promotionx.blade.php" afterPath="$PROJECT_DIR$/app/views/students/promotionx.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/students/class.blade.php" afterPath="$PROJECT_DIR$/app/views/students/class.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mtoto-shuleni-pro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,8 +40,18 @@
       <file leaf-file-name="StudentController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/StudentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.46682188" vertical-offset="2993" max-vertical-offset="22284">
-              <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.7066356" vertical-offset="2993" max-vertical-offset="22428">
+              <caret line="100" column="9" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/students/class.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.909091" vertical-offset="1188" max-vertical-offset="10404">
+              <caret line="43" column="240" selection-start-line="43" selection-start-column="240" selection-end-line="43" selection-end-column="240" />
               <folding />
             </state>
           </provider>
@@ -97,10 +108,10 @@
         <option value="$PROJECT_DIR$/app/database/migrations/2017_01_24_100940_create_studentpromotions_table.php" />
         <option value="$PROJECT_DIR$/app/models/Studentpromotion.php" />
         <option value="$PROJECT_DIR$/app/views/students/promotion.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/students/class.blade.php" />
         <option value="$PROJECT_DIR$/app/database/migrations/2017_01_24_140337_add_student_id_to_studentspromotions_table.php" />
         <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/views/students/promotionx.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/students/class.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/StudentController.php" />
       </list>
     </option>
@@ -788,16 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/students/class.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.4545455" vertical-offset="4467" max-vertical-offset="9756">
-          <caret line="148" column="92" selection-start-line="148" selection-start-column="92" selection-end-line="148" selection-end-column="124" />
-          <folding>
-            <element signature="tag#tr#0;tag#tbody#0;tag#table#0;tag#div#1;tag#div#0;tag#div#0;tag#div#0;tag#div#2" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/partials/_saveFunc.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.151516" vertical-offset="1036" max-vertical-offset="3096">
@@ -854,10 +855,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/students/class.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.909091" vertical-offset="1188" max-vertical-offset="10404">
+          <caret line="43" column="240" selection-start-line="43" selection-start-column="240" selection-end-line="43" selection-end-column="240" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/StudentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46682188" vertical-offset="2993" max-vertical-offset="22284">
-          <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.7066356" vertical-offset="2993" max-vertical-offset="22428">
+          <caret line="100" column="9" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
           <folding />
         </state>
       </provider>
