@@ -49,7 +49,7 @@
               </div>
               <div>
                 <input class="btn btn-default submit" type="submit" value="Log in" />
-                
+                <p></p>
               </div>
 
               <div class="clearfix"></div>
@@ -62,7 +62,7 @@
 
                 <div>
                   <h1></h1>
-                  <p>©{{date('Y')}} All Rights Reserved. Izweb Technologies</p>
+                  <p>©{{date('Y')}} MtotoShuleni Pro {{HelperX::getSystemVersion()}}<br/> All Rights Reserved. Powered By Izweb Technologies</p>
                 </div>
               </div>
             </form>
