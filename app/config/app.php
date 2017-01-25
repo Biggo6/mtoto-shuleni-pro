@@ -197,6 +197,7 @@ return array(
 		'Authority'         => 'Authority\AuthorityL4\Facades\Authority',
 		'Zipper'            => 'Chumper\Zipper\Zipper',
         'Excel'             => 'Maatwebsite\Excel\Facades\Excel',
+        'Carbon'            => 'Carbon\Carbon',
 
 	),
 

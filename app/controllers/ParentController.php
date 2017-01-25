@@ -60,6 +60,7 @@ class ParentController extends \BaseController {
                 $user->firstname = $fullname;
                 $user->password  = Hash::make($password);
                 $user->active    = $status;
+                $user->role_id = Role::where('name', 'parent')->first()->id;
                 $user->save();
 
                 $user_id  = $user->id;

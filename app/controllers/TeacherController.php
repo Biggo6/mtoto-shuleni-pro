@@ -143,6 +143,7 @@ class TeacherController extends BaseController{
                 $user->lastname  = $lastname;
                 $user->password  = Hash::make($password);
                 $user->active    = $status;
+                $user->role_id = Role::where('name', 'teacher')->first()->id;
                 $user->save();
 
                 $user_id  = $user->id;

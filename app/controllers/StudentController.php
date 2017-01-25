@@ -219,6 +219,7 @@ class StudentController extends \BaseController
                             $user->username = $username;
                             $user->firstname = $firstname;
                             $user->lastname = $lastname;
+                            $user->role_id = Role::where('name', 'student')->first()->id;
                             $user->password = Hash::make($password);
                             $user->save();
 
@@ -294,6 +295,7 @@ class StudentController extends \BaseController
                 $user->lastname = $lastname;
                 $user->password = Hash::make($password);
                 $user->active = $status;
+                $user->role_id = Role::where('name', 'student')->first()->id;
                 $user->save();
 
                 $user_id = $user->id;
@@ -372,6 +374,7 @@ class StudentController extends \BaseController
                 $user->lastname = $lastname;
                 $user->password = Hash::make($password);
                 $user->active = $status;
+                $user->role_id = Role::where('name', 'student')->first()->id;
                 $user->save();
 
                 $user_id = $user->id;

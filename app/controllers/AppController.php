@@ -8,6 +8,7 @@ class AppController extends BaseController{
 			"active"   => 1
  		];
 		if(Auth::attempt($credx)){
+            HelperX::updateLogintime();
 			return Redirect::intended('app/dashboard');
 		}else{
 			return Redirect::back()->withError('Invalid login information');
@@ -18,7 +19,9 @@ class AppController extends BaseController{
 	}
 
 	public function logout(){
-		Auth::logout();
+
+        HelperX::updateLogouttime();
+        Auth::logout();
 		return Redirect::to('/')->withSuccess('Successfully Logout');
 	}
 }

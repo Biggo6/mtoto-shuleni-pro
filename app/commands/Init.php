@@ -58,6 +58,7 @@ class Init extends Command {
             $s->website = "http://mtotoshuleni.co.tz";
             $s->logo = url("/uploads/companylogos/w2bnif8zwz.png");
 			$s->save();
+            $this->call('db:seed');
 			$this->info('dump data was added successfully........');
 			$this->call('mtotoshuleni:add-admin');	
 		}

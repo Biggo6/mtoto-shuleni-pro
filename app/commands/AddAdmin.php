@@ -66,6 +66,7 @@ class AddAdmin extends Command {
 			$user->firstname = "John";
 			$user->lastname = "Doe";
 			$user->password = Hash::make($password);
+            $user->role_id = Role::where('name', 'admin')->first()->id;
 			$user->save();
 			$this->info('Successfully added!');
 			$this->info('================================');

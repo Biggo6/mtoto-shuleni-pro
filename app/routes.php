@@ -70,6 +70,9 @@ Route::group(['before'=>'auth'], function(){
 	
 	//Users Management
 	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);
+    Route::get('users/manage', ['as'=>'users.manage', 'uses'=>'UserController@manage']);
+    Route::get('users/refreshWith', ['as'=>'users.refreshWith', 'uses'=>'UserController@refreshWith']);
+
 	//Classes Management
 	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
 	//Settings Codes
