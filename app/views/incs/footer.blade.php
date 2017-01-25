@@ -100,6 +100,17 @@
     <script type="text/javascript">
     $(function(){
 
+
+        $('.user_history').on('click', function(){
+            var user_id = $(this).attr('user_id');
+            $('#history').show();
+            $('#history_area').html('');
+            $.post('{{route('users.history')}}', {user_id:user_id}, function(res){
+                 $('#history').hide();
+                 $('#history_area').hide().html(res).fadeIn();
+            });
+        });
+
         $('#admit').on('click', function(){
             $('#admit_area').css('opacity', 0.2).css('cursor', 'wait');
             $(this).css('cursor', 'wait');

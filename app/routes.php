@@ -72,7 +72,8 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);
     Route::get('users/manage', ['as'=>'users.manage', 'uses'=>'UserController@manage']);
     Route::get('users/refreshWith', ['as'=>'users.refreshWith', 'uses'=>'UserController@refreshWith']);
-
+    Route::get('users/roles', ['as'=>'users.roles', 'uses'=>'UserController@roles']);
+    Route::post('users/history', ['as'=>'users.history', 'uses'=>'UserController@history']);
 	//Classes Management
 	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
 	//Settings Codes

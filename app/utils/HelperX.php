@@ -80,6 +80,10 @@ class HelperX {
             return "<label class='label label-danger'>Never Login</label>";
         }
     }
+
+    public static  function  getRoleName(){
+        return Role::where('id', Auth::user()->role_id)->first()->name;
+    }
     public static function getLogoutTime($user_id) {
         $check = LoginHistory::where('user_id', $user_id)->orderBy('id', 'DESC')->where('logouttime', '!=', '0000-00-00 00:00:00')->first();
         if (count($check)) {
