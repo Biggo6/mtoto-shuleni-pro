@@ -46,7 +46,7 @@
 
 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-list"></i> Manage Parents</h2>
+                    <h2><i class="fa fa-list"></i> Manage Examlists</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

@@ -72,10 +72,17 @@ Route::group(['before'=>'auth'], function(){
 
     //Exams
     Route::get('exams/list', ['as'=>'exams.list', 'uses'=>'ExamController@listexams']);
+    Route::get('exams/grade', ['as'=>'exams.grade', 'uses'=>'ExamController@gradeexams']);
+    Route::post('exams/grade', ['as'=>'exams.gradex', 'uses'=>'ExamController@gradeexamsx']);
     Route::post('exams/list', ['as'=>'exams.listx', 'uses'=>'ExamController@listexamsx']);
     Route::post('exams/edit_list/{id}', ['as'=>'exams.edit_list', 'uses'=>'ExamController@edit_list']);
     Route::post('exams/destroy_list/{id}', ['as'=>'exams.destroy_list', 'uses'=>'ExamController@destroy_list']);
     Route::post('exams/update_list/{id}', ['as'=>'exams.update_list', 'uses'=>'ExamController@update_list']);
+    Route::post('exams/edit_grade/{id}', ['as'=>'exams.edit_grade', 'uses'=>'ExamController@edit_grade']);
+    Route::post('exams/destroy_grade/{id}', ['as'=>'exams.destroy_grade', 'uses'=>'ExamController@destroy_grade']);
+    Route::post('exams/update_grade/{id}', ['as'=>'exams.update_grade', 'uses'=>'ExamController@update_grade']);
+    
+
 
 	//Users Management
 	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);

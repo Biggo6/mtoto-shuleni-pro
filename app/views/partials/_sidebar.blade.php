@@ -47,7 +47,7 @@
     <li><a><i class="fa fa-pencil"></i> Exams <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
         <li><a href="{{route('exams.list')}}"><i class="fa fa-circle-o"></i> Exam List</a></li>
-        <li><a href="form.html"><i class="fa fa-circle-o"></i> Exam Grades</a></li>
+        <li><a href="{{route('exams.grade')}}"><i class="fa fa-circle-o"></i> Exam Grades</a></li>
         <li><a href="form.html"><i class="fa fa-circle-o"></i> Exam Manage Marks</a></li>
         <li><a href="form.html"><i class="fa fa-circle-o"></i> Send Marks By SMS</a></li>
         <li><a href="form.html"><i class="fa fa-circle-o"></i> Tabulation Sheet</a></li>

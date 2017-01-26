@@ -13,6 +13,74 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function gradeexams(){
+		return View::make('exams.grade');
+	}
+
+	public function gradeexamsx(){
+		$gradename  = Input::get('gradename');
+		$markfrom   = Input::get('markfrom');
+		$markupto   = Input::get('markupto');
+		$comment    = Input::get('comment');
+		$status     = Input::get('status');
+		$gradepoint = Input::get('gradepoint');
+
+		$check = Examgrade::where('name', $gradename)->count();
+		if($check){
+			return Response::json(['error'=>true, 'msg'=>'Grade already registered']);
+		}else{
+			$g = new Examgrade;
+			$g->name = $gradename;
+			$g->grade_point = $gradepoint;
+			$g->mark_from = $markfrom;
+			$g->mark_upto = $markupto;
+			$g->comment = $comment;
+			$g->status    = $status;
+			$g->save();
+			return Response::json(['error'=>false, 'msg'=>'Successfully']);
+		}
+	}
+
+	public function update_grade($id){
+		$eg_id    = Input::get('row_id');
+		$gradename  = Input::get('gradename');
+		$markfrom   = Input::get('markfrom');
+		$markupto   = Input::get('markupto');
+		$comment    = Input::get('comment');
+		$status     = Input::get('status');
+		$gradepoint = Input::get('gradepoint');
+
+		$check = Examgrade::where('id', $eg_id)->where('name', $gradename)->count();
+		if($check){
+			//update
+			$g = Examgrade::find($eg_id);
+			$g->name = $gradename;
+			$g->grade_point = $gradepoint;
+			$g->mark_from = $markfrom;
+			$g->mark_upto = $markupto;
+			$g->comment = $comment;
+			$g->status    = $status;
+			$g->save();
+			return Response::json(['error'=>false, 'msg'=>'Successfully']);
+		}else{
+			$check_ = Examgrade::where('id', '!=',$eg_id)->where('name', $gradename)->count();
+			if($check_){
+				return Response::json(['error'=>true, 'msg'=>'Grade already registered']);	
+			}else{
+				//update
+				$g = Examgrade::find($eg_id);
+				$g->name = $gradename;
+				$g->grade_point = $gradepoint;
+				$g->mark_from = $markfrom;
+				$g->mark_upto = $markupto;
+				$g->comment = $comment;
+				$g->status    = $status;
+				$g->save();
+				return Response::json(['error'=>false, 'msg'=>'Successfully']);
+			}
+		}
+	}	
+
 	public function update_list($id){
 	   $el_id    = Input::get('row_id');
 	   $examname = Input::get('examname');
@@ -59,10 +127,22 @@ class ExamController extends \BaseController {
     	return View::make('exams.edit_list')->withExamlist(Examlist::find($row_id));
     }
 
+    public function edit_grade(){
+    	$row_id = Input::get('row_id');
+    	return View::make('exams.edit_grade')->withExamgrade(Examgrade::find($row_id));
+    }
+
     public function destroy_list($id){
     	$row_id = Input::get('row_id');
     	Examlist::find($row_id)->delete();
     }
+
+    public function destroy_grade($id){
+    	$row_id = Input::get('row_id');
+    	Examgrade::find($row_id)->delete();
+    }
+
+
 
     public function listexamsx(){
        $examname = Input::get('examname');
