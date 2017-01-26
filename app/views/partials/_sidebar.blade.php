@@ -56,7 +56,7 @@
     <li><a><i class="fa fa-line-chart"></i>  Attendance <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
         <li><a href="form.html"><i class="fa fa-pencil"></i> Manage Users</a></li>
-        <li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>
+        <!--<li><a href="form.html"><i class="fa fa-lock"></i> Manage Roles</a></li>-->
         <!--<li><a href="{{route('users.permissions')}}"><i class="fa fa-key"></i> Manage Permissions</a></li>-->
         </ul>
     </li>
