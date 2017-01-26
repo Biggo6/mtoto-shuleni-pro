@@ -41,7 +41,7 @@
     <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
         <li><a href="{{route('users.manage')}}"><i class="fa fa-pencil"></i> Manage Users</a></li>
-        <li><a href="{{route('users.roles')}}"><i class="fa fa-lock"></i> Manage Roles</a></li>
+        <!--<li><a href="{{route('users.roles')}}"><i class="fa fa-lock"></i> Manage Roles</a></li>-->
         </ul>
     </li>
     <li><a><i class="fa fa-pencil"></i> Exams <span class="fa fa-chevron-down"></span></a>
