@@ -36,6 +36,13 @@ class StudentController extends \BaseController
         return View::make('students.getSections')->withC($className);
     }
 
+     public function getSubjects()
+    {
+        $sectName = Input::get('sectName');
+        $class_name = Input::get('class_name');
+        return View::make('students.getSubjects')->withS($sectName)->withC($class_name);
+    }
+
     public function promotionx(){
         sleep(1);
         $class_name_from = Input::get('class_name_from');

@@ -44,6 +44,7 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('students/storex', ['as'=>'students.store', 'uses'=>'StudentController@storex']);
 	Route::get('students/refreshWith', ['as'=>'students.refreshWith', 'uses'=>'StudentController@refreshWith']);
 	Route::post('students/getSections', ['as'=>'students.getSections', 'uses'=>'StudentController@getSections']);
+	Route::post('students/getSubjects', ['as'=>'students.getSubjects', 'uses'=>'StudentController@getSubjects']);
     Route::get('students/bulkImport', ['as'=>'students.bulkImport', 'uses'=>'StudentController@bulkImport']);
     Route::post('students/bulkImport', ['as'=>'students.bulkImport_', 'uses'=>'StudentController@bulkImport_']);
 	//Parents
@@ -72,6 +73,7 @@ Route::group(['before'=>'auth'], function(){
 
     //Exams
     Route::get('exams/list', ['as'=>'exams.list', 'uses'=>'ExamController@listexams']);
+    Route::get('exams/marks', ['as'=>'exams.marks', 'uses'=>'ExamController@marks']);
     Route::get('exams/grade', ['as'=>'exams.grade', 'uses'=>'ExamController@gradeexams']);
     Route::post('exams/grade', ['as'=>'exams.gradex', 'uses'=>'ExamController@gradeexamsx']);
     Route::post('exams/list', ['as'=>'exams.listx', 'uses'=>'ExamController@listexamsx']);

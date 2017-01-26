@@ -13,6 +13,10 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function marks(){
+		return View::make('exams.marks');
+	}
+
 	public function gradeexams(){
 		return View::make('exams.grade');
 	}
