@@ -18,6 +18,10 @@ class AppController extends BaseController{
 		return View::make('dashboard');
 	}
 
+    public function refreshWith(){
+        return Redirect::back()->withSuccess('Successfully processed!');
+    }
+
 	public function logout(){
 
         HelperX::updateLogouttime();

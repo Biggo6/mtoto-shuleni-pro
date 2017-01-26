@@ -67,7 +67,16 @@ Route::group(['before'=>'auth'], function(){
 	//App
 	Route::get('app/dashboard', ['as'=>'app.dashboard', 'uses'=>'AppController@dashboard']);
 	Route::get('app/logout', ['as'=>'app.logout', 'uses'=>'AppController@logout']);
-	
+	Route::get('app/refresh', ['as'=>'app.refreshWith', 'uses'=>'AppController@refreshWith']);
+
+
+    //Exams
+    Route::get('exams/list', ['as'=>'exams.list', 'uses'=>'ExamController@listexams']);
+    Route::post('exams/list', ['as'=>'exams.listx', 'uses'=>'ExamController@listexamsx']);
+    Route::post('exams/edit_list/{id}', ['as'=>'exams.edit_list', 'uses'=>'ExamController@edit_list']);
+    Route::post('exams/destroy_list/{id}', ['as'=>'exams.destroy_list', 'uses'=>'ExamController@destroy_list']);
+    Route::post('exams/update_list/{id}', ['as'=>'exams.update_list', 'uses'=>'ExamController@update_list']);
+
 	//Users Management
 	Route::get('users/permissions', ['as'=>'users.permissions', 'uses'=>'UserController@permissions']);
     Route::get('users/manage', ['as'=>'users.manage', 'uses'=>'UserController@manage']);
