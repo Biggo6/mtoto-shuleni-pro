@@ -1,16 +1,78 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
 
+
+<script type="text/javascript">
+    $(function(){
+            $('body').on('change', '#class_name', function(){
+                  var sel = $(this).val();
+                  if(sel!=""){
+                      $('#sectionS').prop('disabled', true);
+                      $('#sectionS').html('');
+                      $.post('{{route('students.getSections')}}', {className:sel}, function(res){
+                            $('#sectionS').html(res);
+                            $('#sectionS').prop('disabled', false);
+                      });
+                  }
+            });
+
+            $('body').on('change', '#sectionS', function(){
+                  var sel = $(this).val();
+                  var class_name = $('#class_name').val();
+                  if(sel!=""){
+                      $('#subjects').prop('disabled', true);
+                      $('#subjects').html('');
+                      $.post('{{route('students.getSubjects')}}', {sectName:sel, class_name:class_name}, function(res){
+                            $('#subjects').html(res);
+                            $('#subjects').prop('disabled', false);
+                      });
+                  }
+            });
+
+           
+
+
+
+           
+    });
+</script>
+
+<script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+<script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+     $('#manage_marks').on('click', function(){
+           var manageForm = $('#manageExamMarks').validationEngine('validate');
+           if(manageForm){
+                $('#manageExamMarks').css('opacity', 0.2);
+                $('#manageExamMarks').css('cursor', 'wait');
+                $('#manage_marks').css('cursor', 'wait');
+                var data = $('#manageExamMarks').serializeArray();
+                $('#marks_area').html('');
+                $.post('{{route('exams.startManageMarks')}}', data, function(res){
+                    $('#manageExamMarks').css('opacity', 1);
+                    $('#manageExamMarks').css('cursor', '');
+                    $('#manage_marks').css('cursor', '');
+                    $('#marks_area').hide().html(res).fadeIn();
+                });
+           }
+     });
+});
+</script>
+
     <script src="{{url('es/es.js')}}"></script>
     <script type="text/javascript">
     
     
 
+
+
     $(function(){
-
-        
-
-      $('#editable-select').editableSelect({ effects: 'fade' });
+      @if(Route::currentRouteName() == "classes.manage")
+        $('#editable-select').editableSelect({ effects: 'fade' });
+      @endif
     });
     </script>
 
@@ -123,6 +185,13 @@
             });
         });
 
+
+         $('#datatable-mark').dataTable({
+              "bFilter": false,
+              "bDestroy": true //<-- set bDestroy to true which will destroy the previous initializarion
+          });
+
+
         $('#datatable').dataTable();
 
         var i = 0;
@@ -173,6 +242,22 @@
 
     <script type="text/javascript">
     $(function(){
+
+
+        $('body').on('keyup', '#searchStudent', function(){
+            var student      = $(this).val();
+            var class_name   = $(this).attr('class_name');
+            var section_name = $(this).attr('section_name');
+
+           
+
+            if(student == ""){
+               $('#markss_').css('opacity', 1).css('cursor', '');
+            }else{
+               $('#markss_').css('opacity', 0.2).css('cursor', 'wait');
+            }
+
+        });
         
         @if(Route::currentRouteName() == "settings.school")
         Biggo.changePhotoDiv('schoolLogo', 'logo-placeholder', 72, 72, '');

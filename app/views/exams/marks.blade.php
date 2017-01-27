@@ -114,65 +114,6 @@
 
 
 
-<script type="text/javascript">
-    $(function(){
-            $('body').on('change', '#class_name', function(){
-                  var sel = $(this).val();
-                  if(sel!=""){
-                      $('#sectionS').prop('disabled', true);
-                      $('#sectionS').html('');
-                      $.post('{{route('students.getSections')}}', {className:sel}, function(res){
-                            $('#sectionS').html(res);
-                            $('#sectionS').prop('disabled', false);
-                      });
-                  }
-            });
-
-            $('body').on('change', '#sectionS', function(){
-                  var sel = $(this).val();
-                  var class_name = $('#class_name').val();
-                  if(sel!=""){
-                      $('#subjects').prop('disabled', true);
-                      $('#subjects').html('');
-                      $.post('{{route('students.getSubjects')}}', {sectName:sel, class_name:class_name}, function(res){
-                            $('#subjects').html(res);
-                            $('#subjects').prop('disabled', false);
-                      });
-                  }
-            });
-
-           
-
-
-
-           
-    });
-</script>
-
-<script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
-
-<script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
-<script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
-<script>
-$(function(){
-     $('#manage_marks').on('click', function(){
-           var manageForm = $('#manageExamMarks').validationEngine('validate');
-           if(manageForm){
-                $('#manageExamMarks').css('opacity', 0.2);
-                $('#manageExamMarks').css('cursor', 'wait');
-                $('#manage_marks').css('cursor', 'wait');
-                var data = $('#manageExamMarks').serializeArray();
-                $('#marks_area').html('');
-                $.post('{{route('exams.startManageMarks')}}', data, function(res){
-                    $('#manageExamMarks').css('opacity', 1);
-                    $('#manageExamMarks').css('cursor', '');
-                    $('#manage_marks').css('cursor', '');
-                    $('#marks_area').hide().html(res).fadeIn();
-                });
-           }
-     });
-});
-</script>
 
 
 @stop

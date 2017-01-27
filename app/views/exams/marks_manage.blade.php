@@ -27,7 +27,19 @@ $i = 1;
 
 <hr/>
 
-<table id="datatable" class="table  table-striped table-bordered">
+<div class="row">
+	<div class="col-md-3">
+		<input id="searchStudent" section_name="{{$markmanager['section']}}" class_name="{{$markmanager['class_name']}}"  type="text" placeholder="Search Student Here ... " class="form-control" />
+	</div>
+</div>
+
+<br/>
+
+
+
+<div id="markss_">
+
+<table id="datatable-mark" class="table  table-striped table-bordered">
   <thead>
       <tr>
           <th>#</th>
@@ -48,7 +60,7 @@ $i = 1;
 		          	<input class="form-control" style="width:100%" type="text" />
 		          </td>
 		          <td>
-		          	<textarea class="form-control"></textarea>	
+		          	<textarea style="width:100%" class="form-control"></textarea>	
 		          </td>
 		      </tr>
 		      <?php $i++; ?>
@@ -56,11 +68,12 @@ $i = 1;
   </tbody>
 </table> 
 
-						<hr/>
-                        <center>
-                            <button id="saveChanges" type="button" class="btn btn-success"><i class="fa fa-check"></i> Save Changes</button>
-                        </center>
+<hr/>
+<center>
+    <button id="saveChanges" type="button" class="btn btn-success"><i class="fa fa-check"></i> Save Changes</button>
+</center>
 
+</div>
 
 @else
 
@@ -70,29 +83,7 @@ $i = 1;
 
 @endif
 
-<!-- jQuery -->
-    <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
-<!-- Datatables -->
-    <script src="{{url('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
-    <script src="{{url('vendors/datatables.net-scroller/js/datatables.scroller.min.js')}}"></script>
 
-    <script type="text/javascript">
-    $(function(){
-        $('#datatable').dataTable({
-            "bPaginate": false
-        });
-    });
-    </script>  
 
 
 
