@@ -13,6 +13,10 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function startManageMarks(){
+		return View::make('exams.marks_manage')->withMarkmanager(Input::all());
+	}
+
 	public function marks(){
 		return View::make('exams.marks');
 	}

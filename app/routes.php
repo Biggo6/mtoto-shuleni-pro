@@ -83,7 +83,7 @@ Route::group(['before'=>'auth'], function(){
     Route::post('exams/edit_grade/{id}', ['as'=>'exams.edit_grade', 'uses'=>'ExamController@edit_grade']);
     Route::post('exams/destroy_grade/{id}', ['as'=>'exams.destroy_grade', 'uses'=>'ExamController@destroy_grade']);
     Route::post('exams/update_grade/{id}', ['as'=>'exams.update_grade', 'uses'=>'ExamController@update_grade']);
-    
+    Route::post('exams/startManageMarks', ['as'=>'exams.startManageMarks', 'uses'=>'ExamController@startManageMarks']);
 
 
 	//Users Management

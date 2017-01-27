@@ -63,7 +63,7 @@
                           <div class="form-group">
                               <label>Section</label>
 
-                            <select id="sectionS"  name="section_from" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
+                            <select id="sectionS"  name="section" {{HelperX::ve(["veName"=>"Section", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
 
 
 
@@ -80,7 +80,7 @@
                           <div class="form-group">
                               <label>Subjects</label>
 
-                            <select id="subjects"  name="section_from" {{HelperX::ve(["veName"=>"Subject", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
+                            <select id="subjects"  name="subject" {{HelperX::ve(["veName"=>"Subject", "veVs"=>"required", "vePos"=>"bottomLeft"])}}>
 
 
 
@@ -111,6 +111,8 @@
 
 
  @section('footerScripts')
+
+
 
 <script type="text/javascript">
     $(function(){
@@ -147,6 +149,8 @@
     });
 </script>
 
+<script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
 <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
 <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -159,12 +163,12 @@ $(function(){
                 $('#manage_marks').css('cursor', 'wait');
                 var data = $('#manageExamMarks').serializeArray();
                 $('#marks_area').html('');
-                // $.post('{{route('students.promotionx')}}', data, function(res){
-                //     $('#promoteForm').css('opacity', 1);
-                //     $('#promoteForm').css('cursor', 'pointer');
-                //     $('#manage_promotion').css('cursor', 'pointer');
-                //     $('#promotion_area').hide().html(res).fadeIn();
-                // });
+                $.post('{{route('exams.startManageMarks')}}', data, function(res){
+                    $('#manageExamMarks').css('opacity', 1);
+                    $('#manageExamMarks').css('cursor', '');
+                    $('#manage_marks').css('cursor', '');
+                    $('#marks_area').hide().html(res).fadeIn();
+                });
            }
      });
 });
