@@ -59,6 +59,12 @@ $(function(){
                 });
            }
      });
+     $('#view_sheet').on('click', function(){
+        var viewTabulationSheet_ = $('#viewTabulationSheet').validationEngine('validate');
+        if(viewTabulationSheet_){
+
+        }
+     });
 });
 </script>
 
