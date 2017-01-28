@@ -26,12 +26,46 @@ class ExamController extends \BaseController {
 	}
 
 	public function saveMarks(){
-		dd(Input::all());
+
+		$examlist_id      = Input::get('examlist_id');
+		$students_ids     = Input::get('students_ids');
+		$students_marks   = Input::get('students_marks');
+		$students_comment = Input::get('students_comment');
+
+
+		$c = 0;
+		foreach ($students_ids as $student_id) {
+			$check = Exammark::where('examlist_id', $examlist_id)->where('student_id', $student_id)->where('running_year', date('Y'))->count();
+
+			if($check){
+				// updaate
+				$m = Exammark::where('examlist_id', $examlist_id)->where('student_id', $student_id)->where('running_year', date('Y'))->first();
+				$m->examlist_id = $examlist_id;
+				$m->student_id = $student_id;
+				$m->running_year = date('Y');
+				$m->comment      = $students_comment[$c];
+				$m->marks     = $students_marks[$c];
+				$m->save();
+			}else{
+				// insert
+				$m = new Exammark;
+				$m->examlist_id = $examlist_id;
+				$m->student_id = $student_id;
+				$m->running_year = date('Y');
+				$m->comment      = $students_comment[$c];
+				$m->marks     = $students_marks[$c];
+				$m->save();
+			}
+			$c++;
+		}
+
+		
+
 		return Redirect::back()->withSuccess('Successfully Saved!');
 	}
 
 	public function searchStudent(){
-		
+
 		if(Input::get('student') == ""){
 			return View::make('exams.allStudents')->withData(Input::all());
 		}else{

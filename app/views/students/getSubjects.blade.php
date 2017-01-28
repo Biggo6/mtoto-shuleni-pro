@@ -11,10 +11,10 @@ $subjects = Subject::where('class_id', $class_id)->where('section_id', $section_
 
 @if(($subjects))
 
-<option valaue="">---Select Subject ----</option>
+<option value="">---Select Subject ----</option>
 
 @foreach(Subject::where('class_id', $class_id)->where('section_id', $section_id)->get() as $s)
-  <option valaue="{{$s->id}}">{{$s->name}}</option>
+  <option value="{{$s->id}}">{{$s->name}}</option>
 @endforeach
 
 @endif
