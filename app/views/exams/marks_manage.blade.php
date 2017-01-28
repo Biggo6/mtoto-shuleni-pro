@@ -57,10 +57,10 @@ $i = 1;
 		          <td>{{$s->admit_number}}</td>
 		          <td>{{$s->firstname}} {{$s->lastname}}</td>
 		          <td>
-		          	<input class="form-control" style="width:100%" type="text" />
+		          	<input class="form-control" value="{{HelperX::getStudentMark($s->id)}}" style="width:100%" type="text" />
 		          </td>
 		          <td>
-		          	<textarea style="width:100%" class="form-control"></textarea>	
+		          	<textarea style="width:100%" class="form-control">{{HelperX::getStudentMarkComment($s->id)}}</textarea>	
 		          </td>
 		      </tr>
 		      <?php $i++; ?>
@@ -68,18 +68,22 @@ $i = 1;
   </tbody>
 </table> 
 
+
+
+</div>
+
 <hr/>
 <center>
     <button id="saveChanges" type="button" class="btn btn-success"><i class="fa fa-check"></i> Save Changes</button>
 </center>
-
-</div>
 
 @else
 
 <div class="alert alert-danger">
 	<h5>No Students Found</h5>
 </div>
+
+
 
 @endif
 

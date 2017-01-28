@@ -66,7 +66,13 @@ $(function(){
     <script type="text/javascript">
     
     
+     $(function(){
 
+      $('body').on('click', '#saveChanges', function(){
+          alert(333)
+      });
+
+     }); 
 
 
     $(function(){
@@ -256,6 +262,10 @@ $(function(){
             }else{
                $('#markss_').css('opacity', 0.2).css('cursor', 'wait');
             }
+
+            $.post('{{route('exams.searchStudent')}}', {student:student, class_name:class_name, section_name:section_name}, function(res){
+                $('#markss_').css('opacity', 1).css('cursor', '').html(res);
+            });
 
         });
         

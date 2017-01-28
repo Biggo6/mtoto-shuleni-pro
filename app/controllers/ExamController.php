@@ -25,6 +25,16 @@ class ExamController extends \BaseController {
 		return View::make('exams.grade');
 	}
 
+	public function searchStudent(){
+
+		if(Input::get('student') == ""){
+			return View::make('exams.allStudents')->withData(Input::all());
+		}else{
+			return View::make('exams.searchStudent')->withData(Input::all());
+		}
+		
+	}
+
 	public function gradeexamsx(){
 		$gradename  = Input::get('gradename');
 		$markfrom   = Input::get('markfrom');

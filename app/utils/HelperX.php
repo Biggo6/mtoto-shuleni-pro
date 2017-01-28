@@ -12,6 +12,25 @@ class HelperX {
 		return $models;
 	}
 
+
+    public static  function getStudentMark($student_id){
+        $studentMark = Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->count();
+        if($studentMark){
+            return Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->first()->marks;
+        }else{
+            return 0;
+        }
+    }
+
+    public static  function getStudentMarkComment($student_id){
+        $studentMark = Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->count();
+        if($studentMark){
+            return Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->first()->comment;
+        }else{
+            return "";
+        }
+    }
+
     public static function getNextYear(){
         return date('Y', strtotime('+1 year'));
     }

@@ -75,6 +75,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('exams/list', ['as'=>'exams.list', 'uses'=>'ExamController@listexams']);
     Route::get('exams/marks', ['as'=>'exams.marks', 'uses'=>'ExamController@marks']);
     Route::get('exams/grade', ['as'=>'exams.grade', 'uses'=>'ExamController@gradeexams']);
+    Route::post('exams/searchStudent', ['as'=>'exams.searchStudent', 'uses'=>'ExamController@searchStudent']);
     Route::post('exams/grade', ['as'=>'exams.gradex', 'uses'=>'ExamController@gradeexamsx']);
     Route::post('exams/list', ['as'=>'exams.listx', 'uses'=>'ExamController@listexamsx']);
     Route::post('exams/edit_list/{id}', ['as'=>'exams.edit_list', 'uses'=>'ExamController@edit_list']);
