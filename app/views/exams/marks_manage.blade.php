@@ -36,8 +36,14 @@ $i = 1;
 <br/>
 
 
+<form  method="POST" action="{{route('exams.saveMarks')}}">	
+
+	<input name="examlist_id" value="{{Examlist::find($markmanager['exam_name'])->id}}" type="hidden"  />
+
 
 <div id="markss_">
+
+
 
 <table id="datatable-mark" class="table  table-striped table-bordered">
   <thead>
@@ -56,11 +62,13 @@ $i = 1;
 		          <td>{{$i}}</td>
 		          <td>{{$s->admit_number}}</td>
 		          <td>{{$s->firstname}} {{$s->lastname}}</td>
-		          <td>
-		          	<input class="form-control" value="{{HelperX::getStudentMark($s->id)}}" style="width:100%" type="text" />
+		         <td>
+		           	<input name="students_ids[]" value="{{$s->id}}" type="hidden"  />
+		           	
+		          	<input class="form-control" name="students_marks[]" value="{{HelperX::getStudentMark($s->id)}}" style="width:100%" type="text" />
 		          </td>
 		          <td>
-		          	<textarea style="width:100%" class="form-control">{{HelperX::getStudentMarkComment($s->id)}}</textarea>	
+		          	<textarea style="width:100%" name="students_comment[]" class="form-control">{{HelperX::getStudentMarkComment($s->id)}}</textarea>	
 		          </td>
 		      </tr>
 		      <?php $i++; ?>
@@ -74,8 +82,12 @@ $i = 1;
 
 <hr/>
 <center>
-    <button id="saveChanges" type="button" class="btn btn-success"><i class="fa fa-check"></i> Save Changes</button>
+    <button id="saveChanges" type="submit" class="btn btn-success"><i class="fa fa-check"></i> Save Changes</button>
 </center>
+
+</form>
+
+
 
 @else
 
@@ -86,6 +98,7 @@ $i = 1;
 
 
 @endif
+
 
 
 

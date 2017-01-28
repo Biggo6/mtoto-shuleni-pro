@@ -97,7 +97,10 @@
                         <center>
                             <button id="manage_marks" type="button" class="btn btn-primary"><i class="fa fa-list"></i> Manage Marks</button>
                         </center>
+
+                      </form>
                         <hr/>
+                        @include('partials._success')
                         <div id="marks_area"></div>
                  
                   </div>

@@ -25,8 +25,13 @@ class ExamController extends \BaseController {
 		return View::make('exams.grade');
 	}
 
-	public function searchStudent(){
+	public function saveMarks(){
+		dd(Input::all());
+		return Redirect::back()->withSuccess('Successfully Saved!');
+	}
 
+	public function searchStudent(){
+		
 		if(Input::get('student') == ""){
 			return View::make('exams.allStudents')->withData(Input::all());
 		}else{

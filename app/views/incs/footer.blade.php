@@ -69,7 +69,8 @@ $(function(){
      $(function(){
 
       $('body').on('click', '#saveChanges', function(){
-          alert(333)
+          var data = $('#manageExamMarksForm').serializeArray();
+          console.log(data);
       });
 
      }); 
