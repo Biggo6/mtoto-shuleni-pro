@@ -73,6 +73,7 @@ Route::group(['before'=>'auth'], function(){
 
     //Exams
     Route::get('exams/list', ['as'=>'exams.list', 'uses'=>'ExamController@listexams']);
+    Route::get('exams/tubulationSheet', ['as'=>'exams.tubulationSheet', 'uses'=>'ExamController@tubulationSheet']);
     Route::get('exams/marks', ['as'=>'exams.marks', 'uses'=>'ExamController@marks']);
     Route::get('exams/grade', ['as'=>'exams.grade', 'uses'=>'ExamController@gradeexams']);
     Route::post('exams/searchStudent', ['as'=>'exams.searchStudent', 'uses'=>'ExamController@searchStudent']);

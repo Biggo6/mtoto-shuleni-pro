@@ -13,6 +13,10 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function tubulationSheet(){
+		return View::make('exams.tubulationSheet');
+	}
+
 	public function startManageMarks(){
 		return View::make('exams.marks_manage')->withMarkmanager(Input::all());
 	}
