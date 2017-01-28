@@ -127,6 +127,7 @@ return array(
 		'Chumper\Zipper\ZipperServiceProvider',
         'Cmgmyr\Messenger\MessengerServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Ixudra\Curl\CurlServiceProvider',
 
 	),
 
@@ -198,6 +199,7 @@ return array(
 		'Zipper'            => 'Chumper\Zipper\Zipper',
         'Excel'             => 'Maatwebsite\Excel\Facades\Excel',
         'Carbon'            => 'Carbon\Carbon',
+         'Curl'             => 'Ixudra\Curl\Facades\Curl',
 
 	),
 

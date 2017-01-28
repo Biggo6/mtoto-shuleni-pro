@@ -135,6 +135,9 @@ Route::group(['before'=>'auth'], function(){
 		// 	return $s->getMessage();
 		// }
 		//Zipper::make(public_path() . '/quibdo.zip')->extractTo(public_path() . '/files');
+
+		
+
 		return HelperX::getSystemVersion();
 	});
 
