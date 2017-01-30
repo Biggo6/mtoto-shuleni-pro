@@ -92,6 +92,7 @@ $(function(){
                 Biggo.showFeedBack(updaterForm, dt.msg, dt.error);
             }else if(dt == false){
                 Biggo.showFeedBack(updaterForm, dt.msg, dt.error);
+                window.location = "{{route('app.refreshWith')}}";
             }
            
 

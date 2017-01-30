@@ -20,28 +20,36 @@ class UpdateController extends BaseController{
                             $filename        = $file->getClientOriginalName();
                             $uploadSuccess   = $file->move($destinationPath, $filename);
 
-                            $target   = $destinationPath.$filename;
+                            if($uploadSuccess){
+                                $target   = $destinationPath . "/". $filename;
+                                $zip = new ZipArchive;
+                                if ($zip->open($target) === TRUE) {
+                                    $zip->extractTo(base_path());
+                                    $zip->close();
+                                    
+                                    $old = getcwd();
+                                    chdir($destinationPath);
+                                    unlink($filename);
+                                    chdir($old);
+
+                                    Artisan::call('migrate', array('--force' => true));
+
+                                   
+
+                                } else {
+                                   //$zip->open($target);
+                                }
+                            }
+
+                            
+
+                            
+
+                            return Response::json(['error'=>false, 'msg'=>'Successfully ' ]); 
 
                         
-                            $dir = base_path();
 
-                            $leave_files = array(HelperX::getSystemVersion() . "-backup.zip", $target);
-
-                            foreach( glob("$dir/*") as $filex ) {
-                                if( !in_array(basename($file), $leave_files) ){
-                                    unlink($filex);
-                                }
-                                    
-                            }
-
-
-                            $res = Zipper::make($target)->extractTo(base_path());
-
-                            if($res==null){
-                              
-                                return Response::json(['error'=>true, 'msg'=>'Successfully']); 
-                               
-                            }
+                            
 
 
                     } 
