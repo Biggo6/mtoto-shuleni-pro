@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Software Update Check')
+@section('title', 'Software Update')
 
 @section('main')
 
@@ -9,7 +9,7 @@
 	<div class="col-md-4">
 		<div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-refresh"></i> Software Update Check</h2>
+                    <h2><i class="fa fa-refresh"></i> Software Update </h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

@@ -3,6 +3,6 @@ return [
     /*
      * The Remote Uri to check for a new version.
      */
-    'remote_uri' => 'http://localhost/mtoto-shuleni-pro-remote/',
+    'remote_uri' => 'http://localhost',
     
 ];

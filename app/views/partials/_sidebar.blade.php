@@ -114,7 +114,7 @@
 <ul class="nav side-menu">
 <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
 <ul class="nav child_menu">
-<li><a href="{{url('self-updater/check')}}">Software Updates  </a></li>
+<li><a href="{{url('selfupdater/check')}}">Software Updates  </a></li>
 <li><a href="#">System Settings</a></li>
 <li><a href="#">Trash Bin</a></li>
 <li><a href="{{route('settings.school')}}">School Information</a></li>

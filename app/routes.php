@@ -19,7 +19,10 @@ Route::get('/', function()
 Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin']);
 
 
+
 Route::group(['before'=>'auth'], function(){
+
+	Route::get('selfupdater/check', 'UpdateController@check');
 
     Route::group(['prefix' => 'messages'], function () {
         Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
@@ -137,7 +140,7 @@ Route::group(['before'=>'auth'], function(){
 		// }
 		//Zipper::make(public_path() . '/quibdo.zip')->extractTo(public_path() . '/files');
 
-		
+		dd(Config::get('self-updater.remote_uri'));
 
 		return HelperX::getSystemVersion();
 	});
