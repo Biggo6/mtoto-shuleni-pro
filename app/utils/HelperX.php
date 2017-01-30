@@ -2,6 +2,10 @@
 
 
 class HelperX {
+
+
+    const BACKUP = "backup";
+
 	public static function getClassesFromModelsDir(){
 		$dir = app_path() . '/models/';
 		$files = scandir($dir);
@@ -11,6 +15,17 @@ class HelperX {
 		}
 		return $models;
 	}
+
+    public static function getSystemBackUp(){
+        $files = glob(base_path() . '/*');
+        try{
+            $version = HelperX::getSystemVersion() . ".zip";
+            Zipper::make(base_path() . '/' . $version)->add($files)->close();
+            return "backup";
+        }catch(Exception $s){
+            return $s->getMessage();
+        }
+    }
 
 
     public static  function getStudentMark($student_id){

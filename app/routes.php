@@ -23,6 +23,7 @@ Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin'
 Route::group(['before'=>'auth'], function(){
 
 	Route::get('selfupdater/check', 'UpdateController@check');
+	Route::post('app/update', ['as'=>'app.update', 'uses'=>'UpdateController@appUpdate']);
 
     Route::group(['prefix' => 'messages'], function () {
         Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
@@ -131,18 +132,9 @@ Route::group(['before'=>'auth'], function(){
 	Route::post('msclasses/edit/{id}', ['as'=>'msclasses.edit', 'uses'=>'ClassController@edit']);
 	
 	Route::get('test', function(){
-		// $files = glob('files/*');
-		// try{
-		// 	Zipper::make(public_path() . '/quibdo.zip')->add($files)->close();
-		// 	return "good";
-		// }catch(Exception $s){
-		// 	return $s->getMessage();
-		// }
-		//Zipper::make(public_path() . '/quibdo.zip')->extractTo(public_path() . '/files');
-
-		dd(Config::get('self-updater.remote_uri'));
-
-		return HelperX::getSystemVersion();
+		
+		dd(HelperX::BACKUP);
+		
 	});
 
 });
