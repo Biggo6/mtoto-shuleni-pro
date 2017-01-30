@@ -19,7 +19,7 @@ $i = 1;
 		<div class="count">Marks For {{Examlist::find($markmanager['exam_name'])->name}} Exam</div>
 
 		<h3>Class	{{$markmanager['class_name']}} : Section	{{$markmanager['section']}}	</h3>
-		<p>Subject : {{$markmanager['subject']}}</p>
+		<p>Subject : {{Subject::find($markmanager['subject'])->name}}</p>
 		</div>	
 	</div>
 	<div class="col-md-3"></div>
@@ -39,6 +39,10 @@ $i = 1;
 <form  method="POST" action="{{route('exams.saveMarks')}}">	
 
 	<input name="examlist_id" value="{{Examlist::find($markmanager['exam_name'])->id}}" type="hidden"  />
+
+	<input name="subject" value="{{Subject::find($markmanager['subject'])->name}}" type="hidden"  />
+		           	<input name="section" value="{{$markmanager['section']}}" type="hidden"  />
+		           	<input name="class_name" value="{{$markmanager['class_name']}}" type="hidden"  />
 
 
 <div id="markss_">
@@ -65,10 +69,11 @@ $i = 1;
 		         <td>
 		           	<input name="students_ids[]" value="{{$s->id}}" type="hidden"  />
 		           	
-		          	<input class="form-control" name="students_marks[]" value="{{HelperX::getStudentMark($s->id)}}" style="width:100%" type="text" />
+		           	
+		          	<input class="form-control" name="students_marks[]" value="{{HelperX::getStudentMark($s->id, Subject::find($markmanager['subject'])->name, $markmanager['class_name'], $markmanager['section'])}}" style="width:100%" type="text" />
 		          </td>
 		          <td>
-		          	<textarea style="width:100%" name="students_comment[]" class="form-control">{{HelperX::getStudentMarkComment($s->id)}}</textarea>	
+		          	<textarea style="width:100%" name="students_comment[]" class="form-control">{{HelperX::getStudentMarkComment($s->id, Subject::find($markmanager['subject'])->name, $markmanager['class_name'], $markmanager['section'])}}</textarea>	
 		          </td>
 		      </tr>
 		      <?php $i++; ?>

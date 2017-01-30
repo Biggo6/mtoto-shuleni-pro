@@ -41,19 +41,30 @@ class ExamController extends \BaseController {
 		$students_marks   = Input::get('students_marks');
 		$students_comment = Input::get('students_comment');
 
+		$sub = Input::get('subject');
+		$sect = Input::get('section');
+		$clas = Input::get('class_name');
+
+		
+
 
 		$c = 0;
 		foreach ($students_ids as $student_id) {
-			$check = Exammark::where('examlist_id', $examlist_id)->where('student_id', $student_id)->where('running_year', date('Y'))->count();
+			$check = Exammark::where('examlist_id', $examlist_id)->where('class_name', $clas)->where('section', $sect)->where('subject', $sub)->where('student_id', $student_id)->where('running_year', date('Y'))->count();
 
 			if($check){
 				// updaate
-				$m = Exammark::where('examlist_id', $examlist_id)->where('student_id', $student_id)->where('running_year', date('Y'))->first();
+				$m = Exammark::where('examlist_id', $examlist_id)->where('class_name', $clas)->where('section', $sect)->where('subject', $sub)->where('student_id', $student_id)->where('running_year', date('Y'))->first();
 				$m->examlist_id = $examlist_id;
 				$m->student_id = $student_id;
 				$m->running_year = date('Y');
 				$m->comment      = $students_comment[$c];
 				$m->marks     = $students_marks[$c];
+
+				$m->class_name = $clas;
+				$m->section = $sect;
+				$m->subject = $sub;
+
 				$m->save();
 			}else{
 				// insert
@@ -63,6 +74,11 @@ class ExamController extends \BaseController {
 				$m->running_year = date('Y');
 				$m->comment      = $students_comment[$c];
 				$m->marks     = $students_marks[$c];
+
+				$m->class_name = $clas;
+				$m->section = $sect;
+				$m->subject = $sub;
+
 				$m->save();
 			}
 			$c++;

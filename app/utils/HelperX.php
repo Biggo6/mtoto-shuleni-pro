@@ -52,19 +52,28 @@ class HelperX {
     }
 
 
-    public static  function getStudentMark($student_id){
-        $studentMark = Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->count();
+    public static  function getStudentMark($student_id, $sub, $clas, $sect){
+        $studentMark = Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('section', $sect)->where('subject', $sub)->where('running_year', date('Y'))->count();
         if($studentMark){
-            return Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->first()->marks;
+            return Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('section', $sect)->where('subject', $sub)->where('running_year', date('Y'))->first()->marks;
         }else{
             return 0;
         }
     }
 
-    public static  function getStudentMarkComment($student_id){
-        $studentMark = Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->count();
+     public static  function getStudentMarkX($student_id, $sub, $clas){
+        $studentMark = Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('subject', $sub)->where('running_year', date('Y'))->count();
         if($studentMark){
-            return Exammark::where('student_id', $student_id)->where('running_year', date('Y'))->first()->comment;
+            return Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('subject', $sub)->where('running_year', date('Y'))->first()->marks;
+        }else{
+            return 0;
+        }
+    }
+
+    public static  function getStudentMarkComment($student_id, $sub, $clas, $sect){
+        $studentMark = Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('subject', $sub)->where('running_year', date('Y'))->count();
+        if($studentMark){
+            return Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('subject', $sub)->where('running_year', date('Y'))->first()->comment;
         }else{
             return "";
         }

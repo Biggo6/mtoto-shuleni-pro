@@ -19,7 +19,7 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 	<div class="col-md-3"></div>
 	<div class="col-md-6" >
 		<div class="tile-stats" style="background-color: #483747">
-		<div class="icon"><i class="fa fa-check-book"></i>
+		<div class="icon"><i class="fa fa-file"></i>
 		</div>
 		<div class="count">Tabulation Sheet</div>
 
@@ -64,10 +64,14 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 	</thead>
 	<tbody>
 
+
+		<?php $students_ids = []; ?>
 		@foreach($students as $s)
 			<td style="text-align: center;">
-				{{$s->firstname}} {{$s->firstname}}
+				{{$s->firstname}}
+				 {{$s->firstname}}
 			</td>
+			<?php $students_ids[] = $s->id ?>
 		@endforeach
 
 		<?php 
@@ -79,11 +83,14 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 
 			?>
 
+			<?php $c = 0; ?>
 			@foreach($subjects as $s)
 
+			<td style="text-align: center;"><input class="form-control"  value="{{HelperX::getStudentMarkX($students_ids[$c], $s->name, $class_name)}}" style="width:100%" type="text" /></td>
 			<td style="text-align: center;"></td>
 			<td style="text-align: center;"></td>
-			<td style="text-align: center;"></td>
+
+			<?php $c++; ?>
 
 			@endforeach
 
