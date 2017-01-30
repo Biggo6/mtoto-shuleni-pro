@@ -25,6 +25,11 @@ class ExamController extends \BaseController {
 		return View::make('exams.marks');
 	}
 
+
+	public function getTabulationSheet(){
+		return View::make('exams.getTabulationSheet')->withData(Input::all());
+	}
+
 	public function gradeexams(){
 		return View::make('exams.grade');
 	}

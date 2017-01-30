@@ -99,6 +99,17 @@ $(function(){
 
         });
 
+
+
+        biggo.fail(function(err){
+            Biggo.removeOpacity({{$formID}});
+            Biggo.enableEl({{$btnID}});
+            var error = JSON.stringify(err);
+            Biggo.errorBox(updaterNow, error);
+        });
+         
+
+
    });
 });
 </script>

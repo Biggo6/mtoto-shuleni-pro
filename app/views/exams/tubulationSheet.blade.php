@@ -71,6 +71,10 @@
 
                       </form>
 
+                      <hr/>
+
+                      <div id="tabulation_sheet_area"></div>
+
                     
                   </div>
         </div>
@@ -80,3 +84,5 @@
 </div>
 
 @stop
+
+

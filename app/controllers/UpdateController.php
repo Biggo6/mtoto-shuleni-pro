@@ -24,6 +24,14 @@ class UpdateController extends BaseController{
                                 $target   = $destinationPath . "/". $filename;
                                 $zip = new ZipArchive;
                                 if ($zip->open($target) === TRUE) {
+
+                                    // Future release we will consider this
+                                    // if ($zip->setPassword("MySecretPassword"))
+                                    // {
+                                    //     if (!$zip->extractTo(__DIR__))
+                                    //         echo "Extraction failed (wrong password?)";
+                                    // }
+
                                     $zip->extractTo(base_path());
                                     $zip->close();
                                     

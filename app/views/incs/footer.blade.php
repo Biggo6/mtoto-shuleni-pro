@@ -41,6 +41,35 @@
 
 <script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
 <script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+$(function(){
+
+    $('#view_sheet').on('click', function(){
+
+      var viewTabulationSheet_ = $('#viewTabulationSheet').validationEngine('validate');
+
+      if(viewTabulationSheet_){
+               $('#viewTabulationSheet').css('opacity', 0.2).css('cursor','wait');
+               $('#tabulation_sheet_area').html('');
+               $(this).css('cursor','wait');
+               var data = $('#viewTabulationSheet').serializeArray();
+               $.post('{{route('exams.getTabulationSheet')}}', data, function(res){
+
+                    $('#viewTabulationSheet').css('opacity', 1).css('cursor','pointer');
+                    $('#tabulation_sheet_area').html(res);
+                    $('#view_sheet').css('cursor','pointer');
+
+               });
+
+      }
+
+    });
+
+});
+</script>
+
+
 <script>
 $(function(){
      $('#manage_marks').on('click', function(){
