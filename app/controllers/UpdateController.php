@@ -25,7 +25,7 @@ class UpdateController extends BaseController{
 
                             $dir = base_path();
 
-                            $leave_files = array(HelperX::getSystemVersion() . ".zip");
+                            $leave_files = array(HelperX::getSystemVersion() . ".zip", $target);
 
                             foreach( glob("$dir/*") as $file ) {
                                 if( !in_array(basename($file), $leave_files) )
