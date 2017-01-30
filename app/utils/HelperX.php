@@ -20,7 +20,7 @@ class HelperX {
         $files = glob(base_path() . '/*');
         try{
             $version = HelperX::getSystemVersion() . ".zip";
-            Zipper::make(base_path() . '/' . $version)->add($files)->close();
+            Zipper::make(base_path() . '/' . $version . '-backup')->add($files)->close();
             return "backup";
         }catch(Exception $s){
             return $s->getMessage();

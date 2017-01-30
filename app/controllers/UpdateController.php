@@ -14,41 +14,38 @@ class UpdateController extends BaseController{
                 return Response::json(['error'=>true, 'msg'=>'Invalid File Uploaded! Please Check Administrator']);
             }else{
                  
-                    $destinationPath  = public_path() . '/files/tmp/';
-                    $filename        = $file->getClientOriginalName();
-                    $uploadSuccess   = $file->move($destinationPath, $filename);
+                    if(HelperX::getSystemBackUp() == HelperX::BACKUP){
 
-                    if($uploadSuccess){
-                        $target   = $destinationPath.$filename;
+                            $destinationPath  = base_path();
+                            $filename        = $file->getClientOriginalName();
+                            $uploadSuccess   = $file->move($destinationPath, $filename);
 
-                        if(HelperX::getSystemBackUp() == HelperX::BACKUP){
+                            $target   = $destinationPath.$filename;
 
+                        
                             $dir = base_path();
 
-                            $leave_files = array(HelperX::getSystemVersion() . ".zip", $target);
+                            $leave_files = array(HelperX::getSystemVersion() . "-backup.zip", $target);
 
-                            foreach( glob("$dir/*") as $file ) {
-                                if( !in_array(basename($file), $leave_files) )
-                                    unlink($file);
+                            foreach( glob("$dir/*") as $filex ) {
+                                if( !in_array(basename($file), $leave_files) ){
+                                    unlink($filex);
+                                }
+                                    
                             }
 
 
-
-                            $res = (Zipper::make($target)->extractTo(base_path());
+                            $res = Zipper::make($target)->extractTo(base_path());
 
                             if($res==null){
                               
                                 return Response::json(['error'=>true, 'msg'=>'Successfully']); 
                                
                             }
-                        }
 
-    
-                    }else{
-                        return Response::json(['error'=>true, 'msg'=>'There was a problem with the upload. Please try again.']);  
-                    }
 
-                    
+                    } 
+                               
                  
             }
         }else{
