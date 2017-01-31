@@ -43,12 +43,18 @@ class BuildApp extends Command {
 		$this->info('This will build the whole system ready for production. ');
 		$ans =  $this->ask('(default: Y or yes): ');
 		if($ans == "Y" || $ans == "yes" || $ans == "YES" || $ans == "" || $ans == "y"){
+			
+
+			
+
 			$path = base_path() . "/build";
 			if(!File::exists($path)){
 				$this->info('Creating build folder .....');
 				$result = File::makeDirectory($path);
 				$this->info('Build folder was created!');		
 			}
+
+
 			
 			$this->info('');
 			$this->info('Let Us Go Together!');
@@ -97,10 +103,16 @@ class BuildApp extends Command {
 				$result = File::makeDirectory($path2x);	
 			}	
 			$this->info('....... ....... ');
+			$this->info('....... ....... ');
+			$this->info('....... ....... ');
 			Zipper::make(base_path() . '/build/izwebtools/public.zip')->extractTo(base_path() . '/build');
 
-
+			$this->info('....... ....... ');
+			$this->info('....... ....... ');
+			$this->info('....... ....... ');
+			$this->info('... ... ... ... .... ....');
 			$this->info('At middle of Something ......');
+			$this->info('... ... ... ... .... ....');
 
 			$this->info('');
 
@@ -136,10 +148,14 @@ class BuildApp extends Command {
 				chdir($old);
 				$this->info('....... ....... ...... ......');
 
+				$content_1 = @file_get_contents( base_path() . "/index.php.build");
+				$content_2 = @file_get_contents( base_path() . "/database.php.build");
 
+				file_put_contents(base_path() . "/build/index.php" , $content_1);
+				file_put_contents(base_path() . "/build/izwebtools/app/config/database.php" , $content_2);
 				
 				
-				$this->info('Finilizing things .....');
+				$this->info('......Finilizing things .....');
 
 				$this->info('');
 
@@ -147,7 +163,7 @@ class BuildApp extends Command {
 					
 	            	
 				}catch(Exception $x2){
-					$this->info('Error ' . $x2->getMessage());
+					//$this->info('Error ' . $x2->getMessage());
 				}finally{
 					$this->info('... ... .... ....');
 					$this->info('');
@@ -164,11 +180,17 @@ class BuildApp extends Command {
 						$this->info('....... ...ZIPPING NOW... ........');
 						$this->info('');
 						$this->info('');
-						Zipper::make(base_path() . "/build/" . HelperX::getSystemVersion() . ".zip")->add($filesx)->close();
+						Zipper::make(base_path() . "/build.zip")->add($filesx)->close();
 						$this->info('....... ...FINISHED - ZIPPING PROCESS... ........');
 						$this->info('');
 						$this->info('');
 						$this->info('....... ....... ');
+						$this->info('....... ....... ');
+						$this->info('....... ....... ');
+
+
+						
+
 					}
 
 					
