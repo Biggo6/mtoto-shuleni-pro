@@ -160,7 +160,7 @@ class BuildApp extends Command {
 					$this->info('');
 
 					if($ansx == 1){
-						$filesx = glob(base_path() . "/build");
+						$filesx = (base_path() . "/build");
 						$this->info('....... ...ZIPPING NOW... ........');
 						$this->info('');
 						$this->info('');
