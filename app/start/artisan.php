@@ -13,4 +13,5 @@
 
 Artisan::add(new AddAdmin);
 Artisan::add(new Init);
+Artisan::add(new BuildApp);
 
