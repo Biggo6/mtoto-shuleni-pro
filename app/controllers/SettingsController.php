@@ -18,7 +18,7 @@ class SettingsController extends \BaseController {
 
 	public function doMigrate(){
 		Artisan::call('migrate', array('--force' => true));
-		return Redirect::to('dashboard')->withSuccess('Database Migrated Successfully!');
+		return Redirect::to('app/dashboard')->withSuccess('Database Migrated Successfully!');
 	}
 
 	public function updateSection($id){

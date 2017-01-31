@@ -150,9 +150,15 @@ class BuildApp extends Command {
 
 				$content_1 = @file_get_contents( base_path() . "/index.php.build");
 				$content_2 = @file_get_contents( base_path() . "/database.php.build");
+				
 
 				file_put_contents(base_path() . "/build/index.php" , $content_1);
 				file_put_contents(base_path() . "/build/izwebtools/app/config/database.php" , $content_2);
+				
+				$sourceDir = base_path() . "/vendor";
+				$destinationDir = base_path() . '/build/izwebtools/vendor';
+
+				File::copyDirectory($sourceDir, $destinationDir);
 				
 				
 				$this->info('......Finilizing things .....');
