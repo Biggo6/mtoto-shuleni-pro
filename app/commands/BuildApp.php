@@ -79,8 +79,8 @@ class BuildApp extends Command {
 
 			$this->info('... ... ... ... ....');
 
-			$files__ = glob(base_path() . '/vendor');
-			Zipper::make(base_path() . '/build/izwebtools/vendor.zip')->add($files__)->close();
+			$filesu = glob(base_path() . '/vendor');
+			Zipper::make(base_path() . '/build/izwebtools/vendor.zip')->add($filesu)->close();
 			$path2__ = base_path() . '/build/izwebtools/vendor';		
 			if(!File::exists($path2__)){
 				$this->info('... ... ... ... .... ....');
@@ -88,6 +88,16 @@ class BuildApp extends Command {
 			}	
 			Zipper::make(base_path() . '/build/izwebtools/bootstrap.zip')->extractTo(base_path() . '/build/izwebtools/bootstrap');
 			$this->info('');
+
+			$filesxx = glob(base_path() . '/public');
+		    Zipper::make(base_path() . '/build/izwebtools/public.zip')->add($filesxx)->close();
+			$path2x = base_path() . '/build/izwebtools/public';		
+			if(!File::exists($path2x)){
+				$this->info('... ... ... ... .... ....');
+				$result = File::makeDirectory($path2x);	
+			}	
+			$this->info('....... ....... ');
+			Zipper::make(base_path() . '/build/izwebtools/public.zip')->extractTo(base_path() . '/build');
 
 
 			$this->info('At middle of Something ......');
@@ -102,6 +112,9 @@ class BuildApp extends Command {
 			Zipper::make(base_path() . '/build/izwebtools/composer.json')->add($files2)->close();			
 			Zipper::make(base_path() . '/build/izwebtools/composer.json')->extractTo(base_path() . '/build/izwebtools');
 
+			
+			$this->info('');
+
 			$this->info('');
 			$this->info('Housing Keeping ......');
 			$this->info('');
@@ -110,6 +123,7 @@ class BuildApp extends Command {
             	chdir(base_path() . '/build/izwebtools/');
             	unlink('app.zip');
             	unlink('bootstrap.zip');
+            	unlink('public.zip');
             	unlink('vendor.zip');
             	unlink('version.json.zip');
             	unlink('composer.json.zip');
@@ -122,21 +136,15 @@ class BuildApp extends Command {
 				chdir($old);
 				$this->info('....... ....... ...... ......');
 
-				$filesx = glob(base_path() . '/public');
-				$this->info('....... ....... ...... ...... ........');
-				Zipper::make(base_path() . '/build/public.zip')->add($filesx)->close();
-				$this->info('....... ....... ');
-				Zipper::make(base_path() . '/build/public.zip')->extractTo(base_path() . '/build');
-				$this->info('');
+
+				
 				
 				$this->info('Finilizing things .....');
 
 				$this->info('');
 
 				try{
-					$old_ = getcwd();
-	            	chdir(base_path() . "/build");
-	            	unlink('public.zip');
+					
 	            	
 				}catch(Exception $x2){
 					$this->info('Error ' . $x2->getMessage());
@@ -144,13 +152,26 @@ class BuildApp extends Command {
 					$this->info('... ... .... ....');
 					$this->info('');
 					$this->info('');
-					chdir($old_);
+					
 
-					$filesx = glob(base_path());
-					$this->info('....... ...ZIPPING NOW... ........');
-					Zipper::make(base_path() . "/build/" . HelperX::getSystemVersion() . ".zip")->add($filesx)->close();
-					$this->info('....... ...FINISHED - ZIPPING PROCESS... ........');
-					$this->info('....... ....... ');
+					$ansx =  $this->ask('(We zipping?): 1, 0 >>: ');
+
+					$this->info('');
+					$this->info('');
+
+					if($ansx == 1){
+						$filesx = glob(base_path() . "/build");
+						$this->info('....... ...ZIPPING NOW... ........');
+						$this->info('');
+						$this->info('');
+						Zipper::make(base_path() . "/build/" . HelperX::getSystemVersion() . ".zip")->add($filesx)->close();
+						$this->info('....... ...FINISHED - ZIPPING PROCESS... ........');
+						$this->info('');
+						$this->info('');
+						$this->info('....... ....... ');
+					}
+
+					
 	
 
 			  		$this->info('===========================================');

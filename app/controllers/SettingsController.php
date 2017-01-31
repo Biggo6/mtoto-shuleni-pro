@@ -16,6 +16,11 @@ class SettingsController extends \BaseController {
 		Section::find($row_id)->delete();
 	}
 
+	public function doMigrate(){
+		Artisan::call('migrate', array('--force' => true));
+		return Redirect::to('dashboard')->withSuccess('Database Migrated Successfully!');
+	}
+
 	public function updateSection($id){
 		
 		sleep(1);

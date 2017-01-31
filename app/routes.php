@@ -138,6 +138,8 @@ Route::group(['before'=>'auth'], function(){
 
 	Route::get('noticeboard/add', ['as'=>'noticeboard.add', 'uses'=>'Noticeboard@add']);
 	Route::get('noticeboard/manage', ['as'=>'noticeboard.manage', 'uses'=>'Noticeboard@manage']);
+
+	Route::get('doMigrate', ['as'=>'app.doMigrate', 'uses'=>'SettingsController@doMigrate']);
 	
 	Route::get('test', function(){
 		

@@ -5,6 +5,7 @@
 @section('main')
 
 
+@include('partials._success')
 
 @if(Role::where('id', Auth::user()->role_id)->first()->name == "admin")
 <div class="">
