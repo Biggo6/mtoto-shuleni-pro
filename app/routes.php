@@ -101,6 +101,7 @@ Route::group(['before'=>'auth'], function(){
     Route::get('users/refreshWith', ['as'=>'users.refreshWith', 'uses'=>'UserController@refreshWith']);
     Route::get('users/roles', ['as'=>'users.roles', 'uses'=>'UserController@roles']);
     Route::post('users/history', ['as'=>'users.history', 'uses'=>'UserController@history']);
+    Route::post('users/storeAdmin', ['as'=>'users.storeAdmin', 'uses'=>'UserController@storeAdmin']);
 	//Classes Management
 	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
 	//Settings Codes
@@ -132,6 +133,11 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('msclasses/refreshWith', ['as'=>'msclasses.refreshWith', 'uses'=>'ClassController@refreshWith']);
 	Route::post('msclasses/destroy/{id}', ['as'=>'msclasses.destroy', 'uses'=>'ClassController@destroy']);
 	Route::post('msclasses/edit/{id}', ['as'=>'msclasses.edit', 'uses'=>'ClassController@edit']);
+
+	//Noticeboard
+
+	Route::get('noticeboard/add', ['as'=>'noticeboard.add', 'uses'=>'Noticeboard@add']);
+	Route::get('noticeboard/manage', ['as'=>'noticeboard.manage', 'uses'=>'Noticeboard@manage']);
 	
 	Route::get('test', function(){
 		

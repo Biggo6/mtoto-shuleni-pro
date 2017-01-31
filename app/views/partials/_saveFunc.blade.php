@@ -47,6 +47,8 @@ $(function(){
 
           var biggo = Biggo.talkToServer(url, data, isFileUpload).then(function(res){
 
+           
+
             @if(isset($debug))
                 Biggo.removeOpacity({{$formID}});
                 Biggo.enableEl({{$btnID}});

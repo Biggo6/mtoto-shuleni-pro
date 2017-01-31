@@ -22,4 +22,64 @@ class UserController  extends BaseController{
         return View::make('users.history')->withUser($user);
     }
 
+    public function storeAdmin(){
+        
+        $firstname = Input::get('firstname');
+        $lastname = Input::get('lastname');
+        $username = Input::get('username');
+        $password = Input::get('password');
+        $status   = Input::get('status');
+
+
+        $check = User::where('username', $username)->count();
+
+
+        if($check){
+            return Response::json(['error'=>true, 'msg'=>'Username exists']);
+        }
+
+        $perms = (Input::get('perms'));
+        
+        if(count($perms) == 0){
+            return Response::json(['error'=>true, 'msg'=>'Please Choose Some Permissions']);
+        }
+
+         $check_ = Role::where('name', 'custom_admin')->count();
+
+        if($check_){
+            $role_id = Role::where('name', 'custom_admin')->first()->id;
+        }else{
+            $r = new Role;
+            $r->name   = 'custom_admin';
+            $r->system = 0;
+            $r->save();
+            $role_id = $r->id;
+        }
+
+
+        $u = new User;
+        $u->username  = $username;
+        $u->password  = Hash::make($password);
+        $u->firstname = $firstname;
+        $u->lastname = $lastname;
+        $u->active    = $status;
+        $u->role_id   = $role_id;
+        $u->save();
+
+
+
+        
+
+        $user_id = $u->id;
+
+        foreach ($perms as $p) {
+            $px = new Permission;
+            $px->name    = $p;
+            $px->user_id = $user_id;
+            $px->save(); 
+        }
+
+        return Response::json(['error'=>false, 'msg'=>'Successfully']);
+    }
+
 }
