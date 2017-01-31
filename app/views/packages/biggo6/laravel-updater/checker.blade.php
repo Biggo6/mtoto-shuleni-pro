@@ -102,8 +102,8 @@ $(function(){
 
 
         biggo.fail(function(err){
-            Biggo.removeOpacity({{$formID}});
-            Biggo.enableEl({{$btnID}});
+            Biggo.removeOpacity(updaterNow);
+            Biggo.enableEl(updaterNow);
             var error = JSON.stringify(err);
             Biggo.errorBox(updaterNow, error);
         });

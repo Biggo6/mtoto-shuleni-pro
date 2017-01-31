@@ -51,6 +51,10 @@ class HelperX {
         }
     }
 
+    public static function getGrade($point){
+        
+    }
+
 
     public static  function getStudentMark($student_id, $sub, $clas, $sect){
         $studentMark = Exammark::where('student_id', $student_id)->where('class_name', $clas)->where('section', $sect)->where('subject', $sub)->where('running_year', date('Y'))->count();
