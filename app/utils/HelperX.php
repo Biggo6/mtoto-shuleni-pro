@@ -52,7 +52,14 @@ class HelperX {
     }
 
     public static function getGrade($point){
-        
+        $check = Examgrade::where('mark_from', '<=', $point)->where('mark_upto', '>=', $point)->where('deleted_at', NULL)->get();
+        if(count($check)){
+            foreach ($check as $p) {
+                return $p->name;
+            }
+        }else{
+            return '-';
+        }
     }
 
 

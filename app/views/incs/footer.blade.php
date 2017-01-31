@@ -150,6 +150,19 @@ $(function(){
      
     };
     $(document).ready(function() {
+
+
+      $('body').on('change', '#select_student', function(){
+          var student = $(this).val();
+          var examlist = $(this).attr('examlist');
+          var className = $(this).attr('className');
+          $('#area_results').css('opacity', 0.2).css('cursor', 'wait');
+          $.post('{{route('exams.studentResult')}}', {student:student, examlist:examlist, className:className}, function(res){
+              $('#area_results').css('opacity', 1).css('cursor', 'pointer').html(res);
+          });
+      });
+
+
       $("#select_2").select2({
         templateResult: formatState
       });

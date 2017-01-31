@@ -92,6 +92,7 @@ Route::group(['before'=>'auth'], function(){
     Route::post('exams/update_grade/{id}', ['as'=>'exams.update_grade', 'uses'=>'ExamController@update_grade']);
     Route::post('exams/startManageMarks', ['as'=>'exams.startManageMarks', 'uses'=>'ExamController@startManageMarks']);
     Route::post('exams/getTabulationSheet', ['as'=>'exams.getTabulationSheet', 'uses'=>'ExamController@getTabulationSheet']);
+    Route::post('exams/studentResult', ['as'=>'exams.studentResult', 'uses'=>'ExamController@studentResult']);
 
 
 	//Users Management

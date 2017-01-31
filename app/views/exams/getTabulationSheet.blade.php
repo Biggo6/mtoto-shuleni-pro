@@ -40,8 +40,11 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 
 <div class="col-md-4">
 	Student<br/><br/>
-	<select id="select_2" class="form-control sel">
+	<select id="select_student" class="form-control sel"  examlist="{{Examlist::find($exam_name)->id}}" className="{{$data['class_name']}}">
 		<option value="">---View Single Student Result---</option>
+		@foreach($students as $sts)
+		<option value="{{$sts->id}}">{{$sts->firstname}} {{$sts->lastname}}</option>
+		@endforeach
 	</select>
 </div>
 <div class="col-md-4">
@@ -55,7 +58,7 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 <br/>
 <hr/>
 
-<div class="row">
+<div class="row"  id="area_results">
 
 <table class="table table-bordered table-striped table-condensed mb-none">
 	<thead>
@@ -106,7 +109,7 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 			@endforeach
 			<td style="text-align: center;">{{$total}}</td>
 			<td style="text-align: center;">{{$total/$c}}</td>
-			<td style="text-align: center;"></td>
+			<td style="text-align: center;">{{HelperX::getGrade(HelperX::getStudentMarkX($st->id, $s->name, $class_name))}}</td>
 		</tr>
 		@endforeach
 

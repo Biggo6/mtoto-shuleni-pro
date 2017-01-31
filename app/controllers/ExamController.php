@@ -34,6 +34,11 @@ class ExamController extends \BaseController {
 		return View::make('exams.grade');
 	}
 
+	public function studentResult(){
+		return View::make('exams.studentResult')->withData(Input::all());
+	}
+
+
 	public function saveMarks(){
 
 		$examlist_id      = Input::get('examlist_id');
