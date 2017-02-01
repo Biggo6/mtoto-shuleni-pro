@@ -61,6 +61,15 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                       <div id="student_areas"></div>
 
+                      <div class="form-group">
+                        <label>Send As</label>
+                        <select style="width:100%" class="form-control">
+                              <option value="sms">SMS</option>
+                              <option value="email">E-Mail</option>
+                              <option value="both">Both Email & SMS </option>
+                        </select>
+                      </div>
+
 
                       <div class="form-group">
                         <br/><br/><hr/>
