@@ -9,6 +9,7 @@
       
     </select>
   </div>
+  <br/>
 
 @else
 
@@ -52,6 +53,8 @@
 
   </tbody>
 </table>
+
+<br/>
 
  <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
  <script type="text/javascript" src="{{url('sweetalert/dist/sweetalert.min.js')}}"></script>
