@@ -123,7 +123,7 @@
 <li><a href="{{route('sections.manage')}}">Sections/Streams</a></li>
 @endif
 @endif
-<li><a href="#">SMS settings</a></li>
+<li><a href="{{route('sms.settings')}}">SMS settings</a></li>
 <li><a href="#">Licence</a></li>
 
 </ul>

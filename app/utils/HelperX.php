@@ -102,6 +102,30 @@ class HelperX {
         return '<label class="label label-warning">' . HelperX::getSystemVersion() .'</label>';
     }
 
+    public static function hashCode($messages){
+
+        $sms = Smsbox::where('counter', '!=', '')->first()->counter;
+        $sm = Smsbox::where('counter', '!=', '')->first()->messeges;
+        $m   = (float)Crypt::decrypt($sms);
+
+        if($messages <= $m){
+            $xmx   = (float)Crypt::decrypt($sms) - $messages;
+        }else{
+            $xmx  = Crypt::encrypt(0);
+        }
+
+       
+        $xc  = Smsbox::where('counter', '!=', '')->first();
+        $xc->counter = Crypt::encrypt($xmx);
+        $xc->messeges = $sm + $messages;
+        $xc->save();
+
+    }
+
+     public static function getVersionLabelx(){
+        return '<label class="label label-warning">' . HelperX::getSystemVersion() .'.' . HelperX::getCode() .'.' . date('Y') . '</label>';
+    }
+
     public static function getSystemVersion(){
         $localVersionFile = file_get_contents(base_path('version.json'));
         $localVersionJson = json_decode($localVersionFile, true);
@@ -157,6 +181,11 @@ class HelperX {
         } else {
             return "<label class='label label-danger'>Never Login</label>";
         }
+    }
+
+    public static  function getCode(){
+        $encrytcode = Smsbox::where('counter', '!=', '')->first()->counter;
+        return Crypt::decrypt($encrytcode);
     }
 
     public static  function  getRoleName(){

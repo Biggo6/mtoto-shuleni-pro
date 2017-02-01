@@ -16,6 +16,29 @@ class SettingsController extends \BaseController {
 		Section::find($row_id)->delete();
 	}
 
+	public function sms(){
+		return View::make('settings.sms');
+	}
+
+	public function smsStore(){
+		$messages = Input::get('messages');
+		$check = Smsbox::count();
+		if($check == 0){
+			$s = new Smsbox;
+			$s->counter  = Crypt::encrypt($messages);
+			$s->messeges = $messages; 
+			$s->save();
+		}else{
+			$sms = Smsbox::where('counter', '!=', '')->first()->counter;
+			$sm = Smsbox::where('counter', '!=', '')->first()->messeges;
+			$m   = (float)Crypt::decrypt($sms) + $messages;
+			$xc  = Smsbox::where('counter', '!=', '')->first();
+			$xc->counter = Crypt::encrypt($m);
+			$xc->messeges = $sm + $messages;
+			$xc->save();
+		}
+	}
+
 	public function doMigrate(){
 		Artisan::call('migrate', array('--force' => true));
 		return Redirect::to('app/dashboard')->withSuccess('Database Migrated Successfully!');

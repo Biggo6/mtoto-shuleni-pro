@@ -1,11 +1,20 @@
+<?php 
+
+  $students = Student::where('class_name', $data['class_name'])->where('running_year', date('Y'))->orderBy('created_at', 'DESC')->get();
+
+?>
+
+
 
 @if($data['parent_cat'] == 1)
 
 <div class="form-group"  >
     <label>Student's Parent</label>
-    <select style="width:100%" id="select_2x"  {{HelperX::ve(["veName"=>"Parent Category", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+    <select style="width:100%" id="select_2x" name="student_id"  {{HelperX::ve(["veName"=>"Parent Category", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
       <option value="">-- Student's Parent ----</option>
-      
+      @foreach($students as $ss)
+      <option value="{{$ss->parent_id}}">{{$ss->firstname}}  {{$ss->lastname}} ({{Parentx::find($ss->parent_id)->fullname}})</option>
+      @endforeach	
       
     </select>
   </div>
@@ -36,7 +45,7 @@
 
                                  @foreach($students as $s)
                                   <tr>
-                                    <td><input student_id="{{$s->id}}" class="check_box" type="checkbox" /></td>
+                                    <td><input student_id="{{$s->id}}" name="students_ids[]" value="{{$s->id}}" class="check_box" type="checkbox" /></td>
                                     
                                     <td>
                                         @if($s->profile_photo == "")

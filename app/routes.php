@@ -108,6 +108,8 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('settings/school', ['as'=>'settings.school', 'uses'=>'SettingsController@school']);
 	Route::post('school/update', ['as'=>'school.update', 'uses'=>'SettingsController@schoolUpdate']);
 	Route::get('school/refreshWith', ['as'=>'school.refreshWith', 'uses'=>'SettingsController@schoolRefreshWith']);
+	Route::get('sms/settings', ['as'=>'sms.settings', 'uses'=>'SettingsController@sms']);
+	Route::post('sms/store', ['as'=>'sms.store', 'uses'=>'SettingsController@smsStore']);
 	// if(School::count()){
 	//  	if(HelperX::getSchoolInfo()->isStreamEnable == 1){
 	Route::get('sections/manage', ['as'=>'sections.manage', 'uses'=>'SettingsController@sectionsManage']);	
@@ -139,6 +141,7 @@ Route::group(['before'=>'auth'], function(){
 	Route::get('noticeboard/add', ['as'=>'noticeboard.add', 'uses'=>'NoticeboardController@add']);
 	Route::get('noticeboard/manage', ['as'=>'noticeboard.manage', 'uses'=>'NoticeboardController@manage']);
 	Route::get('notice/getStudents', ['as'=>'notice.getStudents', 'uses'=>'NoticeboardController@getStudents']);
+	Route::post('notice/store', ['as'=>'notice.store', 'uses'=>'NoticeboardController@store']);
 
 	Route::get('doMigrate', ['as'=>'app.doMigrate', 'uses'=>'SettingsController@doMigrate']);
 	

@@ -21,7 +21,7 @@ $classes = MsClass::where('status', 1)->select('class_name')
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" id="registerParent">
+                    <form class="form-horizontal form-label-left" id="registerNotice">
                       
                       <div class="form-group">
                         <label>Title</label>
@@ -35,7 +35,7 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                       <div class="form-group">
                         <label>Class</label>
-                        <select style="width:100%" id="notice_class"  {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+                        <select style="width:100%" id="notice_class" name="notice_class"  {{HelperX::ve(["veName"=>"Student Class", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
                           <option value="all">All Classes (School)</option>
                           @foreach($classes as $c)
                               <option value="{{$c->class_name}}">{{$c->class_name}}</option>
@@ -46,7 +46,7 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                        <div class="form-group" id="parent_cate" style="display: none">
                         <label>Parents Category</label>
-                        <select style="width:100%" id="select_2x"  {{HelperX::ve(["veName"=>"Parent Category", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
+                        <select style="width:100%" id="select_2x" name="parent_cat" {{HelperX::ve(["veName"=>"Parent Category", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
                           <option value="">-- Select Parent Category----</option>
                           <option value="1">Singe Student </option>
                           <option value="0">Multiple Students </option>
@@ -63,7 +63,7 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                       <div class="form-group">
                         <label>Send As</label>
-                        <select style="width:100%" class="form-control">
+                        <select style="width:100%" name="send_as" class="form-control">
                               <option value="sms">SMS</option>
                               <option value="email">E-Mail</option>
                               <option value="both">Both Email & SMS </option>
@@ -84,7 +84,7 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                       <div class="form-group" id="schudor" style="display: none">
                                 <label>Schedule Time For Publishing</label>
-                                <input type="text" id="publish_datetime" placeholder=""  name="birthday" class="form-control date-picker" />
+                                <input type="text" id="publish_datetime" placeholder=""  name="schudor_datetime" class="form-control date-picker" />
                       </div>
 
                         
@@ -95,6 +95,10 @@ $classes = MsClass::where('status', 1)->select('class_name')
                         <hr/>
 
                       @include('partials._buttonSave', ['btnId'=>'saveNotice', 'title'=>'Save Notice']);
+
+                       @section('footerScripts')
+                        @include('partials._saveFunc', [ "btnID" => "saveNotice", "formID"=>"registerNotice", "route"=>"notice.store", "routeWith"=>"noticeboard.manage"])
+                      @stop
 
                       
 
