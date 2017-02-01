@@ -96,7 +96,24 @@ class NoticeboardController extends \BaseController {
 					if($toPublish){
 						HelperX::hashCode(1);	
 						//We send it!
-						return Response::json(['error'=>false, 'msg'=>'Successfully sent!']);	
+						$phone = Parentx::find($student_id)->phone;
+
+						if($phone == ""){
+							return Response::json(['error'=>true, 'msg'=>'Please provide Parent Mobile Number!']);	
+						}else{
+							$code = substr($phone, 0, 3);
+							if($code == "255"){
+								$ms = HelperX::sendSMSApi(HelperX::getSchoolInfo()->name, $phone, $notice);
+								return Response::json(['error'=>true, 'msg'=> $ms]);
+							}else{
+								return Response::json(['error'=>true, 'msg'=>'Invalid Number, make sure the phone start with 255XXXXXXXXX']);	
+							}
+						}
+
+						
+
+
+							
 					}
 						
 				}

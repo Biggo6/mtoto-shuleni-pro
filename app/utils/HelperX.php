@@ -90,6 +90,43 @@ class HelperX {
         }
     }
 
+    public static function sendSMSApi($from, $to, $text){
+
+       
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.infobip.com/sms/1/text/single",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "{  \r\n   \"from\":\"$from\",\r\n   \"to\":\"$to\",\r\n   \"text\":\"$text\"\r\n}",
+          CURLOPT_HTTPHEADER => array(
+            "authorization: Basic SXp3ZWI6VGVzdDEyMzQ=",
+            "cache-control: no-cache",
+            "content-type: application/json",
+            "postman-token: 8ea777b9-aa6d-0c1c-d2f5-a444e0e06bdf"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+         return "cURL Error #:" . $err;
+        } else {
+          return $response;
+        }
+
+        
+    }
+
     public static function getNextYear(){
         return date('Y', strtotime('+1 year'));
     }
