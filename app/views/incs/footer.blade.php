@@ -190,6 +190,18 @@ $(function(){
         });
 
 
+        $('#publish_datetime').daterangepicker({
+          autoUpdateInput: false,
+          timePicker: true,
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('#publish_datetime').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY h:mm a'));
+        });
+
         $('#birthday').daterangepicker({
           autoUpdateInput: false,
           singleDatePicker: true,

@@ -29,6 +29,10 @@ class NoticeboardController extends \BaseController {
 		//
 	}
 
+	public function getStudents(){
+		return View::make('noticeboards.getStudents')->withData(Input::all());
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 * POST /noticeboard
