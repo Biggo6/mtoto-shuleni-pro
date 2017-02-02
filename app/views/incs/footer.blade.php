@@ -329,6 +329,16 @@ $(function(){
           });
         });
 
+        $('body').on('click', '.user_edit', function(){
+            var user_id = $(this).attr('user_id');
+            $('#userEditLoader').show();
+            $('#user_edit_area').html('');
+            $.post('{{route('users.editUser')}}',  {user:user_id}, function(res){
+                $('#userEditLoader').hide();
+                $('#user_edit_area').html(res);
+            });
+        });
+
 
         $('body').on('keyup', '#searchStudent', function(){
             var student      = $(this).val();

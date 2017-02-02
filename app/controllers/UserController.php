@@ -31,6 +31,51 @@ class UserController  extends BaseController{
     }
 
 
+    public function updateUser(){
+        $row_id     = Input::get('row_id');
+        $firstname  = Input::get('firstname');
+        $lastname   = Input::get('lastname');
+        $username   = Input::get('username');
+        $status     = Input::get('status');
+
+
+        $check = User::where('id', $row_id)->where('username', $username)->count();
+
+        if($check){
+                //update
+
+                $us = User::find($row_id);
+                $us->firstname = $firstname;
+                $us->lastname  = $lastname;
+                $us->username  = $username;
+                $us->active    = $status;
+                $us->save();
+                return Response::json(['error'=>false, 'msg'=>'Successfully added']);
+        }else{
+            $check_ = User::where('id', '!=',$row_id)->where('username', $username)->count();
+            if($check_){
+                return Response::json(['error'=>true, 'msg'=>'Username already registered']);
+            }else{
+                //update
+                $us = User::find($row_id);
+                $us->firstname = $firstname;
+                $us->lastname  = $lastname;
+                $us->username  = $username;
+                $us->active    = $status;
+                $us->save();
+                return Response::json(['error'=>false, 'msg'=>'Successfully added']);
+            } 
+        }
+
+    }
+
+    public function editUser(){
+        $user = Input::get('user');
+        $usr  = User::find($user);
+        return View::make('users.editUser')->withUser($usr);
+    }
+
+
     public function getUserPerms(){
         $user = Input::get('user');
         sleep(1);

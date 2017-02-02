@@ -104,6 +104,8 @@ Route::group(['before'=>'auth'], function(){
     Route::post('users/storeAdmin', ['as'=>'users.storeAdmin', 'uses'=>'UserController@storeAdmin']);
     Route::post('users/getUserPerms', ['as'=>'users.getUserPerms', 'uses'=>'UserController@getUserPerms']);
     Route::post('users/updatePerms', ['as'=>'users.updatePerms', 'uses'=>'UserController@updatePerms']);
+    Route::post('users/edit', ['as'=>'users.editUser', 'uses'=>'UserController@editUser']);
+    Route::post('users/update', ['as'=>'users.updateUser', 'uses'=>'UserController@updateUser']);
 
 	//Classes Management
 	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
