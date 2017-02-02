@@ -24,6 +24,42 @@
 </div>
 
 
+<div class="modal fade" id="modal-id-changepass">
+  <div class="modal-dialog">
+    <form id="changepassForm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-lock"></i> Change Password</h4>
+      </div>
+      <div class="modal-body">
+
+        <input type="hidden" name="user_id" id="user_id_x" />
+        
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password"  name="password" id="password_" {{HelperX::ve(["veName"=>" Password ", "veVs"=>"required,funcCall[checkPassMatch[cpassword_]]"])}} placeholder="Enter Password">
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password"  name="cpassword" id="cpassword_" {{HelperX::ve(["veName"=>"Confirm Password ", "veVs"=>"required,funcCall[checkPassMatch[password_]]"])}} placeholder="Enter Confirm Password">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" id="savePassword" class="btn btn-primary">Save changes</button>
+
+        @include('partials._saveFunc', ["btnID" => "savePassword", "formID"=>"changepassForm", "route"=>"users.changePassword", "routeWith"=>"app.refreshWith"])
+      
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
 <div class="modal fade" id="modal-id">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -296,7 +332,7 @@
 
                                                    &nbsp;
 
-                                                   <a><label user_id="{{$u->id}}" class="label label-danger user_delete" title="Edit User" style="cursor: pointer"> <i class="fa fa-trash "></i> Delete </label></a>
+                                                  <!--  <a><label user_id="{{$u->id}}" class="label label-danger user_delete" title="Edit User" style="cursor: pointer"> <i class="fa fa-trash "></i> Delete </label></a> -->
 
 
                                                   </td>

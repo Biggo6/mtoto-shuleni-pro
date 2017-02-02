@@ -30,6 +30,34 @@ class UserController  extends BaseController{
 
     }
 
+    public function changePasswordx(){
+        
+        $user_id   = (integer)Input::get('user_id');
+        $password  = Input::get('password');
+
+        $user = User::find($user_id);
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return Response::json(['error'=>false, 'msg'=>'Successfully']);
+
+    }
+
+
+    public function changePasswordxx(){
+        
+        $user_id   = Auth::user()->id;
+        $password  = Input::get('password');
+
+        $user = User::find($user_id);
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return Response::json(['error'=>false, 'msg'=>'Successfully']);
+
+    }
+
+
 
     public function updateUser(){
         $row_id     = Input::get('row_id');

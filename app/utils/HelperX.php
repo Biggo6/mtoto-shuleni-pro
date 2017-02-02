@@ -16,6 +16,21 @@ class HelperX {
 		return $models;
 	}
 
+    public static function canAccess($user, $per){
+        $perms = Permission::where('user_id', $user)->get();
+
+        $userPerms = [];
+        foreach ($perms as $p) {
+            $userPerms[] = $p->name;
+        }
+
+        if(in_array($per, $userPerms)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function isInUserPerms($user, $per){
         $perms = Permission::where('user_id', $user)->get();
 

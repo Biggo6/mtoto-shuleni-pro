@@ -4,6 +4,17 @@
 
 <script type="text/javascript">
     $(function(){
+
+             $('#help').on('click', function(){
+                 swal({
+                     title: 'MtotoShuleni Pro',
+                     text: 'Current Version: {{HelperX::getSystemVersion()}} \n\n Powered By Izweb Technologies LTD',
+                     type: 'info'
+                 }, function() {
+
+                 });
+            });
+
             $('body').on('change', '#class_name', function(){
                   var sel = $(this).val();
                   if(sel!=""){
@@ -327,6 +338,11 @@ $(function(){
           $.post('{{route('users.updatePerms')}}', data, function(res){
             window.location = "{{route('app.refreshWith')}}";
           });
+        });
+
+        $('body').on('click', '.user_changepassword', function(){
+             var user_id = $(this).attr('user_id');
+             $('#user_id_x').val(user_id);
         });
 
         $('body').on('click', '.user_edit', function(){
