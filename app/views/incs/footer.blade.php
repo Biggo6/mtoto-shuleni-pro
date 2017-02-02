@@ -103,6 +103,16 @@ $(function(){
     
      $(function(){
 
+      $('body').on('click', '.user_id', function(){
+          var user_id = $(this).attr('user_id');
+          $('#userloader').show();
+          $('#user_area').html('');
+          $.post('{{route('users.getUserPerms')}}', {user:user_id}, function(res){
+              $('#userloader').hide();
+              $('#user_area').html(res);
+          });
+      });
+
       $('body').on('click', '#saveChanges', function(){
           var data = $('#manageExamMarksForm').serializeArray();
           console.log(data);
@@ -309,6 +319,15 @@ $(function(){
 
     <script type="text/javascript">
     $(function(){
+
+        $('body').on('click', '#saveEditPerms',function(){
+          var data = $('#editPerms').serializeArray();
+          $('#editPerms').css('opacity', 0.2).css('cursor', 'wait');
+          $(this).prop('disabled', true);
+          $.post('{{route('users.updatePerms')}}', data, function(res){
+            window.location = "{{route('app.refreshWith')}}";
+          });
+        });
 
 
         $('body').on('keyup', '#searchStudent', function(){

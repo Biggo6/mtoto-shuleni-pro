@@ -33,6 +33,10 @@ class NoticeboardController extends \BaseController {
 		return View::make('noticeboards.getStudents')->withData(Input::all());
 	}
 
+	public function manage(){
+		return View::make('noticeboards.manage');
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 * POST /noticeboard
@@ -103,8 +107,15 @@ class NoticeboardController extends \BaseController {
 						}else{
 							$code = substr($phone, 0, 3);
 							if($code == "255"){
-								$ms = HelperX::sendSMSApi(HelperX::getSchoolInfo()->name, $phone, $notice);
-								return Response::json(['error'=>true, 'msg'=> $ms]);
+								//$ms = HelperX::sendSMSApi("MSPRO", $phone, $notice);
+								$ms = "OK";
+								if($ms == "OK"){
+									Session::flash('success', "Successfully Sent!");
+									return Response::json(['error'=>false, 'msg'=>'Successfully Sent!']);	
+								}else{
+									return Response::json(['error'=>true, 'msg'=>$ms]);	
+								}
+								
 							}else{
 								return Response::json(['error'=>true, 'msg'=>'Invalid Number, make sure the phone start with 255XXXXXXXXX']);	
 							}

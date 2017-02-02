@@ -5,6 +5,25 @@
 @section('main')
 
 
+<div class="modal fade" id="modal-id-edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="modal fade" id="modal-id">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -194,6 +213,23 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="modal-role-permissions">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-key"></i> Permissions</h4>
+      </div>
+      <div class="modal-body">
+          <center> <img id="userloader" style="display:none" src="{{url('images/loader.gif')}}" /> </center>   
+          <div id="user_area"></div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
 <div class="row">
 
 	<div class="col-md-12">
@@ -209,6 +245,9 @@
                     <button data-toggle="modal" href='#modal-id-2' class="btn btn-success"><i class="fa fa-user-plus"></i> Add New Administrator</button>
 
                      <hr/>
+
+                     @include('partials._success')
+
 
                    <table id="datatable" class="table  table-striped table-bordered">
                                                  <thead>
@@ -239,7 +278,7 @@
                                                   <td>{{$u->firstname}}</td>
                                                   <td>{{$u->lastname}}</td>
                                                   <td>{{$u->username}}</td>
-                                                  <td><h5>{{Role::find($u->role_id)->name}}</h5></td>
+                                                  <td><h5><a class="user_id" user_id="{{$u->id}}" data-toggle="modal"  href='#modal-role-permissions' style="color:blue">{{Role::find($u->role_id)->name}}</a></h5></td>
                                                   <td>{{HelperX::getStatus($u->active)}}</td>
                                                   <td>{{HelperX::getLogoutTime($u->id)}}</td>
                                                   <td>{{HelperX::getLoginTime($u->id)}}</td>
@@ -249,7 +288,11 @@
 
                                                      &nbsp;
 
-                                                   <a  data-toggle="modal" href='#modal-id-3'><label user_id="{{$u->id}}" class="label label-success user_edit" title="Edit User" style="cursor: pointer"> <i class="fa fa-edit "></i> Edit </label></a>
+                                                   <a  data-toggle="modal" href='#modal-id-edit'><label user_id="{{$u->id}}" class="label label-success user_edit" title="Edit User" style="cursor: pointer"> <i class="fa fa-edit "></i> Edit </label></a>
+
+                                                   &nbsp;
+
+                                                   <a  data-toggle="modal" href='#modal-id-changepass'><label user_id="{{$u->id}}" class="label label-primary user_changepassword" title="Edit User" style="cursor: pointer"> <i class="fa fa-lock "></i> Change Password </label></a>
 
                                                    &nbsp;
 

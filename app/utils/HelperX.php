@@ -16,6 +16,20 @@ class HelperX {
 		return $models;
 	}
 
+    public static function isInUserPerms($user, $per){
+        $perms = Permission::where('user_id', $user)->get();
+
+        $userPerms = [];
+        foreach ($perms as $p) {
+            $userPerms[] = $p->name;
+        }
+
+        if(in_array($per, $userPerms)){
+            return "checked";
+        }
+
+    }
+
     public static function copy($source, $target) {
         if (!is_dir($source)) {//it is a file, do a normal copy
             copy($source, $target);
@@ -92,37 +106,64 @@ class HelperX {
 
     public static function sendSMSApi($from, $to, $text){
 
+
+        try{
+            $client = new GuzzleHttp\Client(['base_uri' => 'https://api.infobip.com', 'auth' => ['Izweb', 'Test1234'], 'headers' => [ 'Content-Type' => 'application/json' ] ]);
+
+            $response = $client->post('/sms/1/text/single', [
+
+                'json' => [
+
+                    "form" => $from,
+                    "to"   => $to,
+                    "text" => $text
+
+                ]
+
+            ]);
+
+            return "OK";
+
+        }catch(Exception $x){
+            return $x->getMessage();
+        }
+        
+        
+
+
+        
+
        
 
-        $curl = curl_init();
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.infobip.com/sms/1/text/single",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{  \r\n   \"from\":\"$from\",\r\n   \"to\":\"$to\",\r\n   \"text\":\"$text\"\r\n}",
-          CURLOPT_HTTPHEADER => array(
-            "authorization: Basic SXp3ZWI6VGVzdDEyMzQ=",
-            "cache-control: no-cache",
-            "content-type: application/json",
-            "postman-token: 8ea777b9-aa6d-0c1c-d2f5-a444e0e06bdf"
-          ),
-        ));
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => "https://api.infobip.com/sms/1/text/single",
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => "",
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 30,
+        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //   CURLOPT_CUSTOMREQUEST => "POST",
+        //   CURLOPT_POSTFIELDS => "{  \r\n   \"from\":\"$from\",\r\n   \"to\":\"$to\",\r\n   \"text\":\"$text\"\r\n}",
+        //   CURLOPT_HTTPHEADER => array(
+        //     "authorization: Basic SXp3ZWI6VGVzdDEyMzQ=",
+        //     "cache-control: no-cache",
+        //     "content-type: application/json",
+        //     "postman-token: 8ea777b9-aa6d-0c1c-d2f5-a444e0e06bdf"
+        //   ),
+        // ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        // $response = curl_exec($curl);
+        // $err = curl_error($curl);
 
-        curl_close($curl);
+        // curl_close($curl);
 
-        if ($err) {
-         return "cURL Error #:" . $err;
-        } else {
-          return $response;
-        }
+        // if ($err) {
+        //  return "cURL Error #:" . $err;
+        // } else {
+        //   return $response;
+        // }
 
         
     }
@@ -221,8 +262,17 @@ class HelperX {
     }
 
     public static  function getCode(){
-        $encrytcode = Smsbox::where('counter', '!=', '')->first()->counter;
-        return Crypt::decrypt($encrytcode);
+
+        $check = Smsbox::where('counter', '!=', '')->get();
+
+        if(count($check) == 0){
+            return 0;
+        }else{
+            $encrytcode = Smsbox::where('counter', '!=', '')->first()->counter;
+            return Crypt::decrypt($encrytcode);
+        }
+
+        
     }
 
     public static  function  getRoleName(){

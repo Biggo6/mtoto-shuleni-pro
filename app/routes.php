@@ -102,6 +102,9 @@ Route::group(['before'=>'auth'], function(){
     Route::get('users/roles', ['as'=>'users.roles', 'uses'=>'UserController@roles']);
     Route::post('users/history', ['as'=>'users.history', 'uses'=>'UserController@history']);
     Route::post('users/storeAdmin', ['as'=>'users.storeAdmin', 'uses'=>'UserController@storeAdmin']);
+    Route::post('users/getUserPerms', ['as'=>'users.getUserPerms', 'uses'=>'UserController@getUserPerms']);
+    Route::post('users/updatePerms', ['as'=>'users.updatePerms', 'uses'=>'UserController@updatePerms']);
+
 	//Classes Management
 	Route::get('classes/manage', ['as'=>'classes.manage', 'uses'=>'ClassController@manage']);
 	//Settings Codes
@@ -147,7 +150,21 @@ Route::group(['before'=>'auth'], function(){
 	
 	Route::get('test', function(){
 		
-		dd(HelperX::BACKUP);
+		$client = new GuzzleHttp\Client(['base_uri' => 'https://api.infobip.com', 'auth' => ['Izweb', 'Test1234'], 'headers' => [ 'Content-Type' => 'application/json' ] ]);
+
+		$response = $client->post('/sms/1/text/single', [
+
+				'json' => [
+
+					"form" => "MTOTO",
+					"to"   => "255712315840",
+					"text" => "Testing the app!"
+
+				]
+
+			]);
+
+		dd($response);
 		
 	});
 

@@ -12,6 +12,31 @@ class UserController  extends BaseController{
         return Redirect::back()->withSuccess('Successfully processed');
     }
 
+    public function updatePerms(){
+        
+        
+        $user_id  = Input::get('user_id');
+
+        if(Input::has('perms')){
+            Permission::where('user_id', $user_id)->delete();
+            $perms = Input::get('perms');
+            foreach ($perms as $p) {
+                $px = new Permission;
+                $px->name    = $p;
+                $px->user_id = $user_id;
+                $px->save(); 
+            }
+        }    
+
+    }
+
+
+    public function getUserPerms(){
+        $user = Input::get('user');
+        sleep(1);
+        return View::make('users.getUserPerms')->withUser($user);
+    }
+
     public function  roles(){
         return View::make('users.roles');
     }
