@@ -172,4 +172,7 @@ Route::group(['before'=>'auth'], function(){
 		
 	});
 
+	// Printing
+	Route::get('print/sheet/{data}', ['as'=>'print.sheet', 'uses' => 'PrintController@printResultSheet']);
+
 });

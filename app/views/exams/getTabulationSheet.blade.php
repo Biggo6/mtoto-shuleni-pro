@@ -60,7 +60,10 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 
 <div class="row"  id="area_results">
 
-<table class="table table-bordered table-striped table-condensed mb-none">
+
+<div id="ax">	
+
+<table class="table table-bordered table-striped table-condensed mb-none" style="border-color: black">
 	<thead>
 		<tr>
 		<td style="text-align: center;">
@@ -114,9 +117,50 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 		@endforeach
 
 	</tbody>
-</table>	
+</table>
 
 </div>
+
+<hr/>
+
+<button id="print_sheet" class="btn btn-primary"><i class="fa fa-print"></i> Print Sheet </button>
+
+</div>
+
+<script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
+
+<script src="{{url('ve/js/languages/jquery.validationEngine-en.js')}}" type="text/javascript" charset="utf-8"></script>
+<script src="{{url('ve/js/jquery.validationEngine.js')}}" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/javascript" src="{{url('printjs/jQuery.print.js')}}"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+      $("body").on('click', '#print_sheet',function(){
+          $('#ax').print({
+                    //Use Global styles
+                    globalStyles : true,
+                    //Add link with attrbute media=print
+                    mediaPrint : false,
+                    //Custom stylesheet
+                    stylesheet : "http://fonts.googleapis.com/css?family=Inconsolata",
+                    //Print in a hidden iframe
+                    iframe : false,
+                    //Don't print this
+                    noPrintSelector : ".avoid-this",
+                    //Add this at top
+                    prepend : '<center>' + '{{HelperX::getSchoolInfo()->name}}' + '<br/>' + '{{HelperX::getSchoolInfo()->address}}' + ' <br/><br/> <img style="width:92px;height: 92px" src="' + '{{HelperX::getSchoolInfo()->logo}}' + '" /> </center><br/><hr/>',
+                    //Add this on bottom
+                    append : '<center>Powered By Izweb Technologies LTD (c) MtotoShuleni Pro {{HelperX::getSystemVersion()}}</center>',
+                    //Log to console when printing is done via a deffered callback
+                    deferred: $.Deferred().done(function() { window.location = ""; })
+                });
+      });
+});
+
+
+</script>
 
 
 @else
@@ -129,14 +173,3 @@ $students = Student::where('class_name', $class_name)->where('running_year', dat
 @endif
 
 
-<script type="text/javascript" src="{{url('select2/dist/js/select2.min.js')}}"></script>
-<script type="text/javascript">
-
-$(document).ready(function() {
-      $("body#select_2").select2({
-       
-      });
-});
-
-
-</script>

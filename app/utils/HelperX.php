@@ -16,6 +16,10 @@ class HelperX {
 		return $models;
 	}
 
+    public static function getReportHeader(){
+        return "Jiaaa";
+    }
+
     public static function canAccess($user, $per){
         $perms = Permission::where('user_id', $user)->get();
 

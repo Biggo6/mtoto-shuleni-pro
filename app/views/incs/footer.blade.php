@@ -1,7 +1,6 @@
 <!-- jQuery -->
     <script src="{{url('vendors/jquery/dist/jquery.min.js')}}"></script>
 
-
 <script type="text/javascript">
     $(function(){
 
@@ -14,6 +13,8 @@
 
                  });
             });
+
+
 
             $('body').on('change', '#class_name', function(){
                   var sel = $(this).val();
@@ -99,7 +100,7 @@ $(function(){
                 });
            }
      });
-     $('#view_sheet').on('click', function(){
+     $('body').on('click', '#view_sheet' ,function(){
         var viewTabulationSheet_ = $('#viewTabulationSheet').validationEngine('validate');
         if(viewTabulationSheet_){
 
