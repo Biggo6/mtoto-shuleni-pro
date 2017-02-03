@@ -146,7 +146,7 @@
         <li><a href="{{route('exams.marks')}}"><i class="fa fa-circle-o"></i> Exam Manage Marks</a></li>
         
         <li><a href="{{route('exams.tubulationSheet')}}"><i class="fa fa-circle-o"></i> Tabulation Sheet</a></li>
-        <li><a href="form.html"><i class="fa fa-circle-o"></i> Send Marks By SMS</a></li>
+        <li><a href="{{route('exams.sendSMS')}}"><i class="fa fa-circle-o"></i> Send Marks To Parents</a></li>
         </ul>
     </li>
     <!--<li><a><i class="fa fa-line-chart"></i>  Attendance <span class="fa fa-chevron-down"></span></a>

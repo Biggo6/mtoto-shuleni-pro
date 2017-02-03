@@ -13,6 +13,10 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function sendSMS(){
+		return View::make('exams.sendSMS');
+	}
+
 	public function tubulationSheet(){
 		return View::make('exams.tubulationSheet');
 	}
