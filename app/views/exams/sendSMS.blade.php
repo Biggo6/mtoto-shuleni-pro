@@ -21,7 +21,10 @@ $classes = MsClass::where('status', 1)->select('class_name')
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" id="registerNotice">
+
+                    @include('partials._success')
+
+                    <form class="form-horizontal form-label-left" id="sendResultToParent">
 
 
                       <div class="form-group">
@@ -109,11 +112,11 @@ $classes = MsClass::where('status', 1)->select('class_name')
 
                         <hr/>
 
-                      <p>@include('partials._buttonSave', ['btnId'=>'saveNotice', 'title'=>'Save']);
+                      <p>@include('partials._buttonSave', ['btnId'=>'sendResult', 'title'=>'Save']);
                       <button class="btn btn-success"><i class="fa fa-list"></i> Manage Results Messages</button></p>
 
                        @section('footerScripts')
-                        @include('partials._saveFunc', [ "btnID" => "saveNotice", "formID"=>"registerNotice", "route"=>"notice.store", "routeWith"=>"noticeboard.manage"])
+                        @include('partials._saveFunc', [ "btnID" => "sendResult", "formID"=>"sendResultToParent", "route"=>"exams.sendResult", "routeWith"=>"app.refreshWith"])
                       @stop
 
                       

@@ -13,7 +13,7 @@
     <select style="width:100%" id="select_2x" name="student_id"  {{HelperX::ve(["veName"=>"Parent Category", "veVs"=>"required",  "clx"=>"select_2", "vePos"=>"topRight"])}}>
       <option value="">-- Student's Parent ----</option>
       @foreach($students as $ss)
-      <option value="{{$ss->parent_id}}">{{$ss->firstname}}  {{$ss->lastname}} ({{Parentx::find($ss->parent_id)->fullname}})</option>
+      <option value="{{$ss->id}}">{{$ss->firstname}}  {{$ss->lastname}} ({{Parentx::find($ss->parent_id)->fullname}})</option>
       @endforeach	
       
     </select>

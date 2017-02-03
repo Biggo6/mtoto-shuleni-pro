@@ -13,6 +13,142 @@ class ExamController extends \BaseController {
 		//
 	}
 
+	public function sendResult(){
+
+		if(HelperX::getCode() == 0){
+			return Response::json(['error'=>true, 'msg'=>'You dont have SMS enough please recharge!f']);			
+		}
+
+		$examlist   	= Input::get('exam_name');
+
+
+
+		
+
+		$toPublish = false;
+
+		// dynamics
+		
+		$parent_cat     = Input::get('parent_cat');
+		$send_as        = Input::get('send_as');
+
+		if(Input::has('publish_now')){
+			$publish_now = Input::get('publish_now');
+			$toPublish = true;
+		}else{
+			$schudor_datetime = Input::get('schudor_datetime');
+		}
+
+		if(Input::get('notice_class') == "all"){
+			// Update all School Students Parents
+
+			$ctxx = Student::where('running_year', date('Y'))->orderBy('created_at', 'DESC')->count();
+
+			if(HelperX::getCode() < $ctxx){
+				return Response::json(['error'=>true, 'msg'=>'You dont have SMS enough please recharge!']);	
+			}else{
+				if($toPublish){
+					HelperX::hashCode($ctxx);	
+					//We send it!
+					return Response::json(['error'=>false, 'msg'=>'Successfully sent!']);	
+				}
+					
+			}
+
+		}else{
+			if($parent_cat == 1){
+				//Single Student
+				$student_id = Input::get('student_id');
+				$notice_class	= Input::get('notice_class');
+
+
+
+				if(HelperX::getCode() < 1){
+					return Response::json(['error'=>true, 'msg'=>'You dont have SMS enough please recharge!']);	
+				}else{
+					if($toPublish){
+						HelperX::hashCode(1);	
+						//We send it!
+						$phone = Parentx::find(Student::find($student_id)->parent_id)->phone;
+
+						if($phone == ""){
+							return Response::json(['error'=>true, 'msg'=>'Please provide Parent Mobile Number!']);	
+						}else{
+							$code = substr($phone, 0, 3);
+							if($code == "255"){
+
+								//$exammarks = Exammark::where('examlist_id', $examlist)->where('student_id', $student_id)->where('class_name', $notice_class)->where('running_year', date('Y'))->get();
+		
+								$subjects = DB::table('subjects')->join('msclasses', 'msclasses.id', '=', 'subjects.class_id')->select('subjects.name')->where('msclasses.class_name', $notice_class)
+							->where('subjects.status', 1)->where('subjects.deleted_at', NULL)->distinct()->get();
+
+								$smss = "Matokeo ya Mtoto wako ni kama ifuatavyo:- ";
+
+								foreach ($subjects as $s) {
+									$smss .=  " "  . $s->name . "-" . HelperX::getStudentMarkX($student_id, $s->name, $notice_class) . ". ";
+								}
+
+								$ms = HelperX::sendSMSApi("MTOTOSHULE", $phone, $smss);
+								//$ms = "OK";
+								if($ms == "OK"){
+									Session::flash('success', "Successfully Sent!");
+									return Response::json(['error'=>false, 'msg'=>'Successfully Sent!']);	
+								}else{
+									return Response::json(['error'=>true, 'msg'=>$ms]);	
+								}
+								
+							}else{
+								return Response::json(['error'=>true, 'msg'=>'Invalid Number, make sure the phone start with 255XXXXXXXXX']);	
+							}
+						}
+
+						
+
+
+							
+					}
+						
+				}
+
+			}else if($parent_cat == 2){
+				//All Students
+				$notice_class	= Input::get('notice_class');
+
+				$ctx = Student::where('class_name', $notice_class)->where('running_year', date('Y'))->orderBy('created_at', 'DESC')->count();
+
+				if(HelperX::getCode() < $ctx){
+					return Response::json(['error'=>true, 'msg'=>'You dont have SMS enough please recharge!']);	
+				}else{
+					if($toPublish){
+						HelperX::hashCode($ctx);	
+						//We send it!
+						return Response::json(['error'=>false, 'msg'=>'Successfully sent!']);	
+					}
+						
+				}
+
+
+			}else{
+				// Multiple Students
+				if(Input::has('students_ids')){
+					if(HelperX::getCode() < count(Input::get('students_ids')) ){
+						return Response::json(['error'=>true, 'msg'=>'You dont have SMS enough please recharge!']);	
+					}else{
+						if($toPublish){
+							HelperX::hashCode(count(Input::get('students_ids')));	
+							//We send it!
+							return Response::json(['error'=>false, 'msg'=>'Successfully sent!']);	
+						}
+							
+					}
+				}else{
+					//
+					return Response::json(['error'=>true, 'msg'=>'Please Select Student First']);
+				}
+			}
+		}
+	}
+
 	public function sendSMS(){
 		return View::make('exams.sendSMS');
 	}

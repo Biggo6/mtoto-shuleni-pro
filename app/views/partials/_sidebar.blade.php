@@ -8,6 +8,18 @@
         </ul>
       </li>
 
+    @if(HelperX::getRoleName() == "teacher")
+    
+    <li><a><i class="fa fa-pencil"></i> Exams <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+        
+        <li><a href="{{route('exams.marks')}}"><i class="fa fa-circle-o"></i> Exam Manage Marks</a></li>
+
+    </ul>
+    </li>
+
+    @endif  
+
     @if(Role::where('id', Auth::user()->role_id)->first()->name == "custom_admin")  
 
 

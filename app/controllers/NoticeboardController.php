@@ -107,8 +107,8 @@ class NoticeboardController extends \BaseController {
 						}else{
 							$code = substr($phone, 0, 3);
 							if($code == "255"){
-								//$ms = HelperX::sendSMSApi("MSPRO", $phone, $notice);
-								$ms = "OK";
+								$ms = HelperX::sendSMSApi("MTOTOSHULE", $phone, $notice);
+								//$ms = "OK";
 								if($ms == "OK"){
 									Session::flash('success', "Successfully Sent!");
 									return Response::json(['error'=>false, 'msg'=>'Successfully Sent!']);	
