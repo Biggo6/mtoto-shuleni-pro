@@ -14,7 +14,7 @@
 Route::get('/', function()
 {
 	return View::make('auth.login');
-})->before('ssl');
+}); //->before('ssl');
 
 Route::post('app/doLogin', ['as'=>'app.doLogin', 'uses'=>'AppController@doLogin']);
 

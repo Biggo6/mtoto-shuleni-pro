@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'mspro',
 			'username'  => 'root',
-			'password'  => 'Kimata#9012',
+			'password'  => 'Kimata.9012',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
