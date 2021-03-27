@@ -2,7 +2,10 @@
 
 class ClassController extends BaseController{
 	public function manage(){
-		return View::make('classes.manage');
+		$classes =  MsClass::where('status', 1)->select('class_name')
+            ->distinct()
+            ->get(); 
+		return View::make('classes.manage', ['classes'=>$classes]);
 	}
 
 	public function destroy($id){

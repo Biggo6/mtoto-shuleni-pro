@@ -25,9 +25,7 @@
                           
                           
 
-                          <?php $classes =  MsClass::where('status', 1)->select('class_name')
-            ->distinct()
-            ->get(); ?>
+                          <?php ?>
                           @foreach($classes as $c)
                               <option  value="{{$c->id}}">{{$c->class_name}}</option>
                           @endforeach
