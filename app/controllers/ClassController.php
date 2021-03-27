@@ -1,5 +1,8 @@
 <?php
 
+
+use \App\Models\MsClass;
+
 class ClassController extends BaseController{
 	public function manage(){
 		$classes =  MsClass::where('status', 1)->select('class_name')
